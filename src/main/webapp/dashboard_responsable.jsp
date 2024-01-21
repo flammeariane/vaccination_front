@@ -17,16 +17,13 @@
                 }
             </style>
         </head>
-
-
         <body>
-           
             <h3 class="text-center mt-5">Bienvenue <b>${username}</b> dans le tableau de bord du responsable!</h3>
 
             <div class="container mt-4">
                 <!-- Logique conditionnelle en fonction du rôle -->
                 <c:choose>
-                    <c:when test="${role == 'ResponsableGeneral'}">
+                    <c:when test="${role == 'Responsable general'}">
                         <!-- Liste des centres -->
                         <h4>Liste des Centres</h4>
                         <table class="table">
@@ -70,7 +67,7 @@
                         <h4>Statistiques des Centres</h4>
                         <!-- Ici, insérez la logique pour afficher les statistiques des centres -->
                     </c:when>
-                    <c:when test="${role == 'ResponsableCentre'}">
+                    <c:when test="${role == 'Responsable de centre'}">
                         <!-- Affichage des membres du personnel -->
                         <h4>Membres du Personnel</h4>
                         <table class="table">

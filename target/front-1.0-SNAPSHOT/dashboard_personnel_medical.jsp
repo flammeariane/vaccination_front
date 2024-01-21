@@ -19,7 +19,7 @@
 
     
     <body>
-    <h3 class="text-center mt-5">Bienvenue <b>${username}</b> dans le tableau de bord!</h3>
+        <h3 class="text-center mt-5">Bienvenue <b>${membrePersonnel.prenom}</b> dans le tableau de bord pour les <b>${membrePersonnel.role}</b></h3>
 
     <div class="container mt-4">
         <table class="table mt-4">
@@ -63,11 +63,11 @@
                         <td>
                             <!-- Boutons différents selon le rôle -->
                             <c:choose>
-                                <c:when test="${role == 'AccueillantEntree'}">
+                                <c:when test="${role == 'Accueillant en entree'}">
                                     <button type="button" class="btn btn-primary">Confirmer la présence</button>
                                     <button type="button" class="btn btn-secondary">Annuler</button>
                                 </c:when>
-                                <c:when test="${role == 'AccueillantSortie'}">
+                                <c:when test="${role == 'Accueillant de sortie'}">
                                     <button type="button" class="btn btn-primary">Sélectionner</button>
                                     <button type="button" class="btn btn-secondary">Annuler</button>
                                 </c:when>
