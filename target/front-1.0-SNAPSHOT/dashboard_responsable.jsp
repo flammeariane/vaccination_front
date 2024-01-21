@@ -5,7 +5,7 @@
     </head>
     <body>
         <%@ include file="header.jsp" %>
-        <h1>Welcome, ${loggedInUser}!in responsable dashboard</h1> 
+        <h1>Welcome, in responsable dashboard</h1> 
   <%@ include file="footer.jsp" %>
     </body>
 </html>

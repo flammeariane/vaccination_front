@@ -1,4 +1,4 @@
-controller\LoginServlet.class
+controller\LoginPatientServlet.class
 CloseableHttpClient.class
 modele\CentreInfo.class
 controller\PatientServlet.class
@@ -8,6 +8,7 @@ modele\ListeRendezVous.class
 modele\Vaccin.class
 modele\PersonnelPool.class
 dto\VaccinDTO.class
+controller\LoginPersonnelServlet.class
 modele\MembrePersonnel.class
 be\vaccination\front\resources\JavaEE8Resource.class
 utils\HttpClientSingleton.class

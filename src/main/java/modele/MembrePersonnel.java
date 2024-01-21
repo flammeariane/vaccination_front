@@ -1,16 +1,14 @@
-
 package modele;
 
-
 public class MembrePersonnel {
-    
-     private String nomFamille; 
-    private String prenom; 
+
+    private String nomFamille;
+    private String prenom;
     private String role;
-    private int  localite;
-    private String numTelephone; 
-    private String adresseMail; 
-    private String password; 
+    private int localite;
+    private String numTelephone;
+    private String adresseMail;
+    private String password;
 
     public String getNomFamille() {
         return nomFamille;
@@ -67,5 +65,5 @@ public class MembrePersonnel {
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
 }

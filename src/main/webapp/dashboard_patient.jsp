@@ -24,7 +24,7 @@
             }
         </style>
     </head>
-   <body>
+    <body>
         <%@ include file="header.jsp" %>
 
         <div class="container">
@@ -50,35 +50,35 @@
                     <div class="card">
                         <div class="card-header text-info">Consulter mon État Vaccinal</div>
                         <div class="card-body">
-                         
+
                             <p>Informations sur l'état vaccinal du patient.</p>
-                             <c:forEach var="da" items="${historique}">
-                                 <p>${da.nom}</p>
-                                </c:forEach>
+                            <c:forEach var="da" items="${historique}">
+                                <p>${da.nom}</p>
+                            </c:forEach>
                             <c:out value="${historique.numeroNational}" escapeXml="false" />
                             <button class="btn btn-primary">Voir Détails</button>
                         </div>
                     </div>
                 </div>
             </div>
-                            
-                             <div class="card-body">
-                                   <p>tes</p>
-                    <c:forEach var="rendezVous" items="${centresVaccination.centres.centreInfo}">
-                        <div class="card mb-2">
-                          
-                            <div class="card-header">
-                                Rendez-Vous Vaccin: <span class="font-weight-bold">${rendezVous.nomCentre}</span>
-                            </div>
-                            <div class="card-body">
-                                <p>Date: <span class="font-weight-bold">${rendezVous.dateRdv}</span></p>
-                                <p>Centre: <span class="font-weight-bold">${rendezVous.nomCentre}</span></p>
-                                <p>Statut: <span class="font-weight-bold">${rendezVous.libelleStatut}</span></p>
-                                <p>Numéro de dose: <span class="font-weight-bold">${rendezVous.numeroDose}</span> sur ${rendezVous.nbrDoseTotal}</p>
-                            </div>
+
+            <div class="card-body">
+
+                <c:forEach var="rendezVous" items="${centresVaccination.centres.centreInfo}">
+                    <div class="card mb-2">
+
+                        <div class="card-header">
+                            Rendez-Vous Vaccin: <span class="font-weight-bold">${rendezVous.nomCentre}</span>
                         </div>
-                    </c:forEach>
-                </div>
+                        <div class="card-body">
+                            <p>Date: <span class="font-weight-bold">${rendezVous.dateRdv}</span></p>
+                            <p>Centre: <span class="font-weight-bold">${rendezVous.nomCentre}</span></p>
+                            <p>Statut: <span class="font-weight-bold">${rendezVous.libelleStatut}</span></p>
+                            <p>Numéro de dose: <span class="font-weight-bold">${rendezVous.numeroDose}</span> sur ${rendezVous.nbrDoseTotal}</p>
+                        </div>
+                    </div>
+                </c:forEach>
+            </div>
 
             <!-- Prendre un Rendez-Vous -->
             <div class="row">
@@ -137,14 +137,14 @@
             $(document).ready(function () {
                 // Appel AJAX pour charger à la fois les centres et les vaccins
                 $.get("centresVaccination", function (data) {
-                    
-                    
+
+
                     var historique = data.vaccins.vaccin
                     // Traitement pour les centres de vaccination
                     var centres = data.centres.centreInfo;
                     var selectHtmlCentres = "";
-                    
-                   
+
+
 
                     if (centres) {
                         centres.forEach(function (centre) {
@@ -211,7 +211,7 @@
                     geocodeAddress(adresseComplete, function (location) {
                         window.map.setCenter(location);
                     });
-              
+
                     var latLng = new google.maps.LatLng(selectedCentre.data('latitude'), selectedCentre.data('longitude'));
                     window.map.setCenter(latLng);
                 });
