@@ -15,6 +15,7 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.util.EntityUtils;
+import utils.ApiUrls;
 import utils.HttpClientSingleton;
 
 public class LoginPatientServlet extends HttpServlet {
@@ -25,6 +26,7 @@ public class LoginPatientServlet extends HttpServlet {
         String codeSecret = request.getParameter("codeSecret");
         
         Patient patient = loginPatient(numeroNational, codeSecret);
+        
         if (patient != null) {
         HttpSession patientSession = request.getSession(true);
         patientSession.setAttribute("patient", patient); // Stockage de l'objet patient dans la session
@@ -44,7 +46,7 @@ public class LoginPatientServlet extends HttpServlet {
         ObjectMapper objectMapper = new ObjectMapper();
         String requestBody = objectMapper.writeValueAsString(loginData);
 
-        HttpPost postRequest = new HttpPost("http://localhost:8080/CentreVaccinationFrontEnd/login");
+        HttpPost postRequest = new HttpPost(ApiUrls.LOGIN_PATIENT);
         postRequest.setEntity(new StringEntity(requestBody, "UTF-8"));
         postRequest.setHeader("Content-Type", "application/json");
 

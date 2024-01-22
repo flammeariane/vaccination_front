@@ -14,6 +14,7 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.util.EntityUtils;
+import utils.ApiUrls;
 import utils.HttpClientSingleton;
 
 
@@ -62,7 +63,7 @@ public class LoginPersonnelServlet extends HttpServlet {
         ObjectMapper objectMapper = new ObjectMapper();
         String requestBody = objectMapper.writeValueAsString(loginData);
 
-        HttpPost postRequest = new HttpPost("http://localhost:8080/CentreVaccinationFrontEnd/loginPersonnel");
+        HttpPost postRequest = new HttpPost(ApiUrls.LOGIN_PERSONNEL);
         postRequest.setEntity(new StringEntity(requestBody, "UTF-8"));
         postRequest.setHeader("Content-Type", "application/json");
 

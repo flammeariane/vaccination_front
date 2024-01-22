@@ -5,10 +5,14 @@ import modele.CentreVaccination;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
+        
+import org.apache.http.HttpResponse;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+
 import org.apache.http.util.EntityUtils;
 
 import javax.servlet.*;
@@ -18,6 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.annotation.*;
+import utils.ApiUrls;
 import utils.HttpClientSingleton;
 
 @WebServlet("/centresVaccination")
@@ -66,7 +71,7 @@ public class PatientServlet extends HttpServlet {
         ObjectMapper objectMapper = new ObjectMapper();
         String requestBody = objectMapper.writeValueAsString(requestData);
 
-        HttpPost postRequest = new HttpPost("http://localhost:8080/CentreVaccinationFrontEnd/rendezVousInfoGeneral");
+        HttpPost postRequest = new HttpPost(ApiUrls.RDV_INFO);
         postRequest.setEntity(new StringEntity(requestBody, "UTF-8"));
         postRequest.setHeader("Content-Type", "application/json");
 
@@ -84,11 +89,12 @@ public class PatientServlet extends HttpServlet {
         ObjectMapper objectMapper = new ObjectMapper();
         String requestBody = objectMapper.writeValueAsString(patient); // Utilisation de l'objet patient
 
-        HttpPost postRequest = new HttpPost("http://localhost:8080/CentreVaccinationFrontEnd/rendezVousListeVaccin");
+        HttpPost postRequest = new HttpPost(ApiUrls.RDV_LISTE_VACCIN);
         postRequest.setEntity(new StringEntity(requestBody, "UTF-8"));
         postRequest.setHeader("Content-Type", "application/json");
 
-         try (CloseableHttpResponse httpResponse = HttpClientSingleton.getInstance().execute(postRequest)) {   if (httpResponse.getStatusLine().getStatusCode() == 200) {
+        try (CloseableHttpResponse httpResponse = HttpClientSingleton.getInstance().execute(postRequest)) {
+            if (httpResponse.getStatusLine().getStatusCode() == 200) {
                 return EntityUtils.toString(httpResponse.getEntity(), "UTF-8");
             } else {
                 // Gérer les réponses autres que 200 OK
@@ -107,14 +113,15 @@ public class PatientServlet extends HttpServlet {
         // Sérialisation de la Map en JSON
         String requestBody = objectMapper.writeValueAsString(payload);
 
-        HttpPost postRequest = new HttpPost("http://localhost:8080/CentreVaccinationFrontEnd/consultationRdv");
+        HttpPost postRequest = new HttpPost(ApiUrls.RDV_CONSULTATION);
         postRequest.setEntity(new StringEntity(requestBody, "UTF-8"));
         postRequest.setHeader("Content-Type", "application/json");
 
-        try (CloseableHttpResponse httpResponse = HttpClientSingleton.getInstance().execute(postRequest)) {  if (httpResponse.getStatusLine().getStatusCode() == 200) {
-             
+        try (CloseableHttpResponse httpResponse = HttpClientSingleton.getInstance().execute(postRequest)) {
+            if (httpResponse.getStatusLine().getStatusCode() == 200) {
+
                 return EntityUtils.toString(httpResponse.getEntity(), "UTF-8");
-                
+
             } else {
                 // Gérer les réponses autres que 200 OK
                 return numeroNational;
@@ -127,17 +134,41 @@ public class PatientServlet extends HttpServlet {
         ObjectMapper objectMapper = new ObjectMapper();
         String requestBody = objectMapper.writeValueAsString(centreVaccination);
 
-        HttpPost postRequest = new HttpPost("http://localhost:8080/CentreVaccinationFrontEnd/rendezVousAffichageAgenda");
+        HttpPost postRequest = new HttpPost(ApiUrls.RDV_AFFICHAGE_AGENDA);
         postRequest.setEntity(new StringEntity(requestBody, "UTF-8"));
         postRequest.setHeader("Content-Type", "application/json");
 
-       try (CloseableHttpResponse httpResponse = HttpClientSingleton.getInstance().execute(postRequest)) {   if (httpResponse.getStatusLine().getStatusCode() == 200) {
+        try (CloseableHttpResponse httpResponse = HttpClientSingleton.getInstance().execute(postRequest)) {
+            if (httpResponse.getStatusLine().getStatusCode() == 200) {
                 return EntityUtils.toString(httpResponse.getEntity(), "UTF-8");
             } else {
                 // Gérer les réponses autres que 200 OK
                 return "[]";
             }
         }
-
     }
+
+    public void savedAppointment(Map<String, String> formData) {
+        try (CloseableHttpClient client = HttpClients.createDefault()) {
+            HttpPost postRequest = new HttpPost("http://localhost:8080/CentreVaccinationFrontEnd/rendezVousInsertRendezVous");
+
+            // Convertir les données du formulaire en JSON
+            ObjectMapper objectMapper = new ObjectMapper();
+            String json = objectMapper.writeValueAsString(formData);
+
+            // Définir le corps de la requête
+            postRequest.setEntity(new StringEntity(json, "UTF-8"));
+            postRequest.setHeader("Content-Type", "application/json");
+
+            // Exécuter la requête
+            HttpResponse response = client.execute(postRequest);
+            String responseBody = EntityUtils.toString(response.getEntity(), "UTF-8");
+
+            // Traiter la réponse ici
+            System.out.println(responseBody);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

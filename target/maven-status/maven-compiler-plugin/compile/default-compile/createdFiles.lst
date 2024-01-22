@@ -15,5 +15,6 @@ be\vaccination\front\resources\JavaEE8Resource.class
 controller\MedicalPersonnelServlet.class
 utils\HttpClientSingleton.class
 controller\LogoutServlet.class
+utils\ApiUrls.class
 modele\CentreVaccination.class
 modele\Patient.class
