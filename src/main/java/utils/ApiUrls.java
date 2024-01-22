@@ -18,4 +18,5 @@ public class ApiUrls {
     // ResponsableServlet
     // MedicalPersonnelServlet
     public static final String VALIDER_VACCINATION_LIST_PATIENT = BASE_URL + "/validerVaccinationPatientListe";
+   
 }

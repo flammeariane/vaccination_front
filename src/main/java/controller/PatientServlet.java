@@ -98,7 +98,7 @@ public class PatientServlet extends HttpServlet {
                 return EntityUtils.toString(httpResponse.getEntity(), "UTF-8");
             } else {
                 // Gérer les réponses autres que 200 OK
-                return "[]"; // Retourne un tableau vide en cas d'erreur
+                return "[]";
             }
         }
     }
@@ -150,7 +150,7 @@ public class PatientServlet extends HttpServlet {
 
     public void savedAppointment(Map<String, String> formData) {
         try (CloseableHttpClient client = HttpClients.createDefault()) {
-            HttpPost postRequest = new HttpPost("http://localhost:8080/CentreVaccinationFrontEnd/rendezVousInsertRendezVous");
+            HttpPost postRequest = new HttpPost(ApiUrls.RDV_SAVE);
 
             // Convertir les données du formulaire en JSON
             ObjectMapper objectMapper = new ObjectMapper();
