@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.annotation.*;
+import utils.HttpClientSingleton;
 
 @WebServlet("/centresVaccination")
 public class PatientServlet extends HttpServlet {
@@ -69,8 +70,7 @@ public class PatientServlet extends HttpServlet {
         postRequest.setEntity(new StringEntity(requestBody, "UTF-8"));
         postRequest.setHeader("Content-Type", "application/json");
 
-        try (CloseableHttpClient httpClient = HttpClients.createDefault(); CloseableHttpResponse httpResponse = httpClient.execute(postRequest)) {
-
+        try (CloseableHttpResponse httpResponse = HttpClientSingleton.getInstance().execute(postRequest)) {
             if (httpResponse.getStatusLine().getStatusCode() == 200) {
                 return EntityUtils.toString(httpResponse.getEntity(), "UTF-8");
             } else {
@@ -88,9 +88,7 @@ public class PatientServlet extends HttpServlet {
         postRequest.setEntity(new StringEntity(requestBody, "UTF-8"));
         postRequest.setHeader("Content-Type", "application/json");
 
-        try (CloseableHttpClient httpClient = HttpClients.createDefault(); CloseableHttpResponse httpResponse = httpClient.execute(postRequest)) {
-
-            if (httpResponse.getStatusLine().getStatusCode() == 200) {
+         try (CloseableHttpResponse httpResponse = HttpClientSingleton.getInstance().execute(postRequest)) {   if (httpResponse.getStatusLine().getStatusCode() == 200) {
                 return EntityUtils.toString(httpResponse.getEntity(), "UTF-8");
             } else {
                 // Gérer les réponses autres que 200 OK
@@ -113,9 +111,10 @@ public class PatientServlet extends HttpServlet {
         postRequest.setEntity(new StringEntity(requestBody, "UTF-8"));
         postRequest.setHeader("Content-Type", "application/json");
 
-        try (CloseableHttpClient httpClient = HttpClients.createDefault(); CloseableHttpResponse httpResponse = httpClient.execute(postRequest)) {
-            if (httpResponse.getStatusLine().getStatusCode() == 200) {
+        try (CloseableHttpResponse httpResponse = HttpClientSingleton.getInstance().execute(postRequest)) {  if (httpResponse.getStatusLine().getStatusCode() == 200) {
+             
                 return EntityUtils.toString(httpResponse.getEntity(), "UTF-8");
+                
             } else {
                 // Gérer les réponses autres que 200 OK
                 return numeroNational;
@@ -132,8 +131,7 @@ public class PatientServlet extends HttpServlet {
         postRequest.setEntity(new StringEntity(requestBody, "UTF-8"));
         postRequest.setHeader("Content-Type", "application/json");
 
-        try (CloseableHttpClient httpClient = HttpClients.createDefault(); CloseableHttpResponse httpResponse = httpClient.execute(postRequest)) {
-            if (httpResponse.getStatusLine().getStatusCode() == 200) {
+       try (CloseableHttpResponse httpResponse = HttpClientSingleton.getInstance().execute(postRequest)) {   if (httpResponse.getStatusLine().getStatusCode() == 200) {
                 return EntityUtils.toString(httpResponse.getEntity(), "UTF-8");
             } else {
                 // Gérer les réponses autres que 200 OK

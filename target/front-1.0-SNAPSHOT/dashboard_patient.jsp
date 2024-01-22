@@ -42,11 +42,14 @@
                             <p class="card-text">Adresse: <span class="font-weight-bold">${patient.adresse} ${patient.numeroAdresse}, ${patient.ville}, ${patient.codePostal}</span></p>
                             <p class="card-text">Date de Naissance: <span class="font-weight-bold">${formattedDateNaissance}</span></p>
                             <p class="card-text">Email: <span class="font-weight-bold">${patient.email}</span></p>
+                            <p> historique : ${historique.numeroNational}</p>
                         </div>
                     </div>
                 </div>
+                        
+                      
 
-                <!-- Consulter Ã‰tat Vaccinal -->
+                <!-- Consulter Etat Vaccinal -->
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-header text-info">Consulter mon état Vaccinal</div>
@@ -54,7 +57,7 @@
 
 
                             <p>Informations sur l'état vaccinal du patient.</p>
-                            <c:forEach var="da" items="${historique}">
+                            <c:forEach var="da" items="${historique.listeRendezVous}">
                                 <p>${da.nom}</p>
                             </c:forEach>
 
@@ -162,12 +165,10 @@
                         $.get("centresVaccination", function (data) {
 
 
-                            var historique = data.vaccins.vaccin
+                        
                             // Traitement pour les centres de vaccination
                             var centres = data.centres.centreInfo;
                             var selectHtmlCentres = "";
-
-
 
                             if (centres) {
                                 centres.forEach(function (centre) {

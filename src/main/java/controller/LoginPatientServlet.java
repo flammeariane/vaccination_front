@@ -14,9 +14,8 @@ import javax.servlet.http.HttpSession;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import utils.HttpClientSingleton;
 
 public class LoginPatientServlet extends HttpServlet {
 
@@ -49,9 +48,7 @@ public class LoginPatientServlet extends HttpServlet {
         postRequest.setEntity(new StringEntity(requestBody, "UTF-8"));
         postRequest.setHeader("Content-Type", "application/json");
 
-        try (CloseableHttpClient httpClient = HttpClients.createDefault();
-             CloseableHttpResponse httpResponse = httpClient.execute(postRequest)) {
-
+        try (CloseableHttpResponse httpResponse = HttpClientSingleton.getInstance().execute(postRequest)) {
             if (httpResponse.getStatusLine().getStatusCode() == 200) {
                 String responseBody = EntityUtils.toString(httpResponse.getEntity(), "UTF-8");
                 return objectMapper.readValue(responseBody, Patient.class);

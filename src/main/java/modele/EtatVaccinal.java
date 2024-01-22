@@ -1,6 +1,7 @@
 package modele;
 
 import java.util.Date;
+import java.util.List;
 
 public class EtatVaccinal {
 
@@ -14,7 +15,7 @@ public class EtatVaccinal {
     private String numeroAdresse;
     private String codeSecret;
     private String email;
-    private ListeRendezVous list;
+    private List<ListeRendezVous> listeRendezVous;
 
     public String getNumeroNational() {
         return numeroNational;
@@ -26,7 +27,7 @@ public class EtatVaccinal {
 
     public int getCodePostal() {
         return codePostal;
-    
+
     }
 
     public void setCodePostal(int codePostal) {
@@ -97,12 +98,18 @@ public class EtatVaccinal {
         this.email = email;
     }
 
-    public ListeRendezVous getList() {
-        return list;
+    public List<ListeRendezVous> getListeRendezVous() {
+        return listeRendezVous;
     }
 
-    public void setList(ListeRendezVous list) {
-        this.list = list;
+    public void setListeRendezVous(List<ListeRendezVous> listeRendezVous) {
+        this.listeRendezVous = listeRendezVous;
     }
+
+ 
+    
+    
+
+
 
 }

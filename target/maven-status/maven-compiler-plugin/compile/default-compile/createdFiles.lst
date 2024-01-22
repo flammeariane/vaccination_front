@@ -10,7 +10,9 @@ modele\PersonnelPool.class
 dto\VaccinDTO.class
 controller\LoginPersonnelServlet.class
 modele\MembrePersonnel.class
+controller\ResponsableServlet.class
 be\vaccination\front\resources\JavaEE8Resource.class
+controller\MedicalPersonnelServlet.class
 utils\HttpClientSingleton.class
 controller\LogoutServlet.class
 modele\CentreVaccination.class
