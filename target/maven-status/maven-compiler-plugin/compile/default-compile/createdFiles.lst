@@ -3,6 +3,7 @@ CloseableHttpClient.class
 modele\CentreInfo.class
 controller\PatientServlet.class
 modele\EtatVaccinal.class
+modele\RendezVous.class
 be\vaccination\front\JAXRSConfiguration.class
 modele\ListeRendezVous.class
 modele\Vaccin.class
