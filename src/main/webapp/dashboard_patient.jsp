@@ -42,12 +42,34 @@
                             <p class="card-text">Adresse: <span class="font-weight-bold">${patient.adresse} ${patient.numeroAdresse}, ${patient.ville}, ${patient.codePostal}</span></p>
                             <p class="card-text">Date de Naissance: <span class="font-weight-bold">${formattedDateNaissance}</span></p>
                             <p class="card-text">Email: <span class="font-weight-bold">${patient.email}</span></p>
-                            <p> historique : ${historique.numeroNational}</p>
+                       
                         </div>
                     </div>
                 </div>
-                        
-                      
+                            
+                            
+                              <h2>Informations sur les Vaccins</h2>
+    <ul>
+        <c:forEach var="vaccin" items="${vaccins.listeVaccins}">
+            <li>${vaccin.nom} - ${vaccin.nbrDoseTotal} doses</li>
+        </c:forEach>
+    </ul>
+
+    <h2>Centres de Vaccination Proches</h2>
+    <ul>
+        <c:forEach var="centre" items="${centres.listeCentres}">
+            <li>${centre.nomCentre} - ${centre.adresse}, ${centre.codePostal}</li>
+        </c:forEach>
+    </ul>
+
+    <h2>Historique de Vaccination</h2>
+    <ul>
+        <c:forEach var="historique" items="${history.listeRendezVous}">
+            <li>Date: ${historique.dateRdv} - Vaccin: ${historique.nomVaccin}</li>
+        </c:forEach>
+    </ul>
+
+
 
                 <!-- Consulter Etat Vaccinal -->
                 <div class="col-md-6">
@@ -56,14 +78,15 @@
                         <div class="card-body">
 
 
-                            <p>Informations sur l'�tat vaccinal du patient.</p>
-                            <c:forEach var="da" items="${historique.listeRendezVous}">
-                                <p>${da.nom}</p>
+                          
+                                <p> ${history.numeroNational}</p>
+                           
+
+
+                            <c:forEach var="rdv" items="${history.listeRendezVous}">
+                                <p>${rdv.dateRdv}</p> <!-- ou tout autre attribut de RendezVous -->
                             </c:forEach>
 
-
-
-                            <c:out value="${historique.numeroNational}" escapeXml="false" />
                             <button class="btn btn-primary">Voir D�tails</button>
                         </div>
                     </div>
@@ -106,7 +129,7 @@
                         </c:forEach>
                     </div>
 
-                    <!-- Prendre un Rendez-Vous -->
+<!--                     Prendre un Rendez-Vous 
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card">
@@ -137,7 +160,7 @@
                                     <input type="text" id="datePicker" class="form-control datepicker">
                                     <button class="btn btn-primary mt-2">Réserver</button>
 
-                                    <!-- Nouvelle section pour les détails du centre -->
+                                     Nouvelle section pour les détails du centre 
                                     <div id="centreDetails" style="display: none;" class="row">
                                         <div class="col-md-5">
                                             <h5 class="mt-3">Détails du Centre</h5>
@@ -147,7 +170,7 @@
                                             <p id="centreHeureFermeture"></p>
                                         </div>
                                         <div class="col-md-7">
-                                            <!--  section pour la carte Google Maps -->
+                                              section pour la carte Google Maps 
                                             <div id="map" style="height: 300px;"></div>
                                         </div>
                                     </div>
@@ -155,17 +178,17 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>-->
 
                 <%@ include file="footer.jsp" %>
 
-                <script>
+<!--                <script>
                     $(document).ready(function () {
                         // Appel AJAX pour charger à la fois les centres et les vaccins
                         $.get("centresVaccination", function (data) {
 
 
-                        
+
                             // Traitement pour les centres de vaccination
                             var centres = data.centres.centreInfo;
                             var selectHtmlCentres = "";
@@ -186,40 +209,8 @@
                             }
                             $('#centreSelect').html(selectHtmlCentres);
 
-                            // Traitement pour les vaccins
-                            var vaccins = data.vaccins.vaccin;
-                            var selectHtmlVaccins = "";
+                 
 
-                            vaccins.forEach(function (vaccin) {
-                                selectHtmlVaccins += "<option value='" + vaccin.nom + "'>" + vaccin.nom + "</option>";
-                            });
-
-                            $('#vaccineSelect').html(selectHtmlVaccins);
-                        });
-
-                        // Initialisez le datepicker
-                        $('#datePicker').datepicker({
-                            format: 'dd/mm/yyyy',
-                            autoclose: true,
-                            todayHighlight: true
-                        });
-
-                        // Gestionnaire d'événements pour la sélection du centre
-                        $('#centreSelect').on('change', function () {
-                            var selectedCentre = $(this).find('option:selected');
-                            var lat = parseFloat(selectedCentre.data('lat'));
-                            var lng = parseFloat(selectedCentre.data('lng'));
-                            var adresseComplete = selectedCentre.data('adresse') + ', ' + selectedCentre.data('codepostal');
-                            var adresse = "Adresse: " + selectedCentre.data('adresse') + ', ' + selectedCentre.data('numero');
-
-                            $('#centreAdresse').text(adresse);
-                            $('#centreCodePostal').text("Code Postal: " + selectedCentre.data('codepostal'));
-                            $('#centreNumero').text("Numéro: " + selectedCentre.data('numero'));
-                            $('#centreTelephone').text("Téléphone: " + selectedCentre.data('telephone'));
-                            $('#centreJourSemaineOuverture').text("Jours d'ouverture: " + selectedCentre.data('joursemaineouverture'));
-                            $('#centreHeureFermeture').text("Heure de Fermeture: " + selectedCentre.data('heurefermeture'));
-
-                            $('#centreDetails').show();
 
 
 
@@ -240,10 +231,10 @@
                             window.map.setCenter(latLng);
                         });
                     });
-                    
-                    
-                    
-                    
+
+
+
+
 
                     function initMap() {
                         var map = new google.maps.Map(document.getElementById('map'), {
@@ -266,6 +257,6 @@
                     }
 
 
-                </script>
+                </script>-->
                 </body>
                 </html>

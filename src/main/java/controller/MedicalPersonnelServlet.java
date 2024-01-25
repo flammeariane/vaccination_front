@@ -1,12 +1,14 @@
 package controller;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import modele.MembrePersonnel;
-import modele.RendezVous;
+import modele.PatientsListResponse;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
@@ -25,54 +27,54 @@ import utils.HttpClientSingleton;
 
 @WebServlet(name = "MedicalPersonnelServlet", urlPatterns = {"/MedicalPersonnelServlet"})
 public class MedicalPersonnelServlet extends HttpServlet {
-    
 
-     
-
+   
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Récupération des paramètres depuis le formulaire
+        String role = request.getParameter("role");
+        String adresseMail = request.getParameter("adresseMail");
+        String password = request.getParameter("password");
 
-         HttpSession session = request.getSession();
-        MembrePersonnel membrePersonnel = (MembrePersonnel) session.getAttribute("membrePersonnel");
-
-        Map<String, Object> requestData = new HashMap<>();
-        requestData.put("role", "Accueillant en entree");
-        requestData.put("adresseMail", "seb@gmail.com");
-        requestData.put("password", "81dc9bdb52d04dc20036dbd8313ed055");
-
-        String jsonResponseappoint = getDayliAppointmentList(requestData);
-        String jsonResponse= "{jsonResponseappoint}";
-
-      
-            // Renvoyer la réponse à la page JSP
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
-            response.getWriter().write(jsonResponse);
-
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/dashboard_personnel_medical.jsp");
-        dispatcher.forward(request, response);
-
+        // Appel de la fonction pour envoyer la requête et obtenir la réponse
+        PatientsListResponse patientsListResponse = validerPresencePatientListe(role, adresseMail, password);
         
 
-
+        if (patientsListResponse != null) {
+            // Stockage de la liste des patients dans la session
+            HttpSession session = request.getSession();
+            session.setAttribute("listPatient", patientsListResponse.getListPatient());
+            RequestDispatcher disp = request.getRequestDispatcher("dashboard_personnel_medical.jsp");
+                    disp.forward(request, response);
+            response.sendRedirect("dashboard_personnel_medical.jsp");
+        } else {
+            // Gestion de l'erreur
+            request.setAttribute("errorMessage", "Problème de connexion ou de récupération des données");
+            request.getRequestDispatcher("login_personnel_medical.jsp").forward(request, response);
+        }
     }
-    // envoyer le membre de personnel type acceuillant en entre 
 
-   private String getDayliAppointmentList(Map<String, Object> requestData) throws IOException {
+    private PatientsListResponse validerPresencePatientListe(String role, String adresseMail, String password) throws IOException {
+        Map<String, String> personnelData = new HashMap<>();
+        personnelData.put("role", role);
+        personnelData.put("adresseMail", adresseMail);
+        personnelData.put("password", password);
+
         ObjectMapper objectMapper = new ObjectMapper();
-        String requestBody = objectMapper.writeValueAsString(requestData); // Utilisez requestData ici
+        String requestBody = objectMapper.writeValueAsString(personnelData);
 
-        HttpPost postRequest = new HttpPost(ApiUrls.VALIDER_VACCINATION_LIST_PATIENT);
+        HttpPost postRequest = new HttpPost("http://localhost:8080/CentreVaccinationFrontEnd/validerPresencePatientListe");
         postRequest.setEntity(new StringEntity(requestBody, "UTF-8"));
         postRequest.setHeader("Content-Type", "application/json");
 
         try (CloseableHttpResponse httpResponse = HttpClientSingleton.getInstance().execute(postRequest)) {
             if (httpResponse.getStatusLine().getStatusCode() == 200) {
-                return EntityUtils.toString(httpResponse.getEntity(), "UTF-8");
-            } else {
-                // Gérer les réponses autres que 200 OK
-                return "{}";
+                String responseBody = EntityUtils.toString(httpResponse.getEntity(), "UTF-8");
+                return objectMapper.readValue(responseBody, PatientsListResponse.class);
             }
         }
+        return null;
+    }
     }
 
     // Use case n°2 : Valider la présence du patient
@@ -85,4 +87,4 @@ public class MedicalPersonnelServlet extends HttpServlet {
     // get list rdv confirmer du jours
     // TODO get commentaire
     // TODO insert commentaire 
-}
+

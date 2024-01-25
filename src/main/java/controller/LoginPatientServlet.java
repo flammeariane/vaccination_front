@@ -58,6 +58,4 @@ public class LoginPatientServlet extends HttpServlet {
         }
         return null;
     }
-    
-   
 }

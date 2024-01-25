@@ -38,4 +38,14 @@
         <servlet-name>LogoutServlet</servlet-name>
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
+    
+     <!-- Configuration pour LogoutServlet -->
+    <servlet>
+        <servlet-name>PatientServlet</servlet-name>
+        <servlet-class>controller.PatientServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PatientServlet</servlet-name>
+        <url-pattern>/centresVaccination</url-pattern>
+    </servlet-mapping>
 </web-app>

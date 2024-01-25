@@ -24,14 +24,16 @@
         <h3 class="text-center mt-5">Bienvenue <b>${membrePersonnel.prenom}</b> dans le tableau de bord pour les <b>${membrePersonnel.role}</b></h3>
 
 
+
         <h2>Liste des Rendez-Vous du Jour</h2>
 
-        <c:if test="${not empty listeRendezVous}">
+        <c:if test="${not empty listPatient}">
             <p>Des rendez-vous sont disponibles.</p>
         </c:if>
-        <c:if test="${empty listeRendezVous}">
+        <c:if test="${empty listPatient}">
             <p>Aucun rendez-vous disponible.</p>
         </c:if>
+            
 
         <table border="1">
       

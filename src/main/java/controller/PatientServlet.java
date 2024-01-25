@@ -1,11 +1,14 @@
 package controller;
 
+import bean.CentreInfoBean;
+import bean.VaccinInfoBean;
+import bean.VaccinationHistoryBean;
 import modele.Patient;
 import modele.CentreVaccination;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.http.client.methods.CloseableHttpResponse;
-        
+
 import org.apache.http.HttpResponse;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
@@ -29,45 +32,54 @@ import utils.HttpClientSingleton;
 public class PatientServlet extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         Patient patient = (Patient) session.getAttribute("patient");
 
 // Informations nécessaires pour l'appel API
         if (patient != null) {
+             Map<String, Object> requestData = new HashMap<>();
             // Utilisez l'objet patient pour récupérer les informations nécessaires
             String numeroNational = patient.getNumeroNational();
+
             int codePostal = patient.getCodePostal();
             String prenom = patient.getPrenom();
             String nomFamille = patient.getNomFamille();
             String codeSecret = patient.getCodeSecret(); // TODO CHECK SECURITE
 
             // Créez un objet pour les données de requête
-            Map<String, Object> requestData = new HashMap<>();
+           
             requestData.put("numeroNational", numeroNational);
             requestData.put("codePostal", codePostal);
             requestData.put("prenom", prenom);
             requestData.put("nomFamille", nomFamille);
             requestData.put("codeSecret", codeSecret);
 
-            String jsonResponseCentres = getCentresNear(requestData);
-            String jsonResponseVaccins = getVaccineList(patient);
-            String jsonResponseHistory = getVaccinationHistory(numeroNational);
-            String jsonResponse = "{\"centres\": " + jsonResponseCentres + ", \"vaccins\": " + jsonResponseVaccins + ", \"historique\": " + jsonResponseHistory + " }";
+            VaccinInfoBean vaccins = getVaccineList(patient);
+            request.setAttribute("vaccins", vaccins);
 
-            // Renvoyer la réponse à la page JSP
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
-            response.getWriter().write(jsonResponse);
+            CentreInfoBean centres = getCentresNear(requestData);
+            request.setAttribute("centres", centres);
+
+            VaccinationHistoryBean v = getVaccinationHistory(numeroNational);
+            session.setAttribute("history", v);
+
+            response.sendRedirect("dashboard_patient.jsp");
+            // request.getRequestDispatcher("dashboard_patient.jsp").forward(request, response);
+
+      
 
         } else {
             // Rediriger vers la page de connexion si aucun patient n'est en session
-            response.sendRedirect("login-patient.jsp");
+            request.setAttribute("errorMessage", "Informations de login incorrectes ou problème de connexion");
+            request.getRequestDispatcher("login-patient.jsp").forward(request, response);
+            
+           
         }
 
     }
 
-    private String getCentresNear(Map<String, Object> requestData) throws IOException {
+    private CentreInfoBean getCentresNear(Map<String, Object> requestData) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         String requestBody = objectMapper.writeValueAsString(requestData);
 
@@ -77,33 +89,44 @@ public class PatientServlet extends HttpServlet {
 
         try (CloseableHttpResponse httpResponse = HttpClientSingleton.getInstance().execute(postRequest)) {
             if (httpResponse.getStatusLine().getStatusCode() == 200) {
-                return EntityUtils.toString(httpResponse.getEntity(), "UTF-8");
+
+                String responseBody = EntityUtils.toString(httpResponse.getEntity(), "UTF-8");
+                return objectMapper.readValue(responseBody, CentreInfoBean.class);
+
             } else {
                 // Gérer les réponses autres que 200 OK
-                return "{}";
+                return null;
             }
         }
     }
 
-    private String getVaccineList(Patient patient) throws IOException {
+    private VaccinInfoBean getVaccineList(Patient patient) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
-        String requestBody = objectMapper.writeValueAsString(patient); // Utilisation de l'objet patient
+        String requestBody = objectMapper.writeValueAsString(patient);
 
         HttpPost postRequest = new HttpPost(ApiUrls.RDV_LISTE_VACCIN);
         postRequest.setEntity(new StringEntity(requestBody, "UTF-8"));
         postRequest.setHeader("Content-Type", "application/json");
 
         try (CloseableHttpResponse httpResponse = HttpClientSingleton.getInstance().execute(postRequest)) {
-            if (httpResponse.getStatusLine().getStatusCode() == 200) {
-                return EntityUtils.toString(httpResponse.getEntity(), "UTF-8");
+            int statusCode = httpResponse.getStatusLine().getStatusCode();
+            String responseString = EntityUtils.toString(httpResponse.getEntity(), "UTF-8");
+
+            System.out.println("Response Status: " + statusCode);
+            System.out.println("Response Body: " + responseString);
+
+            if (statusCode == 200) {
+                String responseBody = EntityUtils.toString(httpResponse.getEntity(), "UTF-8");
+                return objectMapper.readValue(responseBody, VaccinInfoBean.class);
+
             } else {
                 // Gérer les réponses autres que 200 OK
-                return "[]";
+                return null;
             }
         }
     }
 
-    private String getVaccinationHistory(String numeroNational) throws IOException {
+    private VaccinationHistoryBean getVaccinationHistory(String numeroNational) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
 
         // Création d'une Map pour encapsuler le numeroNational
@@ -119,12 +142,13 @@ public class PatientServlet extends HttpServlet {
 
         try (CloseableHttpResponse httpResponse = HttpClientSingleton.getInstance().execute(postRequest)) {
             if (httpResponse.getStatusLine().getStatusCode() == 200) {
-
-                return EntityUtils.toString(httpResponse.getEntity(), "UTF-8");
+                
+                String responseBody = EntityUtils.toString(httpResponse.getEntity(), "UTF-8");
+                return objectMapper.readValue(responseBody, VaccinationHistoryBean.class);
 
             } else {
                 // Gérer les réponses autres que 200 OK
-                return numeroNational;
+                return null;
             }
         }
 
