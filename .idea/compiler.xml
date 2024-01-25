@@ -12,7 +12,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="front" options="-endorseddirs C:\Users\flamm\Documents\NetBeansProjects\front\target/endorsed" />
+      <module name="front" options="-endorseddirs C:\Dev\Ariane\vaccination_front\target/endorsed" />
     </option>
   </component>
 </project>

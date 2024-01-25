@@ -37,8 +37,8 @@
                         <div class="card-body">
                             <img src="static/img/jeune.jpg" alt="Photo du patient" class="img-fluid mb-2 rounded-circle" style="width: 150px; height: 150px; object-fit: cover;">
                             <p class="card-text">Nom: <span class="font-weight-bold">${patient.nomFamille}</span></p>
-                            <p class="card-text">Prénom: <span class="font-weight-bold">${patient.prenom}</span></p>
-                            <p class="card-text">Numéro National: <span class="font-weight-bold">${patient.numeroNational}</span></p>
+                            <p class="card-text">Prï¿½nom: <span class="font-weight-bold">${patient.prenom}</span></p>
+                            <p class="card-text">Numï¿½ro National: <span class="font-weight-bold">${patient.numeroNational}</span></p>
                             <p class="card-text">Adresse: <span class="font-weight-bold">${patient.adresse} ${patient.numeroAdresse}, ${patient.ville}, ${patient.codePostal}</span></p>
                             <p class="card-text">Date de Naissance: <span class="font-weight-bold">${formattedDateNaissance}</span></p>
                             <p class="card-text">Email: <span class="font-weight-bold">${patient.email}</span></p>
@@ -50,14 +50,14 @@
                             
                               <h2>Informations sur les Vaccins</h2>
     <ul>
-        <c:forEach var="vaccin" items="${vaccins.listeVaccins}">
+        <c:forEach var="vaccin" items="${vaccins.vaccin}">
             <li>${vaccin.nom} - ${vaccin.nbrDoseTotal} doses</li>
         </c:forEach>
     </ul>
 
     <h2>Centres de Vaccination Proches</h2>
     <ul>
-        <c:forEach var="centre" items="${centres.listeCentres}">
+        <c:forEach var="centre" items="${centres.centreInfo}">
             <li>${centre.nomCentre} - ${centre.adresse}, ${centre.codePostal}</li>
         </c:forEach>
     </ul>
@@ -74,7 +74,7 @@
                 <!-- Consulter Etat Vaccinal -->
                 <div class="col-md-6">
                     <div class="card">
-                        <div class="card-header text-info">Consulter mon état Vaccinal</div>
+                        <div class="card-header text-info">Consulter mon ï¿½tat Vaccinal</div>
                         <div class="card-body">
 
 
@@ -87,7 +87,7 @@
                                 <p>${rdv.dateRdv}</p> <!-- ou tout autre attribut de RendezVous -->
                             </c:forEach>
 
-                            <button class="btn btn-primary">Voir Détails</button>
+                            <button class="btn btn-primary">Voir Dï¿½tails</button>
                         </div>
                     </div>
                 </div>
@@ -122,7 +122,7 @@
                                         <p>Date: <span class="font-weight-bold">${rendezVous.dateRdv}</span></p>
                                         <p>Centre: <span class="font-weight-bold">${rendezVous.nomCentre}</span></p>
                                         <p>Statut: <span class="font-weight-bold">${rendezVous.libelleStatut}</span></p>
-                                        <p>Numéro de dose: <span class="font-weight-bold">${rendezVous.numeroDose}</span> sur ${rendezVous.nbrDoseTotal}</p>
+                                        <p>Numï¿½ro de dose: <span class="font-weight-bold">${rendezVous.numeroDose}</span> sur ${rendezVous.nbrDoseTotal}</p>
                                     </div>
                                 </div>
                             </c:forEach>

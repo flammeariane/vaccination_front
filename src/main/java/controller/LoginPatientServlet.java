@@ -1,7 +1,9 @@
 package controller;
+
 import modele.Patient;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,19 +22,19 @@ import utils.HttpClientSingleton;
 
 public class LoginPatientServlet extends HttpServlet {
 
-     @Override
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String numeroNational = request.getParameter("numeroNational");
         String codeSecret = request.getParameter("codeSecret");
-        
+
         Patient patient = loginPatient(numeroNational, codeSecret);
-        
+
         if (patient != null) {
-        HttpSession patientSession = request.getSession(true);
-        patientSession.setAttribute("patient", patient); // Stockage de l'objet patient dans la session
-        patientSession.setAttribute("userType", "patient");// set du userType pour la redirection du logout 
-        response.sendRedirect("dashboard_patient.jsp"); 
-   } else {
+            HttpSession patientSession = request.getSession(true);
+            patientSession.setAttribute("patient", patient); // Stockage de l'objet patient dans la session
+            patientSession.setAttribute("userType", "patient");// set du userType pour la redirection du logout
+            request.getRequestDispatcher("centresVaccination").forward(request, response);
+        } else {
             request.setAttribute("errorMessage", "Informations de login incorrectes ou problème de connexion");
             request.getRequestDispatcher("login-patient.jsp").forward(request, response);
         }

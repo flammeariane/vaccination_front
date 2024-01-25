@@ -25,10 +25,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.annotation.*;
+
 import utils.ApiUrls;
 import utils.HttpClientSingleton;
 
-@WebServlet("/centresVaccination")
+
 public class PatientServlet extends HttpServlet {
 
     @Override
@@ -38,7 +39,7 @@ public class PatientServlet extends HttpServlet {
 
 // Informations nécessaires pour l'appel API
         if (patient != null) {
-             Map<String, Object> requestData = new HashMap<>();
+            Map<String, Object> requestData = new HashMap<>();
             // Utilisez l'objet patient pour récupérer les informations nécessaires
             String numeroNational = patient.getNumeroNational();
 
@@ -48,7 +49,7 @@ public class PatientServlet extends HttpServlet {
             String codeSecret = patient.getCodeSecret(); // TODO CHECK SECURITE
 
             // Créez un objet pour les données de requête
-           
+
             requestData.put("numeroNational", numeroNational);
             requestData.put("codePostal", codePostal);
             requestData.put("prenom", prenom);
@@ -62,19 +63,17 @@ public class PatientServlet extends HttpServlet {
             request.setAttribute("centres", centres);
 
             VaccinationHistoryBean v = getVaccinationHistory(numeroNational);
-            session.setAttribute("history", v);
+            request.setAttribute("history", v);
 
-            response.sendRedirect("dashboard_patient.jsp");
-            // request.getRequestDispatcher("dashboard_patient.jsp").forward(request, response);
+            request.getRequestDispatcher("dashboard_patient.jsp").forward(request, response);
 
-      
 
         } else {
             // Rediriger vers la page de connexion si aucun patient n'est en session
             request.setAttribute("errorMessage", "Informations de login incorrectes ou problème de connexion");
             request.getRequestDispatcher("login-patient.jsp").forward(request, response);
-            
-           
+
+
         }
 
     }
@@ -110,13 +109,12 @@ public class PatientServlet extends HttpServlet {
 
         try (CloseableHttpResponse httpResponse = HttpClientSingleton.getInstance().execute(postRequest)) {
             int statusCode = httpResponse.getStatusLine().getStatusCode();
-            String responseString = EntityUtils.toString(httpResponse.getEntity(), "UTF-8");
 
             System.out.println("Response Status: " + statusCode);
-            System.out.println("Response Body: " + responseString);
 
             if (statusCode == 200) {
                 String responseBody = EntityUtils.toString(httpResponse.getEntity(), "UTF-8");
+                System.out.println("Response Body: " + responseBody);
                 return objectMapper.readValue(responseBody, VaccinInfoBean.class);
 
             } else {
@@ -142,7 +140,7 @@ public class PatientServlet extends HttpServlet {
 
         try (CloseableHttpResponse httpResponse = HttpClientSingleton.getInstance().execute(postRequest)) {
             if (httpResponse.getStatusLine().getStatusCode() == 200) {
-                
+
                 String responseBody = EntityUtils.toString(httpResponse.getEntity(), "UTF-8");
                 return objectMapper.readValue(responseBody, VaccinationHistoryBean.class);
 

@@ -25,7 +25,7 @@ import org.apache.http.util.EntityUtils;
 import utils.ApiUrls;
 import utils.HttpClientSingleton;
 
-@WebServlet(name = "MedicalPersonnelServlet", urlPatterns = {"/MedicalPersonnelServlet"})
+
 public class MedicalPersonnelServlet extends HttpServlet {
 
    
