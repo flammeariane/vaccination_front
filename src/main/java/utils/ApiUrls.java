@@ -16,6 +16,7 @@ public class ApiUrls {
     
 
     // ResponsableServlet
+    public static final String STAT_AFFICHER_CENTRE = BASE_URL + "/consulterStatistiqueAfficherCentre";
     // MedicalPersonnelServlet
     public static final String VALIDER_PRESENCE_LIST_PATIENT = BASE_URL + "/validerPresencePatientListe";
    

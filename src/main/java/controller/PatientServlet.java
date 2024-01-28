@@ -107,11 +107,8 @@ public class PatientServlet extends HttpServlet {
         try (CloseableHttpResponse httpResponse = HttpClientSingleton.getInstance().execute(postRequest)) {
             int statusCode = httpResponse.getStatusLine().getStatusCode();
 
-            System.out.println("Response Status: " + statusCode);
-
             if (statusCode == 200) {
                 String responseBody = EntityUtils.toString(httpResponse.getEntity(), "UTF-8");
-                System.out.println("Response Body: " + responseBody);
                 return objectMapper.readValue(responseBody, VaccinInfoBean.class);
 
             } else {
@@ -189,5 +186,4 @@ public class PatientServlet extends HttpServlet {
             e.printStackTrace();
         }
     }
-
 }

@@ -48,6 +48,7 @@
                 </div>
 
                 <!-- Consulter Etat Vaccinal -->
+                <!--TODO afficher toute les infos ci dessous  -->
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-header text-info">Consulter mon Ètat Vaccinal</div>
@@ -62,117 +63,90 @@
                 </div>
             </div>
 
-            <div class="card-body">
-                <c:forEach var="rendezVous" items="${centresVaccination.centres.centreInfo}">
-                    <div class="card mb-2">
-                        <div class="card-header">
-                            Rendez-Vous Vaccin: <span class="font-weight-bold">${rendezVous.nomCentre}</span>
-                            <div class="card-body">
-                                <p>tes</p>
-                                <c:forEach var="rendezVous" items="${centresVaccination.centres.centreInfo}">
-                                    <div class="card mb-2">
-                                        <div class="card-header">
-                                            Rendez-Vous Vaccin: <span class="font-weight-bold">${rendezVous.nomCentre}</span>
-                                        </div>
-                                        <div class="card-body">
-                                            <p>Date: <span class="font-weight-bold">${rendezVous.dateRdv}</span></p>
-                                            <p>Centre: <span class="font-weight-bold">${rendezVous.nomCentre}</span></p>
-                                            <p>Statut: <span class="font-weight-bold">${rendezVous.libelleStatut}</span></p>
-                                            <p>Num√©ro de dose: <span class="font-weight-bold">${rendezVous.numeroDose}</span> sur ${rendezVous.nbrDoseTotal}</p>
-                                        </div>
-                                    </div>
-                                    <div class="card-body">
-                                        <p>Date: <span class="font-weight-bold">${rendezVous.dateRdv}</span></p>
-                                        <p>Centre: <span class="font-weight-bold">${rendezVous.nomCentre}</span></p>
-                                        <p>Statut: <span class="font-weight-bold">${rendezVous.libelleStatut}</span></p>
-                                        <p>NumÔøΩro de dose: <span class="font-weight-bold">${rendezVous.numeroDose}</span> sur ${rendezVous.nbrDoseTotal}</p>
-                                    </div>
+            <!--  Prendre un Rendez-Vous -->
+            <form action="medicalPersonnelServlet" method="post">
+                <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header text-info">Prendre un Rendez-Vous</div>
+                        <div class="card-body">
+                            <label for="centreSelect">Centre de Vaccination:</label>
+                            <select id="centreSelect" class="form-control">
+                                <c:forEach var="centre" items="${centres.centreInfo}">
+                                    <option value="${centre.nomCentre}"
+                                            data-adresse="${centre.adresse}"
+                                            data-codepostal="${centre.codePostal}"
+                                            data-numero="${centre.numero}"
+                                            data-telephone="${centre.telephone}"
+                                            data-joursemaineouverture="${centre.jourSemaineOuverture}"
+                                            data-heurefermeture="${centre.heureFermeture}">
+                                        ${centre.nomCentre} - ${centre.adresse}
+                                    </option>
+                                </c:forEach>
+                            </select>
+                            <label for="vaccineSelect">Type de Vaccin:</label>
+                            <select id="vaccineSelect" class="form-control">
+                                <c:forEach var="vaccin" items="${vaccins.vaccin}">
+                                    <option value="${vaccin.nom}">${vaccin.nom}</option>
+                                </c:forEach>
+                            </select>
+
+                            <label for="datePicker">Date du Rendez-Vous:</label>
+                            <input type="text" id="datePicker" class="form-control datepicker">
+                            <button class="btn btn-primary mt-2">RÈserver</button>
+
+                            <!-- Nouvelle section pour les dÈtails du centre -->
+                            <div id="centreDetails" style="display: none;" class="row">
+                                <div class="col-md-5">
+                                    <h5 class="mt-3">DÈtails du Centre</h5>
+                                    <p id="centreAdresse"></p>
+                                    <p id="centreTelephone"></p>
+                                    <p id="centreJourSemaineOuverture"></p>
+                                    <p id="centreHeureFermeture"></p>
                                 </div>
-                            </c:forEach>
-                        </c:forEach>
-                    </div>
-
-                    <!--  Prendre un Rendez-Vous -->
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header text-info">Prendre un Rendez-Vous</div>
-                                <div class="card-body">
-                                    <label for="centreSelect">Centre de Vaccination:</label>
-                                    <select id="centreSelect" class="form-control">
-                                        <c:forEach var="centre" items="${centres.centreInfo}">
-                                            <option value="${centre.nomCentre}"
-                                                    data-adresse="${centre.adresse}"
-                                                    data-codepostal="${centre.codePostal}"
-                                                    data-numero="${centre.numero}"
-                                                    data-telephone="${centre.telephone}"
-                                                    data-joursemaineouverture="${centre.jourSemaineOuverture}"
-                                                    data-heurefermeture="${centre.heureFermeture}">
-                                                ${centre.nomCentre} - ${centre.adresse}
-                                            </option>
-                                        </c:forEach>
-                                    </select>
-                                    <label for="vaccineSelect">Type de Vaccin:</label>
-                                    <select id="vaccineSelect" class="form-control">
-                                        <c:forEach var="vaccin" items="${vaccins.vaccin}">
-                                            <option value="${vaccin.nom}">${vaccin.nom} - ${vaccin.nbrDoseTotal} doses</option>
-                                        </c:forEach>
-                                    </select>
-
-                                    <label for="datePicker">Date du Rendez-Vous:</label>
-                                    <input type="text" id="datePicker" class="form-control datepicker">
-                                    <button class="btn btn-primary mt-2">RÈserver</button>
-
-                                    <!--Nouvelle section pour les d√©tails du centre -->
-                                    <div id="centreDetails" style="display: none;" class="row">
-                                        <div class="col-md-5">
-                                            <h5 class="mt-3">DÈtails du Centre</h5>
-                                            <p id="centreAdresse"></p>
-                                            <p id="centreTelephone"></p>
-                                            <p id="centreJourSemaineOuverture"></p>
-                                            <p id="centreHeureFermeture"></p>
-                                        </div>
-                                        <div class="col-md-7">
-                                            section pour la carte Google Maps 
-                                            <div id="map" style="height: 300px;"></div>
-                                        </div>
-                                    </div>
+                                <div class="col-md-7">
+                                    <!--  section pour la carte Google Maps -->
+                                    <div id="map" style="height: 300px;"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <%@ include file="footer.jsp" %>
-                <script>
-               
-                    function initMap() {
-                        var map = new google.maps.Map(document.getElementById('map'), {
-                            zoom: 14,
-                            center: {lat: -34.397, lng: 150.644} // Coordonn√©es par d√©faut
-                        });
+            </div>
+        </div>
+            </form>
+        </div>
+        <%@ include file="footer.jsp" %>
+        <script>
+             
+            function initMap() {
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 14,
+                    center: {lat: -34.397, lng: 150.644} // Coordonn√©es par d√©faut
+                });
 
-                        window.map = map;
+                window.map = map;
+            }
+
+
+            // DÈclenchez la mise ‡ jour de la carte lorsque la sÈlection du centre change
+            document.getElementById('centreSelect').addEventListener('change', function () {
+                var selectedOption = this.options[this.selectedIndex];
+                var adresse = selectedOption.getAttribute('data-adresse');
+                updateMap(map, adresse);
+            });
+            }
+            function geocodeAddress(address, callback) {
+                var geocoder = new google.maps.Geocoder();
+                geocoder.geocode({'address': address}, function (results, status) {
+                    if (status === 'OK') {
+                        callback(results[0].geometry.location);
+                    } else {
+                        alert('Geocode was not successful for the following reason: ' + status);
                     }
+                });
+            }
 
-
-    // DÈclenchez la mise ‡ jour de la carte lorsque la sÈlection du centre change
-        document.getElementById('centreSelect').addEventListener('change', function () {
-            var selectedOption = this.options[this.selectedIndex];
-            var adresse = selectedOption.getAttribute('data-adresse');
-            updateMap(map, adresse);
-        });
-    }
-                    function geocodeAddress(address, callback) {
-                        var geocoder = new google.maps.Geocoder();
-                        geocoder.geocode({'address': address}, function (results, status) {
-                            if (status === 'OK') {
-                                callback(results[0].geometry.location);
-                            } else {
-                                alert('Geocode was not successful for the following reason: ' + status);
-                            }
-                        });
-                    }
-                    
-                </script>
-                </body>
-                </html>
+        </script>
+    </body>
+</html>

@@ -6,6 +6,7 @@ bean\CentreInfoBean$CentreInfo.class
 be\vaccination\front\resources\JavaEE8Resource.class
 utils\HttpClientSingleton.class
 modele\CentreVaccination.class
+bean\ListCentreBean$listCentre.class
 CloseableHttpClient.class
 modele\CentreInfo.class
 controller\PatientServlet.class
@@ -16,6 +17,7 @@ modele\ListeRendezVous.class
 modele\Vaccin.class
 modele\PersonnelPool.class
 bean\CentreInfoBean.class
+bean\ListCentreBean.class
 bean\VaccinInfoBean.class
 controller\LoginPersonnelServlet.class
 bean\VaccinationHistoryBean$RendezVous.class

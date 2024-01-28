@@ -18,12 +18,12 @@
             </style>
         </head>
         <body>
-            <h3 class="text-center mt-5">Bienvenue <b>${username}</b> dans le tableau de bord du responsable!</h3>
+            <h3 class="text-center mt-5">Bienvenue <b>${membrePersonnel.prenom}</b> dans le tableau de bord du responsable!</h3>
 
             <div class="container mt-4">
                 <!-- Logique conditionnelle en fonction du rôle -->
                 <c:choose>
-                    <c:when test="${role == 'Responsable general'}">
+                    <c:when test="${membrePersonnel.role == 'Responsable general'}">
                         <!-- Liste des centres -->
                         <h4>Liste des Centres</h4>
                         <table class="table">
@@ -38,13 +38,14 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <c:forEach var="centre" items="${centres}">
+                                 <c:forEach var="centre" items="${centres.listCentre}">
+                              
                                     <tr>
-                                        <td>${centre.localite}</td>
-                                        <td>${centre.heuresOuverture}</td>
+                                        <td>${centre.nomCentre}</td>
+                                      
                                         <td>${centre.adresse}</td>
                                         <td>${centre.codePostal}</td>
-                                        <td>${centre.statut}</td>
+                                    
                                         <td>
                                             <button class="btn btn-primary">Ajouter Effectif</button>
                                         </td>
@@ -67,7 +68,7 @@
                         <h4>Statistiques des Centres</h4>
                         <!-- Ici, insérez la logique pour afficher les statistiques des centres -->
                     </c:when>
-                    <c:when test="${role == 'Responsable de centre'}">
+                    <c:when test="${membrePersonnel.role == 'Responsable de centre'}">
                         <!-- Affichage des membres du personnel -->
                         <h4>Membres du Personnel</h4>
                         <table class="table">
