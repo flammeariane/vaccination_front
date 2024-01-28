@@ -21,36 +21,23 @@
 
 
     <body>
-        <h3 class="text-center mt-5">Bienvenue <b>${membrePersonnel.prenom}</b> dans le tableau de bord pour les <b>${membrePersonnel.role}</b></h3>
-
-
-        <table border="1">
-      
-            <c:forEach var="patient" items="${patientList.listPatient}" >
-                <tr>
-                   //TODO Add Date
-                    <td>${patient.prenom}</td>
-                    <td>${patient.nomFamille}</td>
-                    <td>${patient.numeroNational}</td>
-                    <td>${patient.numeroDose}</td>
-                    <td>${patient.statutRdv}</td>
-                    <td>${patient.numeroLot}</td>
-                </tr>
-            </c:forEach>
-        </table>
-
-
-<!--        <div class="container mt-4">
+        <h3 class="text-center mt-5">Bienvenue <b>${membrePersonnel.prenom}</b> dans le tableau de bord pour les <b>${membrePersonnel.role}  </b></h3>
+        <div class="container mt-4">
             <table class="table mt-4">
                 <thead>
                     <tr>
-                        <th>Nom</th>
+                        <th>Date rendez vous </th>
                         <th>Prénom</th>
-                        <th>Date de Naissance</th>
+                        <th>Nom</th>
                         <th>Numéro National</th>
-                        <th>Heure du Rendez-vous</th>
-                            <c:choose>
-                                <c:when test="${role == 'Medecin'}">
+                        <th>Date de Naissance</th>
+
+                        <th>Numéro de dose</th>
+                        <th>Statut rendez vous</th>
+                        <th>Numero de lot</th>
+
+                        <c:choose>
+                            <c:when test="${userType == 'Medecin'}">
                                 <th>Commentaires</th>
                                 </c:when>
                             </c:choose>
@@ -58,39 +45,41 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach var="patient" items="${patients}">
+                    <c:forEach var="patient" items="${patientList.listPatient}" >
                         <tr>
-                            <td>${patient.nom}</td>
+                            <td>${patient.dateRdv}</td>
                             <td>${patient.prenom}</td>
-                            <td>${patient.dateNaissance}</td>
-                            <td>${patient.numRegNat}</td>
-                            <td>${patient.heureRendezVous}</td>
+                            <td>${patient.nomFamille}</td>
+                            <td>${patient.numeroNational}</td>
+                          <td> <fmt:formatDate value="${patient.dateNaissance}" pattern="dd-MM-yyyy" />  </td>
+                            <td>${patient.numeroDose}</td>
+                            <td>${patient.statutRdv}</td>
+                            <td>${patient.numeroLot}</td>
 
                             <c:choose>
-                                <c:when test="${role == 'Medecin'}">
+                                <c:when test="${membrePersonnel.role == 'Medecin'}">
                                     <td>
-                                         Section de commentaires pour Médecin 
+                                        Section de commentaires pour Médecin 
                                         <textarea class="form-control" rows="2" placeholder="Ajouter un commentaire..."></textarea>
-                                         Afficher les précédents commentaires ici 
+                                        Afficher les précédents commentaires ici 
                                         <c:forEach var="comment" items="${patient.commentaires}">
                                             <p>${comment}</p>
                                         </c:forEach>
                                     </td>
                                 </c:when>
                             </c:choose>
-
                             <td>
-                                 Boutons différents selon le rôle 
+                              
                                 <c:choose>
-                                    <c:when test="${role == 'Accueillant en entree'}">
+                                    <c:when test="${membrePersonnel.role == 'Accueillant en entree'}">
                                         <button type="button" class="btn btn-primary">Confirmer la présence</button>
                                         <button type="button" class="btn btn-secondary">Annuler</button>
                                     </c:when>
-                                    <c:when test="${role == 'Accueillant de sortie'}">
+                                    <c:when test="${membrePersonnel.role == 'Accueillant de sortie'}">
                                         <button type="button" class="btn btn-primary">Sélectionner</button>
                                         <button type="button" class="btn btn-secondary">Annuler</button>
                                     </c:when>
-                                    <c:when test="${role == 'Medecin'}">
+                                    <c:when test="${membrePersonnel.role == 'Medecin'}">
                                         <button type="button" class="btn btn-primary">Enregistrer</button>
                                         <button type="button" class="btn btn-secondary">Annuler</button>
                                     </c:when>
@@ -100,7 +89,7 @@
                     </c:forEach>
                 </tbody>
             </table>
-        </div>-->
+        </div>
 
         <%@ include file="footer.jsp" %>
         <!-- Inclure les scripts nécessaires -->

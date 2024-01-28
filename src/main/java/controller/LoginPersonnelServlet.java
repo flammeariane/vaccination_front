@@ -38,7 +38,6 @@ public class LoginPersonnelServlet extends HttpServlet {
                 case "Accueillant de sortie":
                 case "Infirmier":
                 case "Medecin":
-                   
                      request.getRequestDispatcher("medicalPersonnelServlet").forward(request, response);
                     break;
                 case "Responsable de centre":

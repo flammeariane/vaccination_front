@@ -24,7 +24,7 @@ public class MedicalPersonnelServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
         MembrePersonnel membrePersonnel = (MembrePersonnel) session.getAttribute("membrePersonnel");
-
+       
        
         if (membrePersonnel != null) {
             Map<String, Object> requestData = new HashMap<>();
