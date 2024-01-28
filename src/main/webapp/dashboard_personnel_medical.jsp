@@ -24,35 +24,23 @@
         <h3 class="text-center mt-5">Bienvenue <b>${membrePersonnel.prenom}</b> dans le tableau de bord pour les <b>${membrePersonnel.role}</b></h3>
 
 
-
-        <h2>Liste des Rendez-Vous du Jour</h2>
-
-        <c:if test="${not empty listPatient}">
-            <p>Des rendez-vous sont disponibles.</p>
-        </c:if>
-        <c:if test="${empty listPatient}">
-            <p>Aucun rendez-vous disponible.</p>
-        </c:if>
-            
-
         <table border="1">
       
-            <c:forEach items="${listeRendezVous}" var="rdv">
+            <c:forEach var="patient" items="${patientList.listPatient}" >
                 <tr>
-                    <td><fmt:formatDate value="${rdv.dateRdv}" pattern="dd/MM/yyyy HH:mm" /></td>
-                    <td>${rdv.prenom}</td>
-                    <td>${rdv.nomFamille}</td>
-                    <td>${rdv.numeroNational}</td>
-                    <td><fmt:formatDate value="${rdv.dateNaissance}" pattern="dd/MM/yyyy" /></td>
-                    <td>${rdv.numeroDose}</td>
-                    <td>${rdv.statutRdv}</td>
-                    <td>${rdv.numeroLot}</td>
+                   //TODO Add Date
+                    <td>${patient.prenom}</td>
+                    <td>${patient.nomFamille}</td>
+                    <td>${patient.numeroNational}</td>
+                    <td>${patient.numeroDose}</td>
+                    <td>${patient.statutRdv}</td>
+                    <td>${patient.numeroLot}</td>
                 </tr>
             </c:forEach>
         </table>
 
 
-        <div class="container mt-4">
+<!--        <div class="container mt-4">
             <table class="table mt-4">
                 <thead>
                     <tr>
@@ -81,9 +69,9 @@
                             <c:choose>
                                 <c:when test="${role == 'Medecin'}">
                                     <td>
-                                        <!-- Section de commentaires pour Médecin -->
+                                         Section de commentaires pour Médecin 
                                         <textarea class="form-control" rows="2" placeholder="Ajouter un commentaire..."></textarea>
-                                        <!-- Afficher les précédents commentaires ici -->
+                                         Afficher les précédents commentaires ici 
                                         <c:forEach var="comment" items="${patient.commentaires}">
                                             <p>${comment}</p>
                                         </c:forEach>
@@ -92,7 +80,7 @@
                             </c:choose>
 
                             <td>
-                                <!-- Boutons différents selon le rôle -->
+                                 Boutons différents selon le rôle 
                                 <c:choose>
                                     <c:when test="${role == 'Accueillant en entree'}">
                                         <button type="button" class="btn btn-primary">Confirmer la présence</button>
@@ -112,7 +100,7 @@
                     </c:forEach>
                 </tbody>
             </table>
-        </div>
+        </div>-->
 
         <%@ include file="footer.jsp" %>
         <!-- Inclure les scripts nécessaires -->

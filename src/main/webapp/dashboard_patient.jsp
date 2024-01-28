@@ -41,48 +41,36 @@
                             <p class="card-text">Prénom: <span class="font-weight-bold">${patient.prenom}</span></p>
                             <p class="card-text">Numéro National: <span class="font-weight-bold">${patient.numeroNational}</span></p>
                             <p class="card-text">Adresse: <span class="font-weight-bold">${patient.adresse} ${patient.numeroAdresse}, ${patient.ville}, ${patient.codePostal}</span></p>
-
                             <p class="card-text">Date de Naissance: <span class="font-weight-bold"> <fmt:formatDate value="${patient.dateNaissance}" pattern="dd-MM-yyyy" /></span></p>
                             <p class="card-text">Email: <span class="font-weight-bold">${patient.email}</span></p>
-
                         </div>
                     </div>
                 </div>
-
-
 
                 <!-- Consulter Etat Vaccinal -->
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-header text-info">Consulter mon état Vaccinal</div>
                         <div class="card-body">
-
                             <ul>
                                 <c:forEach var="historique" items="${history.listeRendezVous}">
                                     <li>Date: ${historique.dateRdv} - Vaccin: ${historique.nomVaccin}</li>
-                                </c:forEach>
-
+                                    </c:forEach>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
 
-
             <div class="card-body">
-
                 <c:forEach var="rendezVous" items="${centresVaccination.centres.centreInfo}">
                     <div class="card mb-2">
-
                         <div class="card-header">
                             Rendez-Vous Vaccin: <span class="font-weight-bold">${rendezVous.nomCentre}</span>
-
-
                             <div class="card-body">
                                 <p>tes</p>
                                 <c:forEach var="rendezVous" items="${centresVaccination.centres.centreInfo}">
                                     <div class="card mb-2">
-
                                         <div class="card-header">
                                             Rendez-Vous Vaccin: <span class="font-weight-bold">${rendezVous.nomCentre}</span>
                                         </div>
@@ -105,9 +93,6 @@
                     </div>
 
                     <!--  Prendre un Rendez-Vous -->
-
-
-
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card">
@@ -156,37 +141,10 @@
                             </div>
                         </div>
                     </div>
-                </div>-->
-
+                </div>
                 <%@ include file="footer.jsp" %>
-
                 <script>
-                    $(document).ready(function () {
-
-
-
-                    // Mise Ã  jour de la carte
-
-                    if (!isNaN(lat) && !isNaN(lng)) {
-                    var latLng = new google.maps.LatLng(lat, lng);
-                            window.map.setCenter(latLng);
-                    } else {
-                    console.error('Invalid coordinates:', lat, lng);
-                    }
-
-                    geocodeAddress(adresseComplete, function (location) {
-                    window.map.setCenter(location);
-                    });
-                            var latLng = new google.maps.LatLng(selectedCentre.data('latitude'), selectedCentre.data('longitude'));
-                            window.map.setCenter(latLng);
-                    });
-                    }
-                    );
-
-
-
-
-
+               
                     function initMap() {
                         var map = new google.maps.Map(document.getElementById('map'), {
                             zoom: 14,
@@ -196,6 +154,14 @@
                         window.map = map;
                     }
 
+
+    // Déclenchez la mise à jour de la carte lorsque la sélection du centre change
+        document.getElementById('centreSelect').addEventListener('change', function () {
+            var selectedOption = this.options[this.selectedIndex];
+            var adresse = selectedOption.getAttribute('data-adresse');
+            updateMap(map, adresse);
+        });
+    }
                     function geocodeAddress(address, callback) {
                         var geocoder = new google.maps.Geocoder();
                         geocoder.geocode({'address': address}, function (results, status) {
@@ -206,8 +172,7 @@
                             }
                         });
                     }
-
-
-                </script>-->
+                    
+                </script>
                 </body>
                 </html>

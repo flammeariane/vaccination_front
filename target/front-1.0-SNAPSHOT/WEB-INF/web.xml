@@ -39,13 +39,36 @@
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
     
-     <!-- Configuration pour LogoutServlet -->
+     <!-- Configuration pour le dashboard patient -->
     <servlet>
         <servlet-name>PatientServlet</servlet-name>
         <servlet-class>controller.PatientServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>PatientServlet</servlet-name>
-        <url-pattern>/centresVaccination</url-pattern>
+        <url-pattern>/patientServlet</url-pattern>
+    </servlet-mapping>
+    
+      <!-- Configuration pour le dashboard medecin -->
+     <servlet>
+        <servlet-name>MedicalPersonnelServlet</servlet-name>
+        <servlet-class>controller.MedicalPersonnelServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MedicalPersonnelServlet</servlet-name>
+        <url-pattern>/medicalPersonnelServlet</url-pattern>
+    </servlet-mapping>
+    
+      <!-- Configuration pour le dashboard responsable de centre -->
+     <servlet>
+        <servlet-name>ResponsableServlet</servlet-name>
+        <servlet-class>controller.ResponsableServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ResponsableServlet</servlet-name>
+        <url-pattern>/responsableServlet</url-pattern>
     </servlet-mapping>
 </web-app>
+
+
+

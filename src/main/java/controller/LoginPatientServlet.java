@@ -33,7 +33,7 @@ public class LoginPatientServlet extends HttpServlet {
             HttpSession patientSession = request.getSession(true);
             patientSession.setAttribute("patient", patient); // Stockage de l'objet patient dans la session
             patientSession.setAttribute("userType", "patient");// set du userType pour la redirection du logout
-            request.getRequestDispatcher("centresVaccination").forward(request, response);
+            request.getRequestDispatcher("patientServlet").forward(request, response);
         } else {
             request.setAttribute("errorMessage", "Informations de login incorrectes ou problème de connexion");
             request.getRequestDispatcher("login-patient.jsp").forward(request, response);

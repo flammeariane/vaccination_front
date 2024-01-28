@@ -38,11 +38,13 @@ public class LoginPersonnelServlet extends HttpServlet {
                 case "Accueillant de sortie":
                 case "Infirmier":
                 case "Medecin":
-                    response.sendRedirect("dashboard_personnel_medical.jsp");
+                   
+                     request.getRequestDispatcher("medicalPersonnelServlet").forward(request, response);
                     break;
                 case "Responsable de centre":
                 case "Responsable general":
-                    response.sendRedirect("dashboard_responsable.jsp");
+                      //TODO check this
+                    request.getRequestDispatcher("responsableServlet").forward(request, response);
                     break;
                 default:
                     // Gérer les cas où le rôle n'est pas reconnu

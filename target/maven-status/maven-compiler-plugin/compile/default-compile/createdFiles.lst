@@ -1,4 +1,6 @@
+bean\PatientListJourBean.class
 controller\LoginPatientServlet.class
+bean\PatientListJourBean$listPatient.class
 modele\MembrePersonnel.class
 bean\CentreInfoBean$CentreInfo.class
 be\vaccination\front\resources\JavaEE8Resource.class

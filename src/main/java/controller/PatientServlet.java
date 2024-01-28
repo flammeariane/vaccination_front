@@ -23,9 +23,6 @@ import javax.servlet.http.*;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.servlet.annotation.*;
-
 import utils.ApiUrls;
 import utils.HttpClientSingleton;
 
