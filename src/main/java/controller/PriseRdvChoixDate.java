@@ -1,8 +1,8 @@
-
 package controller;
 
 import bean.CentreInfoBean;
 import bean.CentreInfoBean.CentreInfo;
+import bean.CentreInfoBeanOut;
 import bean.ListDateDispoBean;
 import bean.VaccinInfoBean;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,38 +22,49 @@ import org.apache.http.util.EntityUtils;
 import utils.ApiUrls;
 import utils.HttpClientSingleton;
 
-
 public class PriseRdvChoixDate extends HttpServlet {
 
-    
-protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         Patient patient = (Patient) session.getAttribute("patient");
-        CentreInfo centre = (CentreInfo) session.getAttribute("centre");
+        // centre = (CentreInfo) session.getAttribute("centre");
+        // Récupérez l'objet centreOut de la session
+        CentreInfoBeanOut centreOut = (CentreInfoBeanOut) request.getSession().getAttribute("selectedCentreOut");
+
         //TODO set centre for save
         //TODO set date for save
         //TODO save rdv
-        
-           
-         if (patient != null) {
-           
-            ListDateDispoBean listInfoAgenda = getDateByCenter(centre);
+        // Récupérer l'index du centre sélectionné depuis la requête
+        String selectedVaccinIndex = request.getParameter("selectedVaccin");
+
+        if (selectedVaccinIndex != null) {
+            int index = Integer.parseInt(selectedVaccinIndex);
+
+            String selectedVaccinNom = request.getParameter("selectedVaccinNom_" + index);
+            String selectedVaccinNbrDoseTotal = request.getParameter("selectedVaccinNbrDoseTotal_" + index);
+            String selectedVaccinDureeEntreDose = request.getParameter("selectedVaccinDureeEntreDose_" + index);
+
+            // Stockez les valeurs dans la session 
+            session.setAttribute("selectedVaccinNom", selectedVaccinNom);
+            session.setAttribute("selectedVaccinNbrDoseTotal", selectedVaccinNbrDoseTotal);
+            session.setAttribute("selectedVaccinDureeEntreDose", selectedVaccinDureeEntreDose);
+
+            ListDateDispoBean listInfoAgenda = getDateByCenter(centreOut);
             request.setAttribute("listInfoAgenda", listInfoAgenda);
-            
-            request.getRequestDispatcher("resume_rdv.jsp").forward(request, response);
+
+            request.getRequestDispatcher("choix_date.jsp").forward(request, response);
 
         } else {
             // Rediriger vers la page de connexion si aucun patient n'est en session
             request.setAttribute("errorMessage", "Informations de login incorrectes ou problème de connexion");
             request.getRequestDispatcher("login-patient.jsp").forward(request, response);
 
-
         }
-}
+    }
 
-   private ListDateDispoBean getDateByCenter(CentreInfo centre) throws IOException {
+    private ListDateDispoBean getDateByCenter(CentreInfoBeanOut centreOut) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
-        String requestBody = objectMapper.writeValueAsString(centre);
+        String requestBody = objectMapper.writeValueAsString(centreOut);
 
         HttpPost postRequest = new HttpPost(ApiUrls.RDV_AFFICHAGE_AGENDA);
         postRequest.setEntity(new StringEntity(requestBody, "UTF-8"));

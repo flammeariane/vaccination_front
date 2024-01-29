@@ -56,18 +56,22 @@
 
             <form action="choixDate" method="post">
                 <div class="row">
-                    <c:forEach var="vaccin" items="${vaccins.vaccin}">
+                    <c:forEach var="vaccin" items="${vaccins.vaccin}" varStatus="loop">
                         <div class="col-md-4 mb-4">
                             <div class="card">
                                 <div class="card-header text-info">Centre de Vaccination: ${centre.nomCentre}</div>
                                 <div class="card-body">
+                                    
+                                      <input type="hidden" name="selectedVaccinNom_${loop.index}" value="${vaccin.nom}">
+                                    <input type="hidden" name="selectedVaccinNbrDoseTotal_${loop.index}" value="${vaccin.nbrDoseTotal}">
+                                    <input type="hidden" name="selectedVaccinDureeEntreDose_${loop.index}" value="${vaccin.dureeEntreDose}">
 
                                     <p>Nom:  ${vaccin.nom}</p>
                                     <p>Nombre de doses: ${vaccin.nbrDoseTotal}</p>
                                     <c:if test="${vaccin.nbrDoseTotal >= 2}">
                                         <p>Durée entre 2 doses: ${vaccin.dureeEntreDose} semaines</p>
                                     </c:if>                                                                                   
-                                    <button class="btn btn-primary mt-2">Choisir ce vaccin</button>
+                                    <button class="btn btn-primary mt-2" type="submit" name="selectedVaccin" value="${loop.index}">Choisir ce vaccin</button>
                                 </div>
                             </div>
                         </div>

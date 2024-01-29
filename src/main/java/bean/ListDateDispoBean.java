@@ -1,6 +1,7 @@
 
 package bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -18,6 +19,8 @@ public class ListDateDispoBean {
     }
 
      public static class listInfoAgenda{
+           @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm", timezone = "UTC")
+  
      
          private Date dateAgenda;
          private int nbrMaxPlace;

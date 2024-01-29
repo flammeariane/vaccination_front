@@ -1,12 +1,12 @@
 package controller;
 
-import bean.CentreInfoBean;
+
 import bean.VaccinInfoBean;
-import bean.VaccinationHistoryBean;
+import bean.CentreInfoBeanOut;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +25,8 @@ public class PriseRdvChoixVaccin extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         Patient patient = (Patient) session.getAttribute("patient");
+        CentreInfoBeanOut centreOut = new CentreInfoBeanOut();
+        
 
         // Récupérer l'index du centre sélectionné depuis la requête
         String selectedCentreIndex = request.getParameter("selectedCentre");
@@ -46,11 +48,7 @@ public class PriseRdvChoixVaccin extends HttpServlet {
             String selectedCentreCodePostal = request.getParameter("selectedCentreCodePostal_" + index);
             String selectedCentreNumero = request.getParameter("selectedCentreNumero_" + index);
 
-            // Afficher les valeurs récupérées (pour le débogage)
-            System.out.println("Nom du centre sélectionné : " + selectedCentreNom);
-            System.out.println("Adresse du centre sélectionné : " + selectedCentreAdresse);
-            System.out.println("Téléphone du centre sélectionné : " + selectedCentreTelephone);
-            // ... (affichez les autres propriétés de la même manière)
+     
 
             // Stockez les valeurs dans la session 
             session.setAttribute("selectedCentreNom", selectedCentreNom);
@@ -61,7 +59,21 @@ public class PriseRdvChoixVaccin extends HttpServlet {
             session.setAttribute("selectedCentreHeureFermeture", selectedCentreHeureFermeture);
             session.setAttribute("selectedCentreCodePostal", selectedCentreCodePostal);
             session.setAttribute("selectedCentreNumero", selectedCentreNumero);
+            
+            centreOut.setNomCentre(request.getParameter("selectedCentreNom"));
+            centreOut.setAdresse(request.getParameter("selectedCentreAdresse"));
+            centreOut.setTelephone(request.getParameter("selectedCentreTelephone" ));
+            centreOut.setJourSemaineOuverture(request.getParameter("selectedCentreJourOuverture" ));
+            centreOut.setHeureOuverture(request.getParameter("selectedCentreHeureOuverture"));
+            centreOut.setHeureFermeture(request.getParameter("selectedCentreHeureFermeture" ));
+            centreOut.setCodePostal(request.getParameter("selectedCentreCodePostal"));
+            centreOut.setNumero(request.getParameter("selectedCentreNumero"));
+            
+            // Stockez l'objet centreOut dans la session
+session.setAttribute("selectedCentreOut", centreOut);
 
+
+            
             VaccinInfoBean vaccins = getVaccineList(patient);
             request.setAttribute("vaccins", vaccins);
 
