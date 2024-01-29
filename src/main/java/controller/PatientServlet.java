@@ -60,7 +60,7 @@ public class PatientServlet extends HttpServlet {
             request.setAttribute("centres", centres);
 
             VaccinationHistoryBean v = getVaccinationHistory(numeroNational);
-            request.setAttribute("history", v);
+            session.setAttribute("history", v);
 
             request.getRequestDispatcher("dashboard_patient.jsp").forward(request, response);
 

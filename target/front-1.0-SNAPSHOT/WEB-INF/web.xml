@@ -18,9 +18,7 @@
         <servlet-name>LoginPatientServlet</servlet-name>
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
-
-
-  <!-- Configuration pour LoginMembrePersonnelServlet -->
+    <!-- Configuration pour LoginMembrePersonnelServlet -->
     <servlet>
         <servlet-name>LoginPersonnelServlet</servlet-name>
         <servlet-class>controller.LoginPersonnelServlet</servlet-class>
@@ -38,8 +36,7 @@
         <servlet-name>LogoutServlet</servlet-name>
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
-    
-     <!-- Configuration pour le dashboard patient -->
+    <!-- Configuration pour le dashboard patient -->
     <servlet>
         <servlet-name>PatientServlet</servlet-name>
         <servlet-class>controller.PatientServlet</servlet-class>
@@ -48,9 +45,8 @@
         <servlet-name>PatientServlet</servlet-name>
         <url-pattern>/patientServlet</url-pattern>
     </servlet-mapping>
-    
-      <!-- Configuration pour le dashboard medecin -->
-     <servlet>
+    <!-- Configuration pour le dashboard medecin -->
+    <servlet>
         <servlet-name>MedicalPersonnelServlet</servlet-name>
         <servlet-class>controller.MedicalPersonnelServlet</servlet-class>
     </servlet>
@@ -58,9 +54,8 @@
         <servlet-name>MedicalPersonnelServlet</servlet-name>
         <url-pattern>/medicalPersonnelServlet</url-pattern>
     </servlet-mapping>
-    
-      <!-- Configuration pour le dashboard responsable de centre -->
-     <servlet>
+    <!-- Configuration pour le dashboard responsable de centre -->
+    <servlet>
         <servlet-name>ResponsableServlet</servlet-name>
         <servlet-class>controller.ResponsableServlet</servlet-class>
     </servlet>
@@ -68,7 +63,33 @@
         <servlet-name>ResponsableServlet</servlet-name>
         <url-pattern>/responsableServlet</url-pattern>
     </servlet-mapping>
+    <!-- Servlet pour la prise de rendez depuis le dashboard patient  -->
+    <servlet>
+        <servlet-name>PriseRdvChoixCentreServlet</servlet-name>
+        <servlet-class>controller.PriseRdvChoixCentreServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PriseRdvChoixCentreServlet</servlet-name>
+        <url-pattern>/choixcentre</url-pattern>
+    </servlet-mapping>
+    
+     <servlet>
+        <servlet-name>PriseRdvChoixVaccin</servlet-name>
+        <servlet-class>controller.PriseRdvChoixVaccin</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PriseRdvChoixVaccin</servlet-name>
+        <url-pattern>/choixVaccin</url-pattern>
+    </servlet-mapping>
+    
+      <servlet>
+        <servlet-name>PriseRdvChoixDate</servlet-name>
+        <servlet-class>controller.PriseRdvChoixDate</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PriseRdvChoixDate</servlet-name>
+        <url-pattern>/choixDate</url-pattern>
+    </servlet-mapping>
 </web-app>
-
 
 

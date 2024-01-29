@@ -29,92 +29,54 @@
     <body>
         <%@ include file="header.jsp" %>
 
-        <div class="container">
-            <!-- Vos Informations -->
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header text-info">Vos Informations</div>
-                        <div class="card-body">
-                            <img src="static/img/jeune.jpg" alt="Photo du patient" class="img-fluid mb-2 rounded-circle" style="width: 150px; height: 150px; object-fit: cover;">
-                            <p class="card-text">Nom: <span class="font-weight-bold">${patient.nomFamille}</span></p>
-                            <p class="card-text">Prénom: <span class="font-weight-bold">${patient.prenom}</span></p>
-                            <p class="card-text">Numéro National: <span class="font-weight-bold">${patient.numeroNational}</span></p>
-                            <p class="card-text">Adresse: <span class="font-weight-bold">${patient.adresse} ${patient.numeroAdresse}, ${patient.ville}, ${patient.codePostal}</span></p>
-                            <p class="card-text">Date de Naissance: <span class="font-weight-bold"> <fmt:formatDate value="${patient.dateNaissance}" pattern="dd-MM-yyyy" /></span></p>
-                            <p class="card-text">Email: <span class="font-weight-bold">${patient.email}</span></p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Consulter Etat Vaccinal -->
-                <!--TODO afficher toute les infos ci dessous  -->
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-header text-info">Consulter mon état Vaccinal</div>
-                        <div class="card-body">
-                            <ul>
-                                <c:forEach var="historique" items="${history.listeRendezVous}">
-                                    <li>Date: ${historique.dateRdv} - Vaccin: ${historique.nomVaccin}</li>
-                                    </c:forEach>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!--  Prendre un Rendez-Vous -->
-            <form action="medicalPersonnelServlet" method="post">
-                <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header text-info">Prendre un Rendez-Vous</div>
-                        <div class="card-body">
-                            <label for="centreSelect">Centre de Vaccination:</label>
-                            <select id="centreSelect" class="form-control">
-                                <c:forEach var="centre" items="${centres.centreInfo}">
-                                    <option value="${centre.nomCentre}"
-                                            data-adresse="${centre.adresse}"
-                                            data-codepostal="${centre.codePostal}"
-                                            data-numero="${centre.numero}"
-                                            data-telephone="${centre.telephone}"
-                                            data-joursemaineouverture="${centre.jourSemaineOuverture}"
-                                            data-heurefermeture="${centre.heureFermeture}">
-                                        ${centre.nomCentre} - ${centre.adresse}
-                                    </option>
-                                </c:forEach>
-                            </select>
-                            <label for="vaccineSelect">Type de Vaccin:</label>
-                            <select id="vaccineSelect" class="form-control">
-                                <c:forEach var="vaccin" items="${vaccins.vaccin}">
-                                    <option value="${vaccin.nom}">${vaccin.nom}</option>
-                                </c:forEach>
-                            </select>
-
-                            <label for="datePicker">Date du Rendez-Vous:</label>
-                            <input type="text" id="datePicker" class="form-control datepicker">
-                            <button class="btn btn-primary mt-2">Réserver</button>
-
-                            <!-- Nouvelle section pour les détails du centre -->
-                            <div id="centreDetails" style="display: none;" class="row">
-                                <div class="col-md-5">
-                                    <h5 class="mt-3">Détails du Centre</h5>
-                                    <p id="centreAdresse"></p>
-                                    <p id="centreTelephone"></p>
-                                    <p id="centreJourSemaineOuverture"></p>
-                                    <p id="centreHeureFermeture"></p>
-                                </div>
-                                <div class="col-md-7">
-                                    <!--  section pour la carte Google Maps -->
-                                    <div id="map" style="height: 300px;"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+   <div class="container">
+    <!-- Vos Informations -->
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-header text-info">Vos Informations</div>
+                <div class="card-body">
+                    <img src="static/img/jeune.jpg" alt="Photo du patient" class="img-fluid mb-3 rounded-circle" style="width: 150px; height: 150px; object-fit: cover;">
+                    <p class="card-text"><strong>Nom:</strong> ${patient.nomFamille}</p>
+                    <p class="card-text"><strong>Prénom:</strong> ${patient.prenom}</p>
+                    <p class="card-text"><strong>Numéro National:</strong> ${patient.numeroNational}</p>
+                    <p class="card-text"><strong>Adresse:</strong> ${patient.adresse} ${patient.numeroAdresse}, ${patient.ville}, ${patient.codePostal}</p>
+                    <p class="card-text"><strong>Date de Naissance:</strong> <fmt:formatDate value="${patient.dateNaissance}" pattern="dd-MM-yyyy" /></p>
+                    <p class="card-text"><strong>Email:</strong> ${patient.email}</p>
                 </div>
             </div>
         </div>
+
+        <!-- Consulter Etat Vaccinal -->
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-header text-info">Consulter mon état Vaccinal</div>
+                <div class="card-body">
+                    <ul>
+                        <c:forEach var="historique" items="${history.listeRendezVous}">
+                            <li>Date: ${historique.dateRdv} - Vaccin: ${historique.nomVaccin}</li>
+                        </c:forEach>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Prendre un Rendez-Vous -->
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header text-info">Prendre un Rendez-vous</div>
+                <form action="choixcentre" method="post">
+                <button class="btn btn-primary" type="submit">Prendre un rendez-vous</button>
             </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+           
+            
+     
         </div>
         <%@ include file="footer.jsp" %>
         <script>
