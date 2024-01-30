@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html>
@@ -50,24 +50,35 @@
                 </div>
             </div>
             <h1>veuillez choisir la date de vaccination  </h1>
-            vous avez voici le centre ..... et le vaccin    
+  
+            <%
+    // Récupérer le nom du centre sélectionné de la session
+    String selectedCentre = (String) session.getAttribute("selectedCentreNom");
+%>
+            <p>Centre sélectionné : <%= selectedCentre %></p>
 
 
-            <form action="choixDate" method="post">
-                <div class="row">
-                    <c:forEach var="date" items="${listInfoAgenda.listInfoAgenda}">
-                        <div class="col-md-4 mb-4">
-                            <div class="card">
-                                <div class="card-header text-info">Centre de Vaccination: ${centre.nomCentre}</div>
-                                <div class="card-body">
-                                    <p>date :   ${date.dateAgenda}</p>                                                                                                                             
-                                    <button class="btn btn-primary mt-2">Choisir cette date</button>
-                                </div>
-                            </div>
+    <form action="choixDate" method="post">
+    <div class="row">
+        <c:forEach var="date" items="${listInfoAgenda.listInfoAgenda}">
+          <c:if test="${date.nbrPlaceRestante > 0}">
+
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-header text-info">Centre de Vaccination: <%= selectedCentre %></div>
+                        <div class="card-body">
+                           <p> <fmt:formatDate value="${date.dateAgenda}" pattern="EEEE d MMMM yyyy HH:mm" /></p>
+                   
+                            <p>nombre de place  :   ${date.nbrMaxPlace}</p>   
+                            <button class="btn btn-primary mt-2">Choisir cette date</button>
                         </div>
-                    </c:forEach>
+                    </div>
                 </div>
-            </form>
+          </c:if>
+        </c:forEach>
+    </div>
+</form>
+
 
 
 

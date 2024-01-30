@@ -51,7 +51,7 @@ public class PriseRdvChoixVaccin extends HttpServlet {
      
 
             // Stockez les valeurs dans la session 
-            session.setAttribute("selectedCentreNom", selectedCentreNom);
+            session.setAttribute("selectedCentreNom", selectedCentreNom );
             session.setAttribute("selectedCentreAdresse", selectedCentreAdresse);
             session.setAttribute("selectedCentreTelephone", selectedCentreTelephone);
             session.setAttribute("selectedCentreJourOuverture", selectedCentreJourOuverture);
@@ -60,14 +60,14 @@ public class PriseRdvChoixVaccin extends HttpServlet {
             session.setAttribute("selectedCentreCodePostal", selectedCentreCodePostal);
             session.setAttribute("selectedCentreNumero", selectedCentreNumero);
             
-            centreOut.setNomCentre(request.getParameter("selectedCentreNom"));
-            centreOut.setAdresse(request.getParameter("selectedCentreAdresse"));
-            centreOut.setTelephone(request.getParameter("selectedCentreTelephone" ));
-            centreOut.setJourSemaineOuverture(request.getParameter("selectedCentreJourOuverture" ));
-            centreOut.setHeureOuverture(request.getParameter("selectedCentreHeureOuverture"));
-            centreOut.setHeureFermeture(request.getParameter("selectedCentreHeureFermeture" ));
-            centreOut.setCodePostal(request.getParameter("selectedCentreCodePostal"));
-            centreOut.setNumero(request.getParameter("selectedCentreNumero"));
+            centreOut.setNomCentre(request.getParameter("selectedCentreNom_" + index));
+            centreOut.setAdresse(request.getParameter("selectedCentreAdresse_" + index));
+            centreOut.setTelephone(request.getParameter("selectedCentreTelephone_" + index));
+            centreOut.setJourSemaineOuverture(request.getParameter("selectedCentreJourOuverture_" + index));
+            centreOut.setHeureOuverture(request.getParameter("selectedCentreHeureOuverture_"  + index));
+            centreOut.setHeureFermeture(request.getParameter("selectedCentreHeureFermeture_"  + index ));
+            centreOut.setCodePostal(request.getParameter("selectedCentreCodePostal_"  + index));
+            centreOut.setNumero(request.getParameter("selectedCentreNumero_"  + index));
             
             // Stockez l'objet centreOut dans la session
 session.setAttribute("selectedCentreOut", centreOut);

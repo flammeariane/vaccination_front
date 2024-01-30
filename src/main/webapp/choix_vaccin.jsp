@@ -46,20 +46,19 @@
                 </div>
             </div>
             <h1>veuillez choisir votre vaccin </h1>
-            vous avez voici le centre .....   
+            
             <%
     // Récupérer le nom du centre sélectionné de la session
     String selectedCentre = (String) session.getAttribute("selectedCentreNom");
 %>
-            <p>Centre sélectionné : <%= selectedCentre %></p>
-
+          
 
             <form action="choixDate" method="post">
                 <div class="row">
                     <c:forEach var="vaccin" items="${vaccins.vaccin}" varStatus="loop">
                         <div class="col-md-4 mb-4">
                             <div class="card">
-                                <div class="card-header text-info">Centre de Vaccination: ${centre.nomCentre}</div>
+                                <div class="card-header text-info">Centre de Vaccination: <%= selectedCentre %></div>
                                 <div class="card-body">
                                     
                                       <input type="hidden" name="selectedVaccinNom_${loop.index}" value="${vaccin.nom}">
