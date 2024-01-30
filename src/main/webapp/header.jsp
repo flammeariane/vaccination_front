@@ -6,12 +6,11 @@
         <style>
             #header {
                 background: url('static/img/banner1.jpg') no-repeat center center;
-
                 background-size: cover;
-                background-position: top;
+                background-position: center; /* Centré pour voir le milieu de l'image */
                 color: black;
                 text-align: center;
-                padding: 5rem 0;
+                padding: 10rem 0; /* Augmente la hauteur */
                 position: relative;
             }
 
@@ -31,11 +30,9 @@
     <body>
 
         <div id="header">
-            <h1>Centre de Vaccination</h1>
-            <form action="logout" method="post" class="logout-button">
-                <button type="submit" class="btn btn-danger">Déconnexion</button>
-            </form>
-            <p class="">Nous somme ouvert tous les jours de 09h00 à 17h00</p>
+            <h1>Réseau des Centres de Vaccination National</h1>
+          
+
         </div>
 
     </body>

@@ -8,6 +8,8 @@
         <title>Espace Patient</title>
         <%@ include file="/WEB-INF/bootstrap.jsp" %>
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/custom-styles.css">
+
         <script src="//ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=??????Y&callback=initMap" async defer></script>
@@ -30,18 +32,16 @@
 
         <%@ include file="header.jsp" %>
 
-        <div class="container">
-           
+        <div class="container">    
             <div class="row mb-5">
                 <div class="col-6">
-                    <button class="btn btn-outline-primary" onclick="history.back()"> 
+                    <button class="btn btn-custom-back" onclick="history.back()"> 
                         <i class="fas fa-arrow-left"></i> Retour
                     </button>
-
                 </div>
                 <div class="col-2 offset-4">
                     <form action="" method="post">
-                        <button class="btn btn-outline-danger">
+                        <button class="btn btn-custom-discard">
                             <i class="fas fa-times"></i> Annuler
                         </button>
                     </form>
@@ -49,8 +49,6 @@
             </div>
 
             <h1>veuillez choisir votre centre</h1>
-
-            <!-- ... (votre code existant) ... -->
             <form action="choixVaccin" method="post">
                 <div class="row">
                     <c:forEach var="centre" items="${centres.centreInfo}" varStatus="loop">
@@ -74,7 +72,7 @@
                                     <p>Heure d'ouverture:  de ${centre.heureOuverture} à ${centre.heureFermeture}</p>
 
                                     <!-- Utilisation de loop.index comme valeur pour le bouton submit -->
-                                    <button class="btn btn-primary mt-2" type="submit" name="selectedCentre" value="${loop.index}">
+                                    <button class="btn btn-custom mt-2" type="submit" name="selectedCentre" value="${loop.index}">
                                         Choisir ce centre
                                     </button>
                                 </div>

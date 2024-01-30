@@ -1,0 +1,35 @@
+.btn-custom {
+    background-color: #74c6a0;
+    color: white; 
+}
+
+.btn-custom:hover {
+    background-color: #74c6a0;
+}
+
+.btn-custom-delete{
+    background-color: #f59261;
+    color: white;
+}
+
+.btn-custom-back {
+    color: #f59261; 
+    border: 1px solid #f59261; 
+    background-color: transparent; 
+}
+
+.btn-custom-back:hover {
+    color: white; 
+    background-color: #f59261; 
+}
+
+.btn-custom-discard {
+   color: white; 
+   background-color: #f59261; 
+}
+
+.btn-custom-discard:hover {
+    color: #f59261; 
+    border: 1px solid #f59261; 
+    background-color: transparent; 
+}
