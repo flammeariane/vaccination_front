@@ -13,8 +13,6 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=??????Y&callback=initMap" async defer></script>
-
-
         <style>
             .card-header {
                 background-color: #007bff;
@@ -29,7 +27,6 @@
         </style>
     </head>
     <body>
-
 
         <%@ include file="header.jsp" %>
         <div class="container">        
@@ -56,7 +53,7 @@
             %>
 
 
-            <form action="choixDate" method="post">
+            <form action="dispatch" method="post">
                 <div class="row">
                     <c:forEach var="date" items="${listInfoAgenda.listInfoAgenda}">
                         <c:if test="${date.nbrPlaceRestante > 0}">
@@ -65,14 +62,25 @@
                                 <div class="card">
                                     <div class="card-header text-info">Centre de Vaccination: <%= selectedCentre%></div>
                                     <div class="card-body">
+                                          <input type="hidden" name="selectedDateAgenda_${loop.index}" value="${date.dateAgenda}">
                                         <p> <fmt:formatDate value="${date.dateAgenda}" pattern="EEEE d MMMM yyyy HH:mm" /></p>
                                         <p>nombre de place  :   ${date.nbrMaxPlace}</p>   
-                                        <button class="btn btn-custom mt-2">Choisir cette date</button>
+                                       <button class="btn btn-custom mt-2" type="submit" name="selectedDate" value="${loop.index}">
+                                        Choisir cette date
+                                    </button>
                                     </div>
                                 </div>
                             </div>
                         </c:if>
                     </c:forEach>
+                    
+                    
+                      <c:if test="${empty listInfoAgenda}">
+            <div class="col-md-12">
+                <p class="text-center">Il n'y a plus de rendez-vous disponible pour ce centre. Veuillez choisir un autre centre.</p>
+            </div>
+        </c:if> 
+
                 </div>
             </form>
     </body>

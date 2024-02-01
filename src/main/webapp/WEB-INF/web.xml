@@ -73,7 +73,7 @@
         <url-pattern>/choixcentre</url-pattern>
     </servlet-mapping>
     
-     <servlet>
+    <servlet>
         <servlet-name>PriseRdvChoixVaccin</servlet-name>
         <servlet-class>controller.PriseRdvChoixVaccin</servlet-class>
     </servlet>
@@ -82,7 +82,7 @@
         <url-pattern>/choixVaccin</url-pattern>
     </servlet-mapping>
     
-      <servlet>
+    <servlet>
         <servlet-name>PriseRdvChoixDate</servlet-name>
         <servlet-class>controller.PriseRdvChoixDate</servlet-class>
     </servlet>
@@ -90,6 +90,32 @@
         <servlet-name>PriseRdvChoixDate</servlet-name>
         <url-pattern>/choixDate</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>PriseRdvChoixDateSecond</servlet-name>
+        <servlet-class>controller.PriseRdvChoixDateSecond</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PriseRdvChoixDateSecond</servlet-name>
+        <url-pattern>/choixDatesecond</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>PriseRdvDispatch</servlet-name>
+        <servlet-class>controller.PriseRdvDispatch</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PriseRdvDispatch</servlet-name>
+        <url-pattern>/dispatch</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>PriseRdvResume</servlet-name>
+        <servlet-class>controller.PriseRdvResume</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PriseRdvResume</servlet-name>
+        <url-pattern>/resume</url-pattern>
+    </servlet-mapping>
 </web-app>
-
 

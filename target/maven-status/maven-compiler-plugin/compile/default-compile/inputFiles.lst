@@ -12,11 +12,13 @@ C:\Users\flamm\Documents\NetBeansProjects\front\src\main\java\controller\LoginPe
 C:\Users\flamm\Documents\NetBeansProjects\front\src\main\java\modele\PatientsListResponse.java
 C:\Users\flamm\Documents\NetBeansProjects\front\src\main\java\controller\PriseRdvChoixVaccin.java
 C:\Users\flamm\Documents\NetBeansProjects\front\src\main\java\be\vaccination\front\resources\JavaEE8Resource.java
+C:\Users\flamm\Documents\NetBeansProjects\front\src\main\java\controller\PriseRdvDispatch.java
 C:\Users\flamm\Documents\NetBeansProjects\front\src\main\java\controller\LogoutServlet.java
 C:\Users\flamm\Documents\NetBeansProjects\front\src\main\java\bean\CentreInfoBean.java
 C:\Users\flamm\Documents\NetBeansProjects\front\src\main\java\bean\ListDateDispoBean.java
 C:\Users\flamm\Documents\NetBeansProjects\front\src\main\java\utils\HttpClientSingleton.java
 C:\Users\flamm\Documents\NetBeansProjects\front\src\main\java\modele\Patient.java
+C:\Users\flamm\Documents\NetBeansProjects\front\src\main\java\controller\PriseRdvChoixDateSecond.java
 C:\Users\flamm\Documents\NetBeansProjects\front\src\main\java\modele\CentreVaccination.java
 C:\Users\flamm\Documents\NetBeansProjects\front\src\main\java\modele\PersonnelPool.java
 C:\Users\flamm\Documents\NetBeansProjects\front\src\main\java\modele\RendezVous.java
@@ -29,3 +31,4 @@ C:\Users\flamm\Documents\NetBeansProjects\front\src\main\java\bean\VaccinationHi
 C:\Users\flamm\Documents\NetBeansProjects\front\src\main\java\modele\MembrePersonnel.java
 C:\Users\flamm\Documents\NetBeansProjects\front\src\main\java\bean\ListCentreBean.java
 C:\Users\flamm\Documents\NetBeansProjects\front\src\main\java\controller\ResponsableServlet.java
+C:\Users\flamm\Documents\NetBeansProjects\front\src\main\java\controller\PriseRdvResume.java

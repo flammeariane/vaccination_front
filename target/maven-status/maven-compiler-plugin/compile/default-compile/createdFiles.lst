@@ -1,13 +1,17 @@
 bean\PatientListJourBean.class
 controller\LoginPatientServlet.class
+controller\PriseRdvDispatch.class
 bean\PatientListJourBean$listPatient.class
 modele\MembrePersonnel.class
 bean\CentreInfoBean$CentreInfo.class
 controller\PriseRdvChoixVaccin.class
 be\vaccination\front\resources\JavaEE8Resource.class
+controller\PriseRdvResume.class
 utils\HttpClientSingleton.class
 modele\CentreVaccination.class
+controller\PriseRdvChoixDateSecond.class
 bean\ListCentreBean$listCentre.class
+bean\saveRendezVousBeanIn.class
 controller\PriseRdvChoixDate.class
 CloseableHttpClient.class
 modele\CentreInfo.class
@@ -33,4 +37,5 @@ utils\ApiUrls.class
 bean\CentreInfoBeanOut.class
 bean\ListDateDispoBean$listInfoAgenda.class
 modele\Patient.class
+bean\saveRendezVousBeanOut.class
 modele\PatientsListResponse.class

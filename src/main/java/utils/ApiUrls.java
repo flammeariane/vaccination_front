@@ -12,6 +12,7 @@ public class ApiUrls {
     public static final String RDV_CONSULTATION = BASE_URL + "/consultationRdv";
     public static final String RDV_AFFICHAGE_AGENDA = BASE_URL + "/rendezVousAffichageAgenda";
     public static final String RDV_SAVE = BASE_URL+"/rendezVousInsertRendezVous";
+
    // public static final String RDV_CHOIX_VACCIN = BASE_URL + "/rendezVousChoixVaccin";
     
 
