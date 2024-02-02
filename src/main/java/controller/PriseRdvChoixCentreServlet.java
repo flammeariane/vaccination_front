@@ -21,10 +21,7 @@ import org.apache.http.util.EntityUtils;
 import utils.ApiUrls;
 import utils.HttpClientSingleton;
 
-/**
- *
- * @author flamm
- */
+
 
 public class PriseRdvChoixCentreServlet extends HttpServlet {
     

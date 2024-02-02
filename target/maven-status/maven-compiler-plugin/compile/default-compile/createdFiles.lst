@@ -1,3 +1,4 @@
+bean\SaveRendezVousSecondBeanIn$ListRecapInfoRendezVous.class
 bean\PatientListJourBean.class
 controller\LoginPatientServlet.class
 controller\PriseRdvDispatch.class
@@ -32,6 +33,9 @@ bean\VaccinationHistoryBean$RendezVous.class
 bean\VaccinationHistoryBean.class
 controller\ResponsableServlet.class
 controller\MedicalPersonnelServlet.class
+bean\saveRendezVousSecondBeanOut.class
+controller\PriseRdvResumeSecond.class
+bean\SaveRendezVousSecondBeanIn.class
 controller\LogoutServlet.class
 utils\ApiUrls.class
 bean\CentreInfoBeanOut.class

@@ -1,43 +1,96 @@
-<%-- 
-    Document   : resume
-    Created on : 1 fÃ©vr. 2024, 10:12:25
-    Author     : flamm
---%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Espace Patient</title>
+        <%@ include file="/WEB-INF/bootstrap.jsp" %>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/custom-styles.css">
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=??????Y&callback=initMap" async defer></script>
+        <style>
+
+        </style>
     </head>
     <body>
-        <h1>HResume!</h1>
-        
-        ${rendezVousResume}
-        
 
-   <c:if test="${empty rendezVousResume}">
-            <div class="col-md-12">
-                <p class="text-center">vide.</p>
-            </div>
-        </c:if> 
+        <%@ include file="header.jsp" %>
 
-   
-        <div class="col-md-4 mb-4">
-            <div class="card">
-
-                <div class="card-body">
+        <div class="row justify-content-center">
+            <div class="col-md-8 mt-5">
+                <div class="card">
+                    <div class="card-header text-info">
+                        Confirmation 
+                    </div>
+                    <div class="card-body">
 
 
+                        <h5 class="text-center mb-4"> <i class="fas fa-check-circle" style="color: green;"></i> Votre rendez-vous est bien confirmé !  </h5>     
 
-                    <p>Nom:  ${rendezVousResume.nom}</p>
-                    <p>Nom:  ${rendezVousResume.prenom}</p>
 
+                        <p>Date du rendez-vous: <strong>${rendezVousResume.dateRdv}</strong></p>
+                        <p>Vaccin: <strong>${rendezVousResume.nomVaccin}</strong></p>
+                        <p>Centre de vaccination: <strong>${rendezVousResume.nomCentre}</strong></p>
+                        <p>Numéro de dose: <strong>${rendezVousResume.numeroDose}</strong></p>
+                        <p>Confirmation par email: <strong>${rendezVousResume.confrmationParEmail ? 'Oui' : 'Non'}</strong></p>
+                        <p>Email de confirmation: <strong>${rendezVousResume.emailConfirmation}</strong></p>
+
+
+
+
+
+                        <div class="row mt-3 ml-1">
+                             <!--  TODO prevoir form quand le back aura implementer la focntion -->.
+                            <form action="" method="post">
+                                <div class="form-group">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="recevoirEmail" name="recevoirEmail" value="oui" onclick="toggleEmailInput()">
+                                        <label class="form-check-label" for="recevoirEmail">
+                                            Je souhaite recevoir un résumé de mon rendez-vous par email
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group" id="emailInput" style="display: none;">
+                                    <label for="email">Adresse Email de confirmation:</label>
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Entrez votre adresse email">
+                                </div>
+
+                            </form>
+                        </div>
+
+                    </div>
                 </div>
+
             </div>
+
+
+
         </div>
- 
-</body>
+        <div class="row justify-content-center mt-3">
+            <form action="patientServlet" method="post">
+                <button type="submit" class="btn btn-custom-discard">Retour sur mon Espace</button>
+            </form>
+        </div>
+
+
+
+        <script>
+            function toggleEmailInput() {
+                var checkbox = document.getElementById('recevoirEmail');
+                var emailInput = document.getElementById('emailInput');
+                if (checkbox.checked) {
+                    emailInput.style.display = 'block';
+                } else {
+                    emailInput.style.display = 'none';
+                }
+            }
+        </script>
+
+    </body>
 </html>
+

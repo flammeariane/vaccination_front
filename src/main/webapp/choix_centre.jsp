@@ -48,8 +48,11 @@
                 </div>
             </div>
 
-            <h1>veuillez choisir votre centre</h1>
+            <h>veuillez choisir votre centre</h>
             <form action="choixVaccin" method="post">
+                <div>
+                    Voulez vous recevoir une confirmation 
+                </div>
                 <div class="row">
                     <c:forEach var="centre" items="${centres.centreInfo}" varStatus="loop">
                         <div class="col-md-4 mb-4">

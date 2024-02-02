@@ -28,7 +28,7 @@ public class PriseRdvDispatch extends HttpServlet {
                 // response.sendRedirect(request.getContextPath() + "/resume");
             } else if (nbrDosesTotal == 2) {
                 // Rediriger vers le servlet de choix de la seconde date
-                request.getRequestDispatcher("choix_date_secong.jsp").forward(request, response);
+                request.getRequestDispatcher("/choixDatesecond").forward(request, response);
                 //response.sendRedirect(request.getContextPath() + "/choixdateSecond");
             }
     }

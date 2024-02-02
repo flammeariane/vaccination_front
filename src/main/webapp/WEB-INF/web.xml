@@ -117,5 +117,14 @@
         <servlet-name>PriseRdvResume</servlet-name>
         <url-pattern>/resume</url-pattern>
     </servlet-mapping>
+
+      <servlet>
+        <servlet-name>PriseRdvResumeSecond</servlet-name>
+        <servlet-class>controller.PriseRdvResumeSecond</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PriseRdvResumeSecond</servlet-name>
+        <url-pattern>/resumeSecond</url-pattern>
+    </servlet-mapping>
 </web-app>
 

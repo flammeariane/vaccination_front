@@ -22,27 +22,30 @@ public class PriseRdvResume extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
+          Patient patient = (Patient) session.getAttribute("patient");
         saveRendezVousBeanOut rendezVousBeanOut = new saveRendezVousBeanOut();
-        
-       // rendezVousBeanOut.setNomCentre(session.getAttribute(string));
-        rendezVousBeanOut.setNomCentre("Family Care");
-        rendezVousBeanOut.setNomVaccin("Johnson&Johnson");
+
+        // rendezVousBeanOut.setNomCentre(session.getAttribute(string));
+        rendezVousBeanOut.setNomCentre((String) session.getAttribute("selectedCentreNom"));
+        rendezVousBeanOut.setNomVaccin((String) session.getAttribute("selectedVaccinNom"));
         rendezVousBeanOut.setDateRdv("2024-02-01T09:30:00");
         rendezVousBeanOut.setConfirmParEmail("1");
-        rendezVousBeanOut.setEmailConfirmation("JeuneKoenig@dayrep.com");
+        rendezVousBeanOut.setEmailConfirmation(patient.getEmail());
         rendezVousBeanOut.setStatutConfirmer("oui");
-        rendezVousBeanOut.setNumeroNational("00022621447");
-        rendezVousBeanOut.setNomFamille( "Koenig");
-        rendezVousBeanOut.setPrenom("Jeune");
+        rendezVousBeanOut.setNumeroNational(patient.getNumeroNational());
+        rendezVousBeanOut.setNomFamille(patient.getNomFamille());
+        rendezVousBeanOut.setPrenom(patient.getNomFamille());
         
-            saveRendezVousBeanIn rendezVousResume = saveRendezVous(rendezVousBeanOut);
-            request.setAttribute("rendezVousResume", rendezVousResume);
-            
-               request.getRequestDispatcher("resume.jsp").forward(request, response);
         
+        
+
+        saveRendezVousBeanIn rendezVousResume = saveRendezVous(rendezVousBeanOut);
+        session.setAttribute("rendezVousResume", rendezVousResume);
+
+        request.getRequestDispatcher("resume.jsp").forward(request, response);
+
     }
 
-    
     private saveRendezVousBeanIn saveRendezVous(saveRendezVousBeanOut rendezVousBeanOut) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         String requestBody = objectMapper.writeValueAsString(rendezVousBeanOut);
@@ -63,10 +66,5 @@ public class PriseRdvResume extends HttpServlet {
                 return null;
             }
         }
+    }
 }
-}
-
-
-
-
-
