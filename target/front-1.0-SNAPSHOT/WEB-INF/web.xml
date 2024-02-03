@@ -162,7 +162,17 @@
         <url-pattern>/medecinServlet</url-pattern>
     </servlet-mapping>
     
+         <servlet>
+        <servlet-name>ConfirmPresencePatientServlet</servlet-name>
+        <servlet-class>controller.medicalStaff.ConfirmPresencePatientServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ConfirmPresencePatientServlet</servlet-name>
+        <url-pattern>/confirmPresencePatientServlet</url-pattern>
+    </servlet-mapping>
+    
+    
    
      
-     
+
 </web-app>

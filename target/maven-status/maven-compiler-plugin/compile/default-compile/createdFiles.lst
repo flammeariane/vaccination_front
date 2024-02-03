@@ -9,6 +9,7 @@ modele\MembrePersonnel.class
 bean\CentreInfoBean$CentreInfo.class
 controller\PriseRdvChoixVaccin.class
 be\vaccination\front\resources\JavaEE8Resource.class
+controller\medicalStaff\ConfirmPresencePatientServlet.class
 controller\PriseRdvResume.class
 utils\HttpClientSingleton.class
 controller\medicalStaff\MedecinServlet.class
@@ -42,4 +43,5 @@ bean\CentreInfoBeanOut.class
 bean\ListDateDispoBean$listInfoAgenda.class
 modele\Patient.class
 controller\medicalStaff\InfirmierServlet.class
+bean\ConfirmPresencePatientBean.class
 bean\saveRendezVousBeanOut.class

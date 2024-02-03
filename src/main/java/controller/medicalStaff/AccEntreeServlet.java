@@ -31,13 +31,11 @@ public class AccEntreeServlet extends HttpServlet {
        
         if (membrePersonnel != null) {
             Map<String, Object> requestData = new HashMap<>();
-            String role = membrePersonnel.getRole();
-            String adresseMail = membrePersonnel.getAdresseMail();
-            String password = membrePersonnel.getPassword();
+         
 
-            requestData.put("role", role);
-            requestData.put("adresseMail", adresseMail);
-            requestData.put("password", password);
+            requestData.put("role", membrePersonnel.getRole());
+            requestData.put("adresseMail", membrePersonnel.getAdresseMail());
+            requestData.put("password",  membrePersonnel.getPassword());
 
             PatientListJourBean patientList = validerPresencePatientListe(requestData);
             request.setAttribute("patientList", patientList);

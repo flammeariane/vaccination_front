@@ -5,7 +5,16 @@
 <!DOCTYPE html>
 <html>
     <head>
+
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <%@ include file="/WEB-INF/bootstrap.jsp" %>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/custom-styles.css">
+
+
+
+
+
         <title>Tableau de Bord du Médecin</title>
         <%@ include file="header.jsp" %>
         <style>
@@ -21,9 +30,17 @@
 
 
     <body>
-        <h3 class="text-center mt-5">Bienvenue <b>${membrePersonnel.prenom}</b> dans le tableau de bord pour les <b>${membrePersonnel.role}  </b></h3>
         <div class="container mt-4">
-            <table class="table mt-4">
+
+            <div class="d-flex justify-content-end align-items-center mb-3">
+                <form action="logout" method="post" > <button class="btn btn-custom-delete" type="submit">Déconnexion <i class="fa-solid fa-arrow-right-from-bracket"></i> </button></form>
+            </div>
+
+            <h3 class="text-center mt-5">Bienvenue <b>${membrePersonnel.prenom}</b> dans le tableau de bord pour les <b>${membrePersonnel.role}  </b></h3>
+
+
+            <table id="tableauPatient" class="table mt-4">
+
                 <thead>
                     <tr>
                         <th>Date rendez vous </th>
@@ -31,62 +48,93 @@
                         <th>Nom</th>
                         <th>Numéro National</th>
                         <th>Date de Naissance</th>
-
                         <th>Numéro de dose</th>
                         <th>Statut rendez vous</th>
                         <th>Numero de lot</th>
-
-                        <c:choose>
-                            <c:when test="${userType == 'Medecin'}">
-                                <th>Commentaires</th>
-                                </c:when>
-                            </c:choose>
-                        <th>Actions</th>
+                        <th>Présence patient</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach var="patient" items="${patientList.listPatient}" >
+                    <c:forEach var="patient" items="${patientList.listPatient}">
                         <tr>
-                            <td>${patient.dateRdv}</td>
+                            <td><fmt:formatDate value="${patient.dateRdv}" pattern="dd-MM-yyyy HH:mm" /></td>
                             <td>${patient.prenom}</td>
                             <td>${patient.nomFamille}</td>
                             <td>${patient.numeroNational}</td>
-                          <td> <fmt:formatDate value="${patient.dateNaissance}" pattern="dd-MM-yyyy" />  </td>
+                            <td><fmt:formatDate value="${patient.dateNaissance}" pattern="dd-MM-yyyy" /></td>
                             <td>${patient.numeroDose}</td>
                             <td>${patient.statutRdv}</td>
                             <td>${patient.numeroLot}</td>
-
-                            <c:choose>
-                                <c:when test="${membrePersonnel.role == 'Medecin'}">
-                                    <td>
-                                        Section de commentaires pour Médecin 
-                                        <textarea class="form-control" rows="2" placeholder="Ajouter un commentaire..."></textarea>
-                                        Afficher les précédents commentaires ici 
-                                        <c:forEach var="comment" items="${patient.commentaires}">
-                                            <p>${comment}</p>
-                                        </c:forEach>
-                                    </td>
-                                </c:when>
-                            </c:choose>
                             <td>
-                              
-                             
-                                        <button type="button" class="btn btn-primary">Confirmer la présence</button>
-                                        <button type="button" class="btn btn-secondary">Annuler</button>
-                                
+                                <form action="confirmPresencePatientServlet" method="post">
+    <input type="hidden" name="numeroNational" value="${patient.numeroNational}" />
+    <input type="hidden" name="validePresence" value="" id="validePresence${patient.numeroNational}" />
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" onclick="submitForm(true, '${patient.numeroNational}')" class="btn btn-custom">
+            Confirmer
+        </button>
+        <button type="button" onclick="submitForm(false, '${patient.numeroNational}')" class="btn btn-custom-discard">
+            Annuler
+        </button>
+    </div>
+</form>
+
+
+
                             </td>
                         </tr>
                     </c:forEach>
                 </tbody>
-            </table>
-        </div>
 
-        <%@ include file="footer.jsp" %>
-        <!-- Inclure les scripts nécessaires -->
-        <!-- jQuery, Popper.js, et Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+            </table>
+
+            <!-- TODO fix search -->
+            <div class="row">
+                <label>Rechercher : </label>
+                <input type="text" id="searchByNumeroNational" placeholder="Rechercher par numéro national">
+            </div>
+
+            <%@ include file="footer.jsp" %>
+            <!-- Inclure les scripts nécessaires -->
+            <!-- jQuery, Popper.js, et Bootstrap JS -->
+            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+            <script>
+            function submitForm(isConfirmed, numeroNational) {
+                // Sélectionner le champ caché par son ID unique et ajuster la valeur
+                var validePresenceField = document.getElementById('validePresence' + numeroNational);
+                validePresenceField.value = isConfirmed ? 'OUI' : 'NON';
+
+                // Soumettre le formulaire
+                validePresenceField.form.submit();
+            }
+            </script>
+
+
+            <script>
+                function myFunction() {
+                    var input, filter, table, tr, td, i, txtValue;
+                    input = document.getElementById("searchByNumeroNational");
+                    filter = input.value.toUpperCase();
+                    table = document.getElementById("tableauPatient");
+                    tr = table.getElementsByTagName("tr");
+
+                    for (i = 0; i < tr.length; i++) {
+                        td = tr[i].getElementsByTagName("td")[3]; // Index 3 pour la colonne "Numéro National"
+                        if (td) {
+                            txtValue = td.textContent || td.innerText;
+                            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                                tr[i].style.display = "";
+                            } else {
+                                tr[i].style.display = "none";
+                            }
+                        }
+                    }
+                }
+            </script>
+
 
     </body>
 </html>
