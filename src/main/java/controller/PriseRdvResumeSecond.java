@@ -28,17 +28,10 @@ public class PriseRdvResumeSecond extends HttpServlet {
         HttpSession session = request.getSession();
          Patient patient = (Patient) session.getAttribute("patient");
          
-            // SaveRendezVousSecondBeanIn premierRdv = (SaveRendezVousSecondBeanIn) session.getAttribute("rendezVousResume");
-    
-    // Vous pouvez effectuer des opérations supplémentaires ici, comme la validation
-    
-    // Puis, passer l'objet ou ses propriétés à la JSP
-   // request.setAttribute("dateRdv", premierRdv.getDateRdv());
-    //request.setAttribute("nomVaccin", premierRdv.getNomVaccin());
   
         saveRendezVousSecondBeanOut rendezVousSecondBeanOut = new saveRendezVousSecondBeanOut();
 
-        // rendezVousBeanOut.setNomCentre(session.getAttribute(string));
+
         rendezVousSecondBeanOut.setNomCentre((String) session.getAttribute("selectedCentreNom"));
         rendezVousSecondBeanOut.setNomVaccin((String) session.getAttribute("selectedVaccinNom"));
         rendezVousSecondBeanOut.setDateRdv("2024-03-01T09:30:00");
@@ -49,10 +42,7 @@ public class PriseRdvResumeSecond extends HttpServlet {
         rendezVousSecondBeanOut.setNomFamille(patient.getNomFamille());
         rendezVousSecondBeanOut.setPrenom(patient.getPrenom());
         
-
-        
-        
-
+ 
         SaveRendezVousSecondBeanIn rendezVousResumeSecond = saveRendezVousSecond(rendezVousSecondBeanOut);
         request.setAttribute("rendezVousResumeSecond", rendezVousResumeSecond);
 

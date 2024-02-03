@@ -1,14 +1,11 @@
 package controller;
 
 import bean.CentreInfoBean;
-import bean.VaccinInfoBean;
-import bean.VaccinationHistoryBean;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,24 +27,16 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
         HttpSession session = request.getSession();
         Patient patient = (Patient) session.getAttribute("patient");
 
-// Informations nécessaires pour l'appel API
+
         if (patient != null) {
             Map<String, Object> requestData = new HashMap<>();
-            // Utilisez l'objet patient pour récupérer les informations nécessaires
-            String numeroNational = patient.getNumeroNational();
-
-            int codePostal = patient.getCodePostal();
-            String prenom = patient.getPrenom();
-            String nomFamille = patient.getNomFamille();
-            String codeSecret = patient.getCodeSecret(); // TODO CHECK SECURITE
-
+    
             // Créez un objet pour les données de requête
-
-            requestData.put("numeroNational", numeroNational);
-            requestData.put("codePostal", codePostal);
-            requestData.put("prenom", prenom);
-            requestData.put("nomFamille", nomFamille);
-            requestData.put("codeSecret", codeSecret);
+            requestData.put("numeroNational", patient.getNumeroNational());
+            requestData.put("codePostal", patient.getCodePostal());
+            requestData.put("prenom", patient.getPrenom());
+            requestData.put("nomFamille", patient.getNomFamille());
+            requestData.put("codeSecret", patient.getCodeSecret());
 
 
             CentreInfoBean centres = getCentresNear(requestData);

@@ -1,15 +1,10 @@
 package controller;
 
-import bean.CentreInfoBean;
-import bean.CentreInfoBean.CentreInfo;
 import bean.CentreInfoBeanOut;
 import bean.ListDateDispoBean;
-import bean.VaccinInfoBean;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
-import java.util.Map;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,13 +22,11 @@ public class PriseRdvChoixDate extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         Patient patient = (Patient) session.getAttribute("patient");
-        // centre = (CentreInfo) session.getAttribute("centre");
+      
         // Récupérez l'objet centreOut de la session
         CentreInfoBeanOut centreOut = (CentreInfoBeanOut) request.getSession().getAttribute("selectedCentreOut");
 
-        //TODO set centre for save
-        //TODO set date for save
-        //TODO save rdv
+
         // Récupérer l'index du centre sélectionné depuis la requête
         String selectedVaccinIndex = request.getParameter("selectedVaccin");
 

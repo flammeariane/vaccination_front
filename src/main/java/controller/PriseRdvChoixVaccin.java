@@ -1,6 +1,5 @@
 package controller;
 
-
 import bean.VaccinInfoBean;
 import bean.CentreInfoBeanOut;
 
@@ -26,54 +25,32 @@ public class PriseRdvChoixVaccin extends HttpServlet {
         HttpSession session = request.getSession();
         Patient patient = (Patient) session.getAttribute("patient");
         CentreInfoBeanOut centreOut = new CentreInfoBeanOut();
-        
 
-        // Récupérer l'index du centre sélectionné depuis la requête
+        //Récuperation de l'index du centre sélectionné depuis la requête
         String selectedCentreIndex = request.getParameter("selectedCentre");
 
-        // Afficher l'index récupéré (pour le débogage)
-        System.out.println("Index du centre sélectionné : " + selectedCentreIndex);
-
-        // Si l'index n'est pas null, convertissez-le en entier pour accéder aux autres propriétés
+        // Si l'index n'est pas null, convertion en entier pour accéder aux autres propriétés
         if (selectedCentreIndex != null) {
             int index = Integer.parseInt(selectedCentreIndex);
 
-            // Utilisez l'index pour récupérer les autres propriétés du centre
-            String selectedCentreNom = request.getParameter("selectedCentreNom_" + index);
-            String selectedCentreAdresse = request.getParameter("selectedCentreAdresse_" + index);
-            String selectedCentreTelephone = request.getParameter("selectedCentreTelephone_" + index);
-            String selectedCentreJourOuverture = request.getParameter("selectedCentreJourOuverture_" + index);
-            String selectedCentreHeureOuverture = request.getParameter("selectedCentreHeureOuverture_" + index);
-            String selectedCentreHeureFermeture = request.getParameter("selectedCentreHeureFermeture_" + index);
-            String selectedCentreCodePostal = request.getParameter("selectedCentreCodePostal_" + index);
-            String selectedCentreNumero = request.getParameter("selectedCentreNumero_" + index);
+    
 
-     
+            // var set pour etre utiliser dans la jsp TODO remplacer a un usebean au code cleaning
+            session.setAttribute("selectedCentreNom", request.getParameter("selectedCentreNom_" + index));
+    
 
-            // Stockez les valeurs dans la session 
-            session.setAttribute("selectedCentreNom", selectedCentreNom );
-            session.setAttribute("selectedCentreAdresse", selectedCentreAdresse);
-            session.setAttribute("selectedCentreTelephone", selectedCentreTelephone);
-            session.setAttribute("selectedCentreJourOuverture", selectedCentreJourOuverture);
-            session.setAttribute("selectedCentreHeureOuverture", selectedCentreHeureOuverture);
-            session.setAttribute("selectedCentreHeureFermeture", selectedCentreHeureFermeture);
-            session.setAttribute("selectedCentreCodePostal", selectedCentreCodePostal);
-            session.setAttribute("selectedCentreNumero", selectedCentreNumero);
-            
             centreOut.setNomCentre(request.getParameter("selectedCentreNom_" + index));
             centreOut.setAdresse(request.getParameter("selectedCentreAdresse_" + index));
             centreOut.setTelephone(request.getParameter("selectedCentreTelephone_" + index));
             centreOut.setJourSemaineOuverture(request.getParameter("selectedCentreJourOuverture_" + index));
-            centreOut.setHeureOuverture(request.getParameter("selectedCentreHeureOuverture_"  + index));
-            centreOut.setHeureFermeture(request.getParameter("selectedCentreHeureFermeture_"  + index ));
-            centreOut.setCodePostal(request.getParameter("selectedCentreCodePostal_"  + index));
-            centreOut.setNumero(request.getParameter("selectedCentreNumero_"  + index));
-            
+            centreOut.setHeureOuverture(request.getParameter("selectedCentreHeureOuverture_" + index));
+            centreOut.setHeureFermeture(request.getParameter("selectedCentreHeureFermeture_" + index));
+            centreOut.setCodePostal(request.getParameter("selectedCentreCodePostal_" + index));
+            centreOut.setNumero(request.getParameter("selectedCentreNumero_" + index));
+
             // Stockez l'objet centreOut dans la session
-session.setAttribute("selectedCentreOut", centreOut);
+            session.setAttribute("selectedCentreOut", centreOut);
 
-
-            
             VaccinInfoBean vaccins = getVaccineList(patient);
             request.setAttribute("vaccins", vaccins);
 

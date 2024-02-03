@@ -8,7 +8,7 @@ public class Patient {
     private int codePostal;
     private String prenom;
     private String nomFamille;
-    private Date dateNaissance; // TODO check que le format de date correspond à celui de la réponse JSON
+    private Date dateNaissance; 
     private String ville;
     private String adresse;
     private String numeroAdresse;

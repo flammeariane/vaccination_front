@@ -41,9 +41,6 @@
                         <p>Email de confirmation: <strong>${rendezVousResume.emailConfirmation}</strong></p>
 
 
-
-
-
                         <div class="row mt-3 ml-1">
                              <!--  TODO prevoir form quand le back aura implementer la focntion -->.
                             <form action="" method="post">

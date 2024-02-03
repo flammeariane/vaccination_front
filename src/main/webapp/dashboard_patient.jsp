@@ -61,10 +61,13 @@
                     <div class="card h-100">
                         <div class="card-header text-info">Consulter mon état Vaccinal</div>
                         <div class="card-body">
+                            <c:if  test="${empty history.listeRendezVous}">
+                                Vous n'a aucun rendez vous passée ou actif 
+                            </c:if>
                             <ul>
                                 <c:forEach var="historique" items="${history.listeRendezVous}">
                                     <li>Date: ${historique.dateRdv} - Vaccin: ${historique.nomVaccin}</li>
-                                    </c:forEach>
+                                </c:forEach>
                             </ul>
                         </div>
                     </div>

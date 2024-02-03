@@ -22,22 +22,19 @@ public class PriseRdvResume extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-          Patient patient = (Patient) session.getAttribute("patient");
+        Patient patient = (Patient) session.getAttribute("patient");
         saveRendezVousBeanOut rendezVousBeanOut = new saveRendezVousBeanOut();
 
         // rendezVousBeanOut.setNomCentre(session.getAttribute(string));
         rendezVousBeanOut.setNomCentre((String) session.getAttribute("selectedCentreNom"));
         rendezVousBeanOut.setNomVaccin((String) session.getAttribute("selectedVaccinNom"));
-        rendezVousBeanOut.setDateRdv("2024-02-01T09:30:00");
+        rendezVousBeanOut.setDateRdv((String) request.getAttribute("selectedDate"));
         rendezVousBeanOut.setConfirmParEmail("1");
         rendezVousBeanOut.setEmailConfirmation(patient.getEmail());
         rendezVousBeanOut.setStatutConfirmer("oui");
         rendezVousBeanOut.setNumeroNational(patient.getNumeroNational());
         rendezVousBeanOut.setNomFamille(patient.getNomFamille());
         rendezVousBeanOut.setPrenom(patient.getNomFamille());
-        
-        
-        
 
         saveRendezVousBeanIn rendezVousResume = saveRendezVous(rendezVousBeanOut);
         session.setAttribute("rendezVousResume", rendezVousResume);

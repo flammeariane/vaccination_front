@@ -30,42 +30,23 @@
                     </div>
                     <div class="card-body">
 
-
-
-
-
                         <h5 class="text-center mb-4"> <i class="fas fa-check-circle" style="color: green;"></i> Vos rendez-vous sont bien confirmé !  </h5>     
-                        <h6>Premier rendez vous : </h6>
-
-                        <p>Vaccin: <strong>${dateRdv}</strong></p>
-                        <p>Centre de vaccination: <strong>${rendezVousResume.nomCentre}</strong></p>
-                        <p>Numéro de dose: <strong>${rendezVousResume.numeroDose}</strong></p>
-                        <p>Confirmation par email: <strong>${rendezVousResume.confrmationParEmail ? 'Oui' : 'Non'}</strong></p>
-                        <p>Email de confirmation: <strong>${rendezVousResume.emailConfirmation}</strong></p>
-                        
-                        
-                         <h6>Second rendez vous : </h6>
-                        
-                        
-                       <c:if test="${not empty rendezVousResumeSecond.listRecapInfoRendezVous}">
-    <h6>Second rendez-vous :</h6>
-    <c:forEach var="rendezVous" items="${rendezVousResumeSecond.listRecapInfoRendezVous}">
-        <p>Date du rendez-vous: <strong>${rendezVous.dateRdv}</strong></p>
-        <p>Vaccin: <strong>${rendezVous.nomVaccin}</strong></p>
-        <p>Centre de vaccination: <strong>${rendezVous.nomCentre}</strong></p>
-        <p>Numéro de dose: <strong>${rendezVous.numeroDose}</strong></p>
-        <p>Confirmation par email: <strong>${rendezVous.confrmationParEmail ? 'Oui' : 'Non'}</strong></p>
-        <p>Email de confirmation: <strong>${rendezVous.emailConfirmation}</strong></p>
-    </c:forEach>
-</c:if>
 
 
-
-
-
+                        <c:if test="${not empty rendezVousResumeSecond.listRecapInfoRendezVous}">
+                          
+                            <c:forEach var="rendezVous" items="${rendezVousResumeSecond.listRecapInfoRendezVous}">
+                                <p>Date du rendez-vous: <strong>${rendezVous.dateRdv}</strong></p>
+                                <p>Vaccin: <strong>${rendezVous.nomVaccin}</strong></p>
+                                <p>Centre de vaccination: <strong>${rendezVous.nomCentre}</strong></p>
+                                <p>Numéro de dose: <strong>${rendezVous.numeroDose}</strong></p>
+                                <p>Confirmation par email: <strong>${rendezVous.confrmationParEmail ? 'Oui' : 'Non'}</strong></p>
+                                <p>Email de confirmation: <strong>${rendezVous.emailConfirmation}</strong></p>
+                            </c:forEach>
+                        </c:if>
 
                         <div class="row mt-3 ml-1">
-                             <!--  TODO prevoir form quand le back aura implementer la focntion -->.
+                            <!--  TODO prevoir form quand le back aura implementer la focntion -->.
                             <form action="" method="post">
                                 <div class="form-group">
                                     <div class="form-check">
