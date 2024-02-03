@@ -1,6 +1,8 @@
+controller\medicalStaff\AccEntreeServlet.class
 bean\SaveRendezVousSecondBeanIn$ListRecapInfoRendezVous.class
 bean\PatientListJourBean.class
 controller\LoginPatientServlet.class
+controller\medicalStaff\MedicalPersonnelServlet.class
 controller\PriseRdvDispatch.class
 bean\PatientListJourBean$listPatient.class
 modele\MembrePersonnel.class
@@ -9,6 +11,7 @@ controller\PriseRdvChoixVaccin.class
 be\vaccination\front\resources\JavaEE8Resource.class
 controller\PriseRdvResume.class
 utils\HttpClientSingleton.class
+controller\medicalStaff\MedecinServlet.class
 controller\PriseRdvChoixDateSecond.class
 bean\ListCentreBean$listCentre.class
 bean\saveRendezVousBeanIn.class
@@ -29,8 +32,8 @@ controller\LoginPersonnelServlet.class
 bean\VaccinationHistoryBean$RendezVous.class
 bean\VaccinationHistoryBean.class
 controller\ResponsableServlet.class
-controller\MedicalPersonnelServlet.class
 bean\saveRendezVousSecondBeanOut.class
+controller\medicalStaff\AccSortieServlet.class
 controller\PriseRdvResumeSecond.class
 bean\SaveRendezVousSecondBeanIn.class
 controller\LogoutServlet.class
@@ -38,4 +41,5 @@ utils\ApiUrls.class
 bean\CentreInfoBeanOut.class
 bean\ListDateDispoBean$listInfoAgenda.class
 modele\Patient.class
+controller\medicalStaff\InfirmierServlet.class
 bean\saveRendezVousBeanOut.class

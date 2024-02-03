@@ -48,7 +48,7 @@
     <!-- Configuration pour le dashboard medecin -->
     <servlet>
         <servlet-name>MedicalPersonnelServlet</servlet-name>
-        <servlet-class>controller.MedicalPersonnelServlet</servlet-class>
+        <servlet-class>controller.medicalStaff.MedicalPersonnelServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MedicalPersonnelServlet</servlet-name>
@@ -72,7 +72,6 @@
         <servlet-name>PriseRdvChoixCentreServlet</servlet-name>
         <url-pattern>/choixcentre</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>PriseRdvChoixVaccin</servlet-name>
         <servlet-class>controller.PriseRdvChoixVaccin</servlet-class>
@@ -81,7 +80,6 @@
         <servlet-name>PriseRdvChoixVaccin</servlet-name>
         <url-pattern>/choixVaccin</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>PriseRdvChoixDate</servlet-name>
         <servlet-class>controller.PriseRdvChoixDate</servlet-class>
@@ -90,7 +88,6 @@
         <servlet-name>PriseRdvChoixDate</servlet-name>
         <url-pattern>/choixDate</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>PriseRdvChoixDateSecond</servlet-name>
         <servlet-class>controller.PriseRdvChoixDateSecond</servlet-class>
@@ -99,7 +96,6 @@
         <servlet-name>PriseRdvChoixDateSecond</servlet-name>
         <url-pattern>/choixDatesecond</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>PriseRdvDispatch</servlet-name>
         <servlet-class>controller.PriseRdvDispatch</servlet-class>
@@ -108,7 +104,6 @@
         <servlet-name>PriseRdvDispatch</servlet-name>
         <url-pattern>/dispatch</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>PriseRdvResume</servlet-name>
         <servlet-class>controller.PriseRdvResume</servlet-class>
@@ -117,8 +112,7 @@
         <servlet-name>PriseRdvResume</servlet-name>
         <url-pattern>/resume</url-pattern>
     </servlet-mapping>
-
-      <servlet>
+    <servlet>
         <servlet-name>PriseRdvResumeSecond</servlet-name>
         <servlet-class>controller.PriseRdvResumeSecond</servlet-class>
     </servlet>
@@ -126,5 +120,49 @@
         <servlet-name>PriseRdvResumeSecond</servlet-name>
         <url-pattern>/resumeSecond</url-pattern>
     </servlet-mapping>
+    
+    <!-- Servlet pour le personnel medical   -->
+     
+    <servlet>
+        <servlet-name>AccEntreeServlet</servlet-name>
+        <servlet-class>controller.medicalStaff.AccEntreeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AccEntreeServlet</servlet-name>
+        <url-pattern>/accEntreServlet</url-pattern>
+    </servlet-mapping>
+    
+      <servlet>
+        <servlet-name>AccSortieServlet</servlet-name>
+        <servlet-class>controller.medicalStaff.AccSortieServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AccSortieServlet</servlet-name>
+        <url-pattern>/accSortieServlet</url-pattern>
+    </servlet-mapping>
+     
+     
+      
+    <servlet>
+        <servlet-name>InfirmierServlet</servlet-name>
+        <servlet-class>controller.medicalStaff.InfirmierServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>InfirmierServlet</servlet-name>
+        <url-pattern>/infirmierServlet</url-pattern>
+    </servlet-mapping>
+    
+    
+      <servlet>
+        <servlet-name>MedecinServlet</servlet-name>
+        <servlet-class>controller.medicalStaff.MedecinServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MedecinServlet</servlet-name>
+        <url-pattern>/medecinServlet</url-pattern>
+    </servlet-mapping>
+    
+   
+     
+     
 </web-app>
-

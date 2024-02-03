@@ -35,10 +35,16 @@ public class LoginPersonnelServlet extends HttpServlet {
             // Redirection basée sur le rôle
             switch (membrePersonnel.getRole()) {
                 case "Accueillant en entree":
+                       request.getRequestDispatcher("accEntreServlet").forward(request, response);
+                        break;
                 case "Accueillant de sortie":
+                       request.getRequestDispatcher("accSortieServlet").forward(request, response);
+                        break;
                 case "Infirmier":
+                       request.getRequestDispatcher("infirmierServlet").forward(request, response);
+                        break;
                 case "Medecin":
-                     request.getRequestDispatcher("medicalPersonnelServlet").forward(request, response);
+                     request.getRequestDispatcher("medecinServlet").forward(request, response);
                     break;
                 case "Responsable de centre":
                 case "Responsable general":
