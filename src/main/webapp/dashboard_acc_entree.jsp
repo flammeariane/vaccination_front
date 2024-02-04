@@ -11,11 +11,7 @@
         <%@ include file="/WEB-INF/bootstrap.jsp" %>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/custom-styles.css">
 
-
-
-
-
-        <title>Tableau de Bord du Médecin</title>
+        <title>dashboard</title>
         <%@ include file="header.jsp" %>
         <style>
             .control-buttons {
@@ -72,17 +68,17 @@
             .table th {
                 word-break: break-all; /* Permet de casser les mots trop longs pour éviter le débordement */
             }
-            
-                .btn-group {
-        width: 100%; /* Permet aux boutons de remplir l'espace horizontal disponible */
-    }
-    .btn-group .btn {
-        width: 50%; /* Chaque bouton remplit la moitié de l'espace de la btn-group */
-    }
-    .btn-custom, .btn-custom-discard {
-        white-space: normal; /* Permet au texte du bouton de passer à la ligne */
-        word-break: break-word; /* Casse les mots si nécessaire pour éviter le débordement */
-    }
+
+            .btn-group {
+                width: 100%; /* Permet aux boutons de remplir l'espace horizontal disponible */
+            }
+            .btn-group .btn {
+                width: 50%; /* Chaque bouton remplit la moitié de l'espace de la btn-group */
+            }
+            .btn-custom, .btn-custom-discard {
+                white-space: normal; /* Permet au texte du bouton de passer à la ligne */
+                word-break: break-word; /* Casse les mots si nécessaire pour éviter le débordement */
+            }
         </style>    </head>
 
 
@@ -133,10 +129,10 @@
                                     <input type="hidden" name="validePresence" value="" id="validePresence${patient.numeroNational}" />
                                     <div class="btn-group" role="group" aria-label="Basic example">
                                         <button type="button" onclick="submitForm(true, '${patient.numeroNational}')" class="btn btn-custom">
-                                           <i class="fas fa-check"></i>
+                                            <i class="fas fa-check"></i>
                                         </button>
                                         <button type="button" onclick="submitForm(false, '${patient.numeroNational}')" class="btn btn-custom-discard">
-                                        <i class="fa-regular fa-calendar-xmark"></i>
+                                            <i class="fa-regular fa-calendar-xmark"></i>
                                         </button>
                                     </div>
                                 </form>
