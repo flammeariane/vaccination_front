@@ -124,38 +124,32 @@
                             <td>${patient.numeroDose}</td>
                             <td>${patient.statutRdv}</td>
                             <td>
+                                <!-- Champ numeroLot éditable sans bouton de validation supplémentaire -->
+                                <input type="text" name="numeroLot" value="${patient.numeroLot}" class="form-control" required onkeyup="validateButton('${patient.numeroNational}', this.value)" />
+                            </td>
+                            <td>
                                 <form action="confirmVaccinationPatientServlet" method="post">
                                     <input type="hidden" name="numeroNational" value="${patient.numeroNational}" />
-                                    <input type="hidden" name="validePresence" value="" id="validePresence${patient.numeroNational}" />
-                                    <div class="input-group">
-                                        <span class="lot-display">${patient.numeroLot}</span>
-                                        <input type="text" name="numeroLot" value="${patient.numeroLot}" class="form-control lot-input" style="display: none;" />
-                                        <div class="input-group-append">
-                                            <button type="button" class="btn btn-toggle-lot" onclick="toggleLotInput('${patient.numeroNational}')">
-                                                Modifier
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </td>
-                                <td>
-                                <form action="confirmPresencePatientServlet" method="post">
-                                    <input type="hidden" name="numeroNational" value="${patient.numeroNational}" />
-                                    <input type="hidden" name="validePresence" value="" id="validePresence${patient.numeroNational}" />
-                                    <div class="btn-group" role="group" aria-label="Basic example">
-                                        <button type="button" onclick="submitForm(true, '${patient.numeroNational}')" class="btn btn-custom">
-                                            <i class="fas fa-check"></i>
-                                        </button>
-                                        <button type="button" onclick="submitForm(false, '${patient.numeroNational}')" class="btn btn-custom-discard">
-                                           <i class="fa-solid fa-droplet-slash"></i>
-                                        </button>
-                                    </div>
+                                    <input type="hidden" name="numeroLot" id="hiddenNumeroLot${patient.numeroNational}" />
+                                    <!-- Les boutons pour confirmer ou refuser la présence -->
+                                    <button type="button" onclick="submitForm(true, '${patient.numeroNational}')" class="btn btn-custom">
+                                        <i class="fas fa-check"></i>
+                                    </button>
+                                    <button type="button" onclick="submitForm(false, '${patient.numeroNational}')" class="btn btn-custom-discard">
+                                        <i class="fas fa-times"></i>
+                                    </button>
                                 </form>
                             </td>
                         </tr>
                     </c:forEach>
                 </tbody>
             </table>
+
+            <c:if test="${empty patientList.listPatient}">
+                <div class="alert alert-warning" role="alert" style="margin-top: 20px; color: orange;">
+                    Il n'y a plus de vaccination à valider à la date du jour.
+                </div>
+            </c:if>
 
 
             <%@ include file="footer.jsp" %>
@@ -166,18 +160,18 @@
             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
             <script>
-                    function submitForm(isConfirmed, numeroNational) {
-                        // Sélectionner le champ caché par son ID unique et ajuster la valeur
-                        var validePresenceField = document.getElementById('validePresence' + numeroNational);
-                        validePresenceField.value = isConfirmed ? 'OUI' : 'NON';
+                                        function submitForm(isConfirmed, numeroNational) {
+                                            // Sélectionner le champ caché par son ID unique et ajuster la valeur
+                                            var validePresenceField = document.getElementById('validePresence' + numeroNational);
+                                            validePresenceField.value = isConfirmed ? 'OUI' : 'NON';
 
-                        // Soumettre le formulaire
-                        validePresenceField.form.submit();
-                    }
+                                            // Soumettre le formulaire
+                                            validePresenceField.form.submit();
+                                        }
             </script>
 
 
-     <script>
+            <script>
                 document.addEventListener("DOMContentLoaded", function () {
                     var input = document.getElementById("searchByNumeroNational");
                     input.addEventListener("keyup", function () {
@@ -207,26 +201,19 @@
             </script>
 
             <script>
-                function toggleLotInput(numeroNational) {
-                    var lotInput = document.querySelector(`.lot-input`);
-                    var confirmButton = document.querySelector(`.btn-custom`);
-                    var cancelButton = document.querySelector(`.btn-custom-discard`);
-                    var toggleButton = document.querySelector(`.btn-toggle-lot`);
+                function validateButton(numeroNational, numeroLot) {
+                    // Mettre à jour la valeur cachée de numeroLot à envoyer avec le formulaire
+                    document.getElementById('hiddenNumeroLot' + numeroNational).value = numeroLot;
+                }
 
-                    if (lotInput.style.display === "none") {
-                        lotInput.style.display = "inline-block";
-                        confirmButton.style.display = "inline-block";
-                        cancelButton.style.display = "inline-block";
-                        toggleButton.style.display = "none";
-                    } else {
-                        lotInput.style.display = "none";
-                        confirmButton.style.display = "none";
-                        cancelButton.style.display = "none";
-                        toggleButton.style.display = "inline-block";
-                    }
+                function submitForm(isConfirmed, numeroNational) {
+                    // Récupérer le champ caché et le formulaire pour soumettre
+                    var validePresenceField = document.getElementById('hiddenNumeroLot' + numeroNational).form;
+                    validePresenceField.submit();
                 }
             </script>
 
-
     </body>
 </html>
+
+

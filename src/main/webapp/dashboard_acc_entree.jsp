@@ -142,6 +142,12 @@
                 </tbody>
 
             </table>
+            
+                       <c:if test="${empty patientList.listPatient}">
+    <div class="alert alert-warning" role="alert" style="margin-top: 20px; color: orange;">
+        Il n'y a plus de présence patient à valider à la date du jour.
+    </div>
+</c:if>
 
 
 

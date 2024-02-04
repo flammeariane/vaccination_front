@@ -13,4 +13,6 @@ public interface MedicalUserFacade {
     
     void validerPresencePatientUpdateStatut(Map<String, String> requestData) throws IOException;
     
+    void validerVaccinationPatientUpdateStatut(Map<String, String> requestData) throws IOException;
+    
 }

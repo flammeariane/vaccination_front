@@ -161,4 +161,17 @@
         <servlet-name>ConfirmPresencePatientServlet</servlet-name>
         <url-pattern>/confirmPresencePatientServlet</url-pattern>
     </servlet-mapping>
+    
+    
+      <servlet>
+        <servlet-name>ConfirmVaccinationPatientServlet</servlet-name>
+        <servlet-class>controller.medicalStaff.ConfirmVaccinationPatientServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ConfirmVaccinationPatientServlet</servlet-name>
+        <url-pattern>/confirmVaccinationPatientServlet</url-pattern>
+    </servlet-mapping>
 </web-app>
+
+
+

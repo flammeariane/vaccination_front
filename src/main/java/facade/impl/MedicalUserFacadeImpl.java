@@ -74,4 +74,27 @@ public class MedicalUserFacadeImpl implements MedicalUserFacade {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void validerVaccinationPatientUpdateStatut(Map<String, String> requestData) throws IOException {
+         String requestBody = objectMapper.writeValueAsString(requestData);
+
+        HttpPost postRequest = new HttpPost("http://localhost:8080/CentreVaccinationFrontEnd/validerVaccinationPatientInsertNumLot");
+        postRequest.setEntity(new StringEntity(requestBody, "UTF-8"));
+        postRequest.setHeader("Content-Type", "application/json");
+
+        CloseableHttpClient httpClient = HttpClientSingleton.getInstance();
+        try (CloseableHttpResponse httpResponse = httpClient.execute(postRequest)) {
+            // Vérifiez le code de statut de la réponse
+            if (httpResponse.getStatusLine().getStatusCode() == 200) {
+                // Si vous avez besoin de traiter la réponse, faites-le ici
+                // Comme vous avez mentionné, aucun mappage de réponse n'est nécessaire
+            } else {
+                // Gérer les cas d'erreur, par exemple, en loggant ou en affichant un message d'erreur
+            }
+        } catch (IOException e) {
+            // Gérer les exceptions
+            e.printStackTrace();
+        }
+    }
 }

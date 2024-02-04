@@ -19,11 +19,13 @@ bean\VaccinationHistoryBean.class
 bean\saveRendezVousSecondBeanOut.class
 utils\ApiUrls.class
 bean\CentreInfoBeanOut.class
+controller\medicalStaff\ConfirmVaccinationPatientServlet.class
 bean\ListDateDispoBean$listInfoAgenda.class
 controller\medicalStaff\InfirmierServlet.class
 bean\ConfirmPresencePatientBean.class
 bean\saveRendezVousBeanOut.class
 controller\medicalStaff\AccEntreeServlet.class
+facade\MedicalUserFacade.class
 bean\PatientListJourBean.class
 controller\medicalStaff\MedicalPersonnelServlet.class
 controller\patient\PriseRdvResumeSecond.class
@@ -35,6 +37,7 @@ controller\patient\PriseRdvResume.class
 controller\patient\PriseRdvChoixDateSecond.class
 be\vaccination\front\resources\JavaEE8Resource.class
 controller\patient\PriseRdvDispatch.class
+facade\impl\MedicalUserFacadeImpl.class
 controller\responsables\ResponsableServlet.class
 bean\ListCentreBean$listCentre.class
 bean\saveRendezVousBeanIn.class
