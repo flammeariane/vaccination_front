@@ -132,7 +132,7 @@
         <url-pattern>/accEntreServlet</url-pattern>
     </servlet-mapping>
     
-      <servlet>
+    <servlet>
         <servlet-name>AccSortieServlet</servlet-name>
         <servlet-class>controller.medicalStaff.AccSortieServlet</servlet-class>
     </servlet>
@@ -153,7 +153,7 @@
     </servlet-mapping>
     
     
-      <servlet>
+    <servlet>
         <servlet-name>MedecinServlet</servlet-name>
         <servlet-class>controller.medicalStaff.MedecinServlet</servlet-class>
     </servlet>
@@ -162,7 +162,7 @@
         <url-pattern>/medecinServlet</url-pattern>
     </servlet-mapping>
     
-         <servlet>
+    <servlet>
         <servlet-name>ConfirmPresencePatientServlet</servlet-name>
         <servlet-class>controller.medicalStaff.ConfirmPresencePatientServlet</servlet-class>
     </servlet>
@@ -172,7 +172,7 @@
     </servlet-mapping>
     
     
-   
+
      
 
 </web-app>

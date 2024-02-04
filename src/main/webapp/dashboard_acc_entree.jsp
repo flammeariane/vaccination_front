@@ -67,21 +67,22 @@
                             <td>${patient.numeroLot}</td>
                             <td>
                                 <form action="confirmPresencePatientServlet" method="post">
-    <input type="hidden" name="numeroNational" value="${patient.numeroNational}" />
-    <input type="hidden" name="validePresence" value="" id="validePresence${patient.numeroNational}" />
-    <div class="btn-group" role="group" aria-label="Basic example">
-        <button type="button" onclick="submitForm(true, '${patient.numeroNational}')" class="btn btn-custom">
-            Confirmer
-        </button>
-        <button type="button" onclick="submitForm(false, '${patient.numeroNational}')" class="btn btn-custom-discard">
-            Annuler
-        </button>
-    </div>
-</form>
+                                    <input type="hidden" name="numeroNational" value="${patient.numeroNational}" />
+                                    <input type="hidden" name="validePresence" value="" id="validePresence${patient.numeroNational}" />
+                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                        <button type="button" onclick="submitForm(true, '${patient.numeroNational}')" class="btn btn-custom">
+                                            Confirmer
+                                        </button>
+                                        <button type="button" onclick="submitForm(false, '${patient.numeroNational}')" class="btn btn-custom-discard">
+                                            Annuler
+                                        </button>
+                                    </div>
+                                </form>
 
 
 
                             </td>
+                          
                         </tr>
                     </c:forEach>
                 </tbody>
