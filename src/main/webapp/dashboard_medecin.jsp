@@ -1,17 +1,217 @@
-<%-- 
-    Document   : dashboard_medecin
-    Created on : 3 fÃ©vr. 2024, 13:01:20
-    Author     : flamm
---%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html>
     <head>
+
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+
+        <%@ include file="/WEB-INF/bootstrap.jsp" %>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/custom-styles.css">
+
+        <title>dashboard</title>
+        <%@ include file="header.jsp" %>
+        <style>
+            .control-buttons {
+                display: flex;
+                gap: 10px;
+            }
+            .comment-section {
+                margin-top: 15px;
+            }
+
+            .search-section {
+                background-color: #f2f2f2; /* Couleur de fond */
+                padding: 20px; /* Espacement intérieur */
+                margin-top: 20px; /* Espacement extérieur en haut */
+                border-radius: 10px; /* Coins arrondis */
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .search-box {
+                position: relative;
+                width: 100%;
+                max-width: 500px; /* Largeur maximale du champ de recherche */
+            }
+            .search-input {
+                width: 100%;
+                padding: 10px 20px;
+                padding-right: 40px; /* Espace pour l'icône de recherche */
+                font-size: 16px; /* Taille de la police */
+                border: 1px solid #ccc;
+                border-radius: 20px; /* Coins arrondis */
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Ombre légère */
+            }
+            .search-icon {
+                position: absolute;
+                right: 10px;
+                top: 50%;
+                transform: translateY(-50%);
+                color: #777;
+            }
+
+            .custom-header {
+                background-color: #6c757d; /* Bootstrap gris foncé, mais plus clair que le noir */
+                color: #ffffff; /* Texte blanc pour contraste */
+            }
+
+            .table th, .table td {
+                max-width: 150px; /* Limite la largeur maximale de toutes les cellules */
+                overflow: hidden; /* Empêche le débordement du contenu */
+                text-overflow: ellipsis; /* Ajoute des points de suspension si le texte déborde */
+                white-space: nowrap; /* Empêche le texte de passer à la ligne automatiquement */
+            }
+
+            .table th {
+                word-break: break-all; /* Permet de casser les mots trop longs pour éviter le débordement */
+            }
+
+            .btn-group {
+                width: 100%; /* Permet aux boutons de remplir l'espace horizontal disponible */
+            }
+            .btn-group .btn {
+                width: 50%; /* Chaque bouton remplit la moitié de l'espace de la btn-group */
+            }
+            .btn-custom, .btn-custom-discard {
+                white-space: normal; /* Permet au texte du bouton de passer à la ligne */
+                word-break: break-word; /* Casse les mots si nécessaire pour éviter le débordement */
+            }
+        </style>
     </head>
+
+
     <body>
-        <h1>Hello World!</h1>
+        <div class="container mt-4">
+
+            <div class="d-flex justify-content-end align-items-center mb-3">
+                <form action="logout" method="post" > <button class="btn btn-custom-delete" type="submit">Déconnexion <i class="fa-solid fa-arrow-right-from-bracket"></i> </button></form>
+            </div>
+
+            <h3 class="text-center mt-5">Bienvenue <b>${membrePersonnel.prenom}</b> dans le tableau de bord pour les <b>${membrePersonnel.role}  </b></h3>
+
+            <div class="search-section">
+                <div class="search-box">
+                    <input type="text" id="searchByNumeroNational" placeholder="Rechercher par numéro national" class="search-input">
+                    <i class="fa fa-search search-icon"></i> <!-- Assurez-vous d'inclure FontAwesome pour l'icône -->
+                </div>
+            </div>
+
+            <table id="tableauPatient" class="table table-hover table-striped table-bordered mt-4">
+                <thead class="custom-header">
+                    <tr>
+                        <th>Date rendez vous </th>
+                        <th>Prénom</th>
+                        <th>Nom</th>
+                        <th>Numéro National</th>
+                        <th>Date de Naissance</th>
+                        <th>Commentaires</th>
+                        <th>Valider</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach var="patient" items="${patientList.listPatient}">
+                        <tr>
+                            <td><fmt:formatDate value="${patient.dateRdv}" pattern="dd-MM-yyyy HH:mm" /></td>
+                            <td>${patient.prenom}</td>
+                            <td>${patient.nomFamille}</td>
+                            <td>${patient.numeroNational}</td>
+                            <td><fmt:formatDate value="${patient.dateNaissance}" pattern="dd-MM-yyyy" /></td>
+                         
+                          
+                            <td>
+                                <!-- Champ numeroLot éditable sans bouton de validation supplémentaire -->
+                                <input type="text" name="commentaire" value="" class="form-control"  />
+                            </td>
+                            <td>
+                                <form action="confirmVaccinationPatientServlet" method="post">
+                                    <input type="hidden" name="numeroNational" value="${patient.numeroNational}" />
+                                    <input type="hidden" name="numeroLot" id="hiddenNumeroLot${patient.numeroNational}" />
+                                    <!-- Les boutons pour confirmer ou refuser la présence -->
+                                    <button type="button" onclick="submitForm(true, '${patient.numeroNational}')" class="btn btn-custom">
+                                        <i class="fas fa-check"></i>
+                                    </button>
+                                    <button type="button" onclick="submitForm(false, '${patient.numeroNational}')" class="btn btn-custom-discard">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+
+            <c:if test="${empty patientList.listPatient}">
+                <div class="alert alert-warning" role="alert" style="margin-top: 20px; color: orange;">
+                    Il n'y a plus de vaccination à valider à la date du jour.
+                </div>
+            </c:if>
+
+
+            <%@ include file="footer.jsp" %>
+            <!-- Inclure les scripts nécessaires -->
+            <!-- jQuery, Popper.js, et Bootstrap JS -->
+            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+            <script>
+                                        function submitForm(isConfirmed, numeroNational) {
+                                            // Sélectionner le champ caché par son ID unique et ajuster la valeur
+                                            var validePresenceField = document.getElementById('validePresence' + numeroNational);
+                                            validePresenceField.value = isConfirmed ? 'OUI' : 'NON';
+
+                                            // Soumettre le formulaire
+                                            validePresenceField.form.submit();
+                                        }
+            </script>
+
+
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    var input = document.getElementById("searchByNumeroNational");
+                    input.addEventListener("keyup", function () {
+                        myFunction();
+                    });
+                });
+
+                function myFunction() {
+                    var input, filter, table, tr, td, i, txtValue;
+                    input = document.getElementById("searchByNumeroNational");
+                    filter = input.value.toUpperCase();
+                    table = document.getElementById("tableauPatient");
+                    tr = table.getElementsByTagName("tr");
+
+                    for (i = 1; i < tr.length; i++) { // Commencez par i = 1 pour ignorer l'en-tête du tableau
+                        td = tr[i].getElementsByTagName("td")[3]; // Index 3 pour la colonne "Numéro National"
+                        if (td) {
+                            txtValue = td.textContent || td.innerText;
+                            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                                tr[i].style.display = "";
+                            } else {
+                                tr[i].style.display = "none";
+                            }
+                        }
+                    }
+                }
+            </script>
+
+            <script>
+                function validateButton(numeroNational, numeroLot) {
+                    // Mettre à jour la valeur cachée de numeroLot à envoyer avec le formulaire
+                    document.getElementById('hiddenNumeroLot' + numeroNational).value = numeroLot;
+                }
+
+                function submitForm(isConfirmed, numeroNational) {
+                    // Récupérer le champ caché et le formulaire pour soumettre
+                    var validePresenceField = document.getElementById('hiddenNumeroLot' + numeroNational).form;
+                    validePresenceField.submit();
+                }
+            </script>
+
     </body>
 </html>
+
+

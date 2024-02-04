@@ -97,4 +97,33 @@ public class MedicalUserFacadeImpl implements MedicalUserFacade {
             e.printStackTrace();
         }
     }
+    
+    
+    
+    
+ public PatientListJourBean incidentSurvenuListPatient(Map<String, Object> requestData) throws IOException {
+
+        String requestBody = objectMapper.writeValueAsString(requestData);
+
+        HttpPost postRequest = new HttpPost("http://localhost:8080/CentreVaccinationFrontEnd/incidentSurvenuListPatient");
+        postRequest.setEntity(new StringEntity(requestBody, "UTF-8"));
+        postRequest.setHeader("Content-Type", "application/json");
+
+        try (CloseableHttpResponse httpResponse = HttpClientSingleton.getInstance().execute(postRequest)) {
+            if (httpResponse.getStatusLine().getStatusCode() == 200) {
+
+                String responseBody = EntityUtils.toString(httpResponse.getEntity(), "UTF-8");
+                return objectMapper.readValue(responseBody, PatientListJourBean.class);
+            }
+        }
+        return null;
+    }
 }
+
+
+
+
+
+
+
+
