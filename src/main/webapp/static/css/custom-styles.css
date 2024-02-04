@@ -1,27 +1,12 @@
 .btn-custom {
-    background-color: transparent; 
-    color: white;
-    border: 1px solid #74c6a0; 
+    background-color: #74c6a0;
+    color: white; 
 }
 
 .btn-custom:hover {
+    background-color: white;
     color: #74c6a0;
-    background-color: #fff; 
 }
-
-
-.btn-custom-discard {
-   color: white; 
-   background-color: #f59261; 
-}
-
-.btn-custom-discard:hover {
-    color: #f59261; 
-    border: 1px solid #f59261; 
-    background-color: transparent; 
-}
-
-
 
 .btn-custom-delete{
     background-color: #f59261;
@@ -37,4 +22,15 @@
 .btn-custom-back:hover {
     color: white; 
     background-color: #f59261; 
+}
+
+.btn-custom-discard {
+   color: white; 
+   background-color: #f59261; 
+}
+
+.btn-custom-discard:hover {
+    color: #f59261; 
+    border: 1px solid #f59261; 
+    background-color: transparent; 
 }
