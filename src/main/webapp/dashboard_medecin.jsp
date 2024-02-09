@@ -105,9 +105,10 @@
                         <th>Date rendez vous </th>
                         <th>Prénom</th>
                         <th>Nom</th>
-                        <th>Numéro National</th>
+                        <th>Niss</th>
                         <th>Date de Naissance</th>
-                        <th>Commentaires</th>
+                        <th>commentaires précédents</th>
+                        <th>Incident</th>
                         <th>Valider</th>
                     </tr>
                 </thead>
@@ -119,8 +120,18 @@
                             <td>${patient.nomFamille}</td>
                             <td>${patient.numeroNational}</td>
                             <td><fmt:formatDate value="${patient.dateNaissance}" pattern="dd-MM-yyyy" /></td>
-                         
-                          
+
+                            <td>
+                                <!-- Lien pour ouvrir la modal des commentaires -->
+                                <a href="#" data-toggle="modal" data-target="#commentModal${patient.numeroNational}">voir les commentaires</a>
+                                <div id="commentSection${patient.numeroNational}" class="collapse comment-section">
+                                    <ul>
+                                        <li>Commentaire 1 pour ${patient.prenom}</li>
+                                        <li>Commentaire 2 pour ${patient.prenom}</li>
+                                    </ul>
+                                </div>
+                            </td>
+
                             <td>
                                 <!-- Champ numeroLot éditable sans bouton de validation supplémentaire -->
                                 <input type="text" name="commentaire" value="" class="form-control"  />
@@ -129,23 +140,47 @@
                                 <form action="confirmVaccinationPatientServlet" method="post">
                                     <input type="hidden" name="numeroNational" value="${patient.numeroNational}" />
                                     <input type="hidden" name="numeroLot" id="hiddenNumeroLot${patient.numeroNational}" />
+                                    <input type="hidden" name="commentaire" class="form-control" />
+
                                     <!-- Les boutons pour confirmer ou refuser la présence -->
-                                    <button type="button" onclick="submitForm(true, '${patient.numeroNational}')" class="btn btn-custom">
-                                        <i class="fas fa-check"></i>
-                                    </button>
-                                    <button type="button" onclick="submitForm(false, '${patient.numeroNational}')" class="btn btn-custom-discard">
-                                        <i class="fas fa-times"></i>
-                                    </button>
+
+
+                                    <button type="submit" class="btn btn-custom"> <i class="fas fa-check"></i></button>
+                                    <button type="button" class="btn btn-custom-discard" onclick="cancelAction('${patient.numeroNational}')"> <i class="fas fa-times"></i></button>
+
                                 </form>
                             </td>
                         </tr>
-                    </c:forEach>
+
+                        <!-- Modal pour afficher les commentaires -->
+                    <div class="modal fade" id="commentModal${patient.numeroNational}" tabindex="-1" role="dialog" aria-labelledby="commentModalLabel${patient.numeroNational}" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="commentModalLabel${patient.numeroNational}">Commentaires pour ${patient.prenom}</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <ul>
+                                        <li>Commentaire 1 pour ${patient.prenom}</li>
+                                        <li>Commentaire 2 pour ${patient.prenom}</li>
+                                    </ul>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach>
                 </tbody>
             </table>
 
             <c:if test="${empty patientList.listPatient}">
                 <div class="alert alert-warning" role="alert" style="margin-top: 20px; color: orange;">
-                    Il n'y a plus de vaccination à valider à la date du jour.
+                    Il n'y a plus de patients auquel vous pouvez ajouter un incident.
                 </div>
             </c:if>
 
@@ -157,59 +192,45 @@
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-            <script>
-                                        function submitForm(isConfirmed, numeroNational) {
-                                            // Sélectionner le champ caché par son ID unique et ajuster la valeur
-                                            var validePresenceField = document.getElementById('validePresence' + numeroNational);
-                                            validePresenceField.value = isConfirmed ? 'OUI' : 'NON';
 
-                                            // Soumettre le formulaire
-                                            validePresenceField.form.submit();
+            <script>
+                                        document.addEventListener("DOMContentLoaded", function () {
+                                            var input = document.getElementById("searchByNumeroNational");
+                                            input.addEventListener("keyup", function () {
+                                                myFunction();
+                                            });
+                                        });
+
+                                        function myFunction() {
+                                            var input, filter, table, tr, td, i, txtValue;
+                                            input = document.getElementById("searchByNumeroNational");
+                                            filter = input.value.toUpperCase();
+                                            table = document.getElementById("tableauPatient");
+                                            tr = table.getElementsByTagName("tr");
+
+                                            for (i = 1; i < tr.length; i++) { // Commencez par i = 1 pour ignorer l'en-tête du tableau
+                                                td = tr[i].getElementsByTagName("td")[3]; // Index 3 pour la colonne "Numéro National"
+                                                if (td) {
+                                                    txtValue = td.textContent || td.innerText;
+                                                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                                                        tr[i].style.display = "";
+                                                    } else {
+                                                        tr[i].style.display = "none";
+                                                    }
+                                                }
+                                            }
                                         }
             </script>
 
-
             <script>
-                document.addEventListener("DOMContentLoaded", function () {
-                    var input = document.getElementById("searchByNumeroNational");
-                    input.addEventListener("keyup", function () {
-                        myFunction();
-                    });
-                });
-
-                function myFunction() {
-                    var input, filter, table, tr, td, i, txtValue;
-                    input = document.getElementById("searchByNumeroNational");
-                    filter = input.value.toUpperCase();
-                    table = document.getElementById("tableauPatient");
-                    tr = table.getElementsByTagName("tr");
-
-                    for (i = 1; i < tr.length; i++) { // Commencez par i = 1 pour ignorer l'en-tête du tableau
-                        td = tr[i].getElementsByTagName("td")[3]; // Index 3 pour la colonne "Numéro National"
-                        if (td) {
-                            txtValue = td.textContent || td.innerText;
-                            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                                tr[i].style.display = "";
-                            } else {
-                                tr[i].style.display = "none";
-                            }
-                        }
-                    }
+                function cancelAction(numeroNational) {
+                    // Logique pour gérer l'annulation
+                    console.log("Annulation pour le patient avec le numéro national: " + numeroNational);
+                    // Vous pouvez ajouter ici une redirection ou une autre logique selon le besoin
                 }
             </script>
 
-            <script>
-                function validateButton(numeroNational, numeroLot) {
-                    // Mettre à jour la valeur cachée de numeroLot à envoyer avec le formulaire
-                    document.getElementById('hiddenNumeroLot' + numeroNational).value = numeroLot;
-                }
 
-                function submitForm(isConfirmed, numeroNational) {
-                    // Récupérer le champ caché et le formulaire pour soumettre
-                    var validePresenceField = document.getElementById('hiddenNumeroLot' + numeroNational).form;
-                    validePresenceField.submit();
-                }
-            </script>
 
     </body>
 </html>
