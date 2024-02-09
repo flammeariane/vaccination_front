@@ -131,7 +131,7 @@ public class RendezVousFacadeImpl implements RendezVousFacade {
             }
         }
     }
-    
+
     @Override
     public ListDateDispoBean getAgendaSecondRendezVous(saveRendezVousBeanOut rendezVousBeanOut) throws IOException {
         String requestBody = objectMapper.writeValueAsString(rendezVousBeanOut);
@@ -145,18 +145,19 @@ public class RendezVousFacadeImpl implements RendezVousFacade {
 
             if (statusCode == 200) {
                 String responseBody = EntityUtils.toString(httpResponse.getEntity(), "UTF-8");
-                return objectMapper.readValue(responseBody, ListDateDispoBean.class);
-
+          
+                    return objectMapper.readValue(responseBody, ListDateDispoBean.class);
+                
             } else {
                 // Gérer les réponses autres que 200 OK
                 return null;
             }
         }
     }
-    
+
     @Override
     public saveRendezVousBeanIn saveRendezVous(saveRendezVousBeanOut rendezVousBeanOut) throws IOException {
-       
+
         String requestBody = objectMapper.writeValueAsString(rendezVousBeanOut);
 
         HttpPost postRequest = new HttpPost(ApiUrls.RDV_SAVE);
@@ -176,7 +177,5 @@ public class RendezVousFacadeImpl implements RendezVousFacade {
             }
         }
     }
-    
-
 
 }

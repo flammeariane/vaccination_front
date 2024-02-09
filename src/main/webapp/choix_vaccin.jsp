@@ -65,20 +65,18 @@
                 <c:forEach var="vaccin" items="${vaccins.vaccin}" varStatus="loop">
                     <div class="col-md-4 mb-3">
                         <div class="card h-100 "> <!-- Utilisez h-100 pour que toutes les cartes aient la même hauteur -->
-                            <div class="card-header text-info">Centre de Vaccination: <%= selectedCentre%></div> <!-- bg-info et text-white pour le style de l'en-tête -->
+                            <div class="card-header text-info">Centre de Vaccination: <%= selectedCentre%></div> 
                             <div class="card-img-container bg-white">
                                 <img src="static/img/${vaccin.nom}.jpg" alt="Image du vaccin ${vaccin.nom}" style="max-height: 100%; max-width: 100%; object-fit: contain;">
                             </div>
 
-                            <div class="card-body d-flex flex-column"> <!-- d-flex et flex-column pour une disposition flexible -->
+                            <div class="card-body d-flex flex-column"> 
 
-                                <p class="card-title">Nom: ${vaccin.nom}</p> <!-- Utilisation de card-title pour le titre -->
-                                <p class="card-text">Nombre de doses: ${vaccin.nbrDoseTotal}</p> <!-- card-text pour le texte -->
+                                <p class="card-title">Nom: ${vaccin.nom}</p> 
+                                <p class="card-text">Nombre de doses: ${vaccin.nbrDoseTotal}</p> 
                                 <c:if test="${vaccin.nbrDoseTotal >= 2}">
                                     <p class="card-text">Durée entre 2 doses: ${vaccin.dureeEntreDose} semaines</p>
                                 </c:if>
-
-                                <!-- Espace pour les inputs cachés -->
                                 <input type="hidden" name="selectedVaccinNom_${loop.index}" value="${vaccin.nom}">
                                 <input type="hidden" name="selectedVaccinNbrDoseTotal_${loop.index}" value="${vaccin.nbrDoseTotal}">
                                 <input type="hidden" name="selectedVaccinDureeEntreDose_${loop.index}" value="${vaccin.dureeEntreDose}">

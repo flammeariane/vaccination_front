@@ -14,15 +14,19 @@ public class PriseRdvDispatch extends HttpServlet {
         String selectedVaccinNbrDoseTotal = (String) session.getAttribute("selectedVaccinNbrDoseTotal");
         int nbrDosesTotal = Integer.parseInt(selectedVaccinNbrDoseTotal);
 
-        String selectedIndex = request.getParameter("selectedDate");
+       String selectedDateIndex = request.getParameter("selectedDate");
+    
+         
+       // String selectedIndex = request.getParameter("selectedDate");
+        //  int selectedDateIndex = Integer.parseInt(selectedDateIndexStr);
+            
 
-        if (selectedIndex != null) {
-            String dateInputName = "selectedDateAgenda_" + selectedIndex;
-            String selectedDate = request.getParameter(dateInputName);
-            session.setAttribute("selectedDate", selectedDate);
-        }
+        if (selectedDateIndex != null) {
+          int index = Integer.parseInt(selectedDateIndex);
+          session.setAttribute("selectedDateAgenda", request.getParameter("selectedDateAgenda_" + index));
+        
 
-// Convertir le nombre de doses en entier pour pouvoir faire des comparaisons
+
         if (nbrDosesTotal == 1) {
             // Rediriger vers le servlet de résumé
             request.getRequestDispatcher("/resume").forward(request, response);
@@ -31,6 +35,7 @@ public class PriseRdvDispatch extends HttpServlet {
             // Rediriger vers le servlet de choix de la seconde date
             request.getRequestDispatcher("/choixDatesecond").forward(request, response);
             //response.sendRedirect(request.getContextPath() + "/choixdateSecond");
+        }
         }
     }
 }

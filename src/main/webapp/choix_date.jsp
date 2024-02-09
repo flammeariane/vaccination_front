@@ -55,7 +55,7 @@
 
             <form action="dispatch" method="post">
                 <div class="row">
-                    <c:forEach var="date" items="${listInfoAgenda.listInfoAgenda}">
+                    <c:forEach var="date" items="${listInfoAgenda.listInfoAgenda}" varStatus="loop">
                         <c:if test="${date.nbrPlaceRestante > 0}">
 
                             <div class="col-md-4 mb-4">

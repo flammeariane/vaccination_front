@@ -10,6 +10,7 @@ controller\medicalStaff\MedecinServlet.class
 controller\login\LoginPatientServlet.class
 modele\ListeRendezVous.class
 modele\Vaccin.class
+utils\DateUtils.class
 controller\patient\PriseRdvChoixVaccin.class
 controller\login\LoginPersonnelServlet.class
 facade\UserOperationsFacade.class
@@ -38,7 +39,9 @@ controller\patient\PriseRdvChoixDateSecond.class
 be\vaccination\front\resources\JavaEE8Resource.class
 controller\patient\PriseRdvDispatch.class
 facade\impl\MedicalUserFacadeImpl.class
+facade\ResponsableUserFacade.class
 controller\responsables\ResponsableServlet.class
+facade\impl\ResponsableUserFacadeImpl.class
 bean\ListCentreBean$listCentre.class
 bean\saveRendezVousBeanIn.class
 CloseableHttpClient.class

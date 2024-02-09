@@ -27,6 +27,8 @@
         </style>
     </head>
     <body>
+        <%@ page import="utils.DateUtils" %>
+
         <%@ include file="header.jsp" %>
 
         <div class="container">
@@ -61,17 +63,41 @@
                     <div class="card h-100">
                         <div class="card-header text-info">Consulter mon état Vaccinal</div>
                         <div class="card-body">
-                            <c:if  test="${empty history.listeRendezVous}">
-                                Vous n'a aucun rendez vous passée ou actif 
+                            <c:if test="${empty history.listeRendezVous}">
+                                <p>Vous n'avez aucun rendez-vous passé ou actif.</p>
                             </c:if>
-                            <ul>
-                                <c:forEach var="historique" items="${history.listeRendezVous}">
-                                    <li>Date: ${historique.dateRdv} - Vaccin: ${historique.nomVaccin}</li>
-                                </c:forEach>
-                            </ul>
+                            <c:forEach var="historique" items="${history.listeRendezVous}">
+                                <div class="vaccination-record-toggle mb-2 d-flex justify-content-between align-items-center" style="cursor: pointer;">
+                                    <div>
+                                        ${DateUtils.formatTimestamp(historique.dateRdv, "dd-MM-yyyy")} - ${historique.nomVaccin}
+                                    </div>
+                                    <div>
+                                        <span class="text-info">voir le détail</span>
+                                        <i class="fas fa-chevron-down ml-2"></i>
+                                    </div>
+                                </div>
+
+
+                                <div class="vaccination-record-details mb-3" style="display: none;">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <img src="static/img/${historique.nomVaccin}.jpg" alt="Vaccin ${historique.nomVaccin}" class="img-fluid rounded-circle" style="width: 100px; height: 100px;">
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p><strong>Centre de vaccination:</strong> ${historique.nomCentre}</p>
+                                            <p><strong>Statut:</strong> ${historique.libelleStatut}</p>
+                                            <p><strong>Dose:</strong> ${historique.numeroDose} sur ${historique.nbrDoseTotal}</p>
+                                            <p><strong>Doses restantes:</strong> ${historique.nbrDoseRestant}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </c:forEach>
                         </div>
                     </div>
                 </div>
+
+
+
             </div>
         </div>
     </div>
@@ -107,5 +133,16 @@
         }
 
     </script>
+
+    <script>
+        $(document).ready(function () {
+            $('.vaccination-record-toggle').click(function () {
+                $(this).find('i.fas').toggleClass('fa-chevron-down fa-chevron-up');
+                $(this).next('.vaccination-record-details').slideToggle();
+            });
+        });
+    </script>
+
+
 </body>
 </html>

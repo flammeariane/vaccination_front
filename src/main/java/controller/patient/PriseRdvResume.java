@@ -23,7 +23,7 @@ public class PriseRdvResume extends HttpServlet {
         // rendezVousBeanOut.setNomCentre(session.getAttribute(string));
         rendezVousBeanOut.setNomCentre((String) session.getAttribute("selectedCentreNom"));
         rendezVousBeanOut.setNomVaccin((String) session.getAttribute("selectedVaccinNom"));
-        rendezVousBeanOut.setDateRdv((String) request.getAttribute("selectedDate"));
+        rendezVousBeanOut.setDateRdv((String) session.getAttribute("selectedDateAgenda"));
         rendezVousBeanOut.setConfirmParEmail("1");
         rendezVousBeanOut.setEmailConfirmation(patient.getEmail());
         rendezVousBeanOut.setStatutConfirmer("oui");
