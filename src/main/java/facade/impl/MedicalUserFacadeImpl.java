@@ -1,6 +1,6 @@
 package facade.impl;
 
-import bean.PatientListJourBean;
+import bean.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import facade.MedicalUserFacade;
 import java.io.IOException;
@@ -77,7 +77,7 @@ public class MedicalUserFacadeImpl implements MedicalUserFacade {
 
     @Override
     public void validerVaccinationPatientUpdateStatut(Map<String, String> requestData) throws IOException {
-         String requestBody = objectMapper.writeValueAsString(requestData);
+        String requestBody = objectMapper.writeValueAsString(requestData);
 
         HttpPost postRequest = new HttpPost("http://localhost:8080/CentreVaccinationFrontEnd/validerVaccinationPatientInsertNumLot");
         postRequest.setEntity(new StringEntity(requestBody, "UTF-8"));
@@ -97,15 +97,13 @@ public class MedicalUserFacadeImpl implements MedicalUserFacade {
             e.printStackTrace();
         }
     }
-    
-    
-    
-    
- public PatientListJourBean incidentSurvenuListPatient(Map<String, Object> requestData) throws IOException {
+
+
+    public PatientListJourBean GetListCommentaire(Map<String, Object> requestData) throws IOException {
 
         String requestBody = objectMapper.writeValueAsString(requestData);
 
-        HttpPost postRequest = new HttpPost("http://localhost:8080/CentreVaccinationFrontEnd/incidentSurvenuListPatient");
+        HttpPost postRequest = new HttpPost("http://localhost:8080/http://localhost:8080/CentreVaccinationFrontEnd/incidenSurvenuSelectPatient");
         postRequest.setEntity(new StringEntity(requestBody, "UTF-8"));
         postRequest.setHeader("Content-Type", "application/json");
 
@@ -118,12 +116,9 @@ public class MedicalUserFacadeImpl implements MedicalUserFacade {
         }
         return null;
     }
+
+    @Override
+    public PatientListJourBean incidentSurvenuListPatient(Map<String, Object> requestData) throws IOException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
-
-
-
-
-
-
-
-

@@ -10,8 +10,9 @@
 
         <%@ include file="/WEB-INF/bootstrap.jsp" %>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/custom-styles.css">
+           <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/table-styles.css">
 
-        <title>dashboard</title>
+        <title>dashboard Medecin</title>
         <%@ include file="header.jsp" %>
         <style>
             .control-buttons {
@@ -191,43 +192,16 @@
             <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+            <script src="${pageContext.request.contextPath}/static/js/search.js"></script>
+
 
 
             <script>
-                                        document.addEventListener("DOMContentLoaded", function () {
-                                            var input = document.getElementById("searchByNumeroNational");
-                                            input.addEventListener("keyup", function () {
-                                                myFunction();
-                                            });
-                                        });
-
-                                        function myFunction() {
-                                            var input, filter, table, tr, td, i, txtValue;
-                                            input = document.getElementById("searchByNumeroNational");
-                                            filter = input.value.toUpperCase();
-                                            table = document.getElementById("tableauPatient");
-                                            tr = table.getElementsByTagName("tr");
-
-                                            for (i = 1; i < tr.length; i++) { // Commencez par i = 1 pour ignorer l'en-tête du tableau
-                                                td = tr[i].getElementsByTagName("td")[3]; // Index 3 pour la colonne "Numéro National"
-                                                if (td) {
-                                                    txtValue = td.textContent || td.innerText;
-                                                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                                                        tr[i].style.display = "";
-                                                    } else {
-                                                        tr[i].style.display = "none";
-                                                    }
-                                                }
-                                            }
+                                        function cancelAction(numeroNational) {
+                                            // Logique pour gérer l'annulation
+                                            console.log("Annulation pour le patient avec le numéro national: " + numeroNational);
+                                            // Vous pouvez ajouter ici une redirection ou une autre logique selon le besoin
                                         }
-            </script>
-
-            <script>
-                function cancelAction(numeroNational) {
-                    // Logique pour gérer l'annulation
-                    console.log("Annulation pour le patient avec le numéro national: " + numeroNational);
-                    // Vous pouvez ajouter ici une redirection ou une autre logique selon le besoin
-                }
             </script>
 
 

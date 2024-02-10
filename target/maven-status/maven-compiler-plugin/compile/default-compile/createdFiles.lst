@@ -1,4 +1,6 @@
 bean\SaveRendezVousSecondBeanIn$ListRecapInfoRendezVous.class
+bean\IncidentBeanIn$Incident.class
+bean\IncidentBeanIn$Patient.class
 controller\login\LogoutServlet.class
 controller\patient\PriseRdvChoixCentreServlet.class
 modele\MembrePersonnel.class
@@ -39,6 +41,7 @@ controller\patient\PriseRdvChoixDateSecond.class
 be\vaccination\front\resources\JavaEE8Resource.class
 controller\patient\PriseRdvDispatch.class
 facade\impl\MedicalUserFacadeImpl.class
+bean\IncidentBeanOut.class
 facade\ResponsableUserFacade.class
 controller\responsables\ResponsableServlet.class
 facade\impl\ResponsableUserFacadeImpl.class
@@ -53,5 +56,6 @@ bean\ListDateDispoBean.class
 bean\CentreInfoBean.class
 bean\VaccinInfoBean.class
 controller\medicalStaff\AccSortieServlet.class
+bean\IncidentBeanIn.class
 bean\SaveRendezVousSecondBeanIn.class
 modele\Patient.class

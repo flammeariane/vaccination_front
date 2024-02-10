@@ -13,10 +13,6 @@ public class ListCentreBean {
     public void setListCentre(List<listCentre> listCentre) {
         this.listCentre = listCentre;
     }
-
- 
-        
-    
      public static class listCentre {
         private String nomCentre;
         private int codePostal;

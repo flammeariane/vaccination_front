@@ -5,17 +5,9 @@
     <html>
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-            <title>Tableau de Bord du Médecin</title>
+            <title>Tableau de Bord du Responsable</title>
             <%@ include file="header.jsp" %>
-            <style>
-                .control-buttons {
-                    display: flex;
-                    gap: 10px;
-                }
-                .comment-section {
-                    margin-top: 15px;
-                }
-            </style>
+             <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/table-styles.css">
         </head>
         <body>
             <h3 class="text-center mt-5">Bienvenue <b>${membrePersonnel.prenom}</b> dans le tableau de bord du responsable!</h3>
