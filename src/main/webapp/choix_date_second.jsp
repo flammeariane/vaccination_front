@@ -8,7 +8,7 @@
         <title>Espace Patient</title>
         <%@ include file="/WEB-INF/bootstrap.jsp" %>
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/custom-styles.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/button-styles.css">
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>

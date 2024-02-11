@@ -9,7 +9,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
         <%@ include file="/WEB-INF/bootstrap.jsp" %>
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/custom-styles.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/button-styles.css">
            <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/table-styles.css">
 
         <title>dashboard Medecin</title>

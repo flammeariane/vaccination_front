@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html>
@@ -8,7 +10,7 @@
         <title>Espace Patient</title>
         <%@ include file="/WEB-INF/bootstrap.jsp" %>
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/custom-styles.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/button-styles.css">
         <script src="//ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=??????Y&callback=initMap" async defer></script>
@@ -24,6 +26,14 @@
             .card {
                 margin-bottom: 20px;
             }
+
+
+            .btn-disabled {
+                background-color: #ccc; 
+                color: #666; 
+                border: 1px solid #999; 
+                cursor: not-allowed; /* Change le curseur pour indiquer l'interdiction */
+            }
         </style>
     </head>
     <body>
@@ -36,10 +46,19 @@
             <!-- Prendre un Rendez-Vous -->
 
             <div class="d-flex justify-content-end align-items-center mb-3">
-                <form action="choixcentre" method="post"> <button class="btn btn-custom mr-2" type="submit"> Prendre un rendez-vous <i class="fa-solid fa-calendar-days"></i></button></form>
-                <form action="logout" method="post" > <button class="btn btn-custom-delete" type="submit">Déconnexion <i class="fa-solid fa-arrow-right-from-bracket"></i> </button></form>
+                <form action="choixcentre" method="post">
+                    <button class="btn btn-custom mr-2 ${fn:length(history.listeRendezVous) == 2 ? 'btn-disabled' : ''}" 
+                            type="submit" 
+                            ${fn:length(history.listeRendezVous) == 2 ? 'disabled' : ''}>
+                        Prendre un rendez-vous <i class="fa-solid fa-calendar-days"></i>
+                    </button>
+                </form>
+                <form action="logout" method="post">
+                    <button class="btn btn-custom-delete" type="submit">
+                        Déconnexion <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    </button>
+                </form>
             </div>
-
 
             <!-- Vos Informations -->
             <div class="row">
