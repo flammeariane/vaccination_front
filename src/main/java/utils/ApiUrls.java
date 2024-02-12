@@ -14,12 +14,14 @@ public class ApiUrls {
     public static final String RDV_SAVE = BASE_URL+"/rendezVousInsertRendezVous";
     public static final String RDV_SAVE_SECOND = BASE_URL+"/rendezVousInsertDeuxiemerendezVous";
 
-   // public static final String RDV_CHOIX_VACCIN = BASE_URL + "/rendezVousChoixVaccin";
-    
 
+   
     // ResponsableServlet
     public static final String STAT_AFFICHER_CENTRE = BASE_URL + "/consulterStatistiqueAfficherCentre";
+    public static final String STAT_CENTRE = BASE_URL + "/consulterStatistiqueChoisirCentre";
+
     // MedicalPersonnelServlet
     public static final String VALIDER_PRESENCE_LIST_PATIENT = BASE_URL + "/validerPresencePatientListe";
    
 }
+

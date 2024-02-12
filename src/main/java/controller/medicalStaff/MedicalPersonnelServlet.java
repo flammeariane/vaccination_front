@@ -69,7 +69,7 @@ public class MedicalPersonnelServlet extends HttpServlet {
 
 // Use case n°2 : Valider la présence du patient
 // TODO insert numero NISS 
-// TODO Confirm presence patient
+// Confirm presence patient
 // Use case n°3 : Valider la vaccination du patient
 // TODO insert numero de lot 
 // TODO save confirm vaccination 

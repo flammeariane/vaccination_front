@@ -28,7 +28,7 @@ public class PriseRdvChoixVaccin extends HttpServlet {
         if (selectedCentreIndex != null) {
             int index = Integer.parseInt(selectedCentreIndex);
 
-            // var set pour etre utiliser dans la jsp TODO remplacer a un usebean au code cleaning
+     
             session.setAttribute("selectedCentreNom", request.getParameter("selectedCentreNom_" + index));
     
             centreOut.setNomCentre(request.getParameter("selectedCentreNom_" + index));

@@ -7,96 +7,56 @@
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
             <title>Tableau de Bord du Responsable</title>
             <%@ include file="header.jsp" %>
-             <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/table-styles.css">
+            <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/table-styles.css">
+            <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/button-styles.css">
+
         </head>
         <body>
-            <h3 class="text-center mt-5">Bienvenue <b>${membrePersonnel.prenom}</b> dans le tableau de bord du responsable!</h3>
-
             <div class="container mt-4">
-                <!-- Logique conditionnelle en fonction du rôle -->
-                <c:choose>
-                    <c:when test="${membrePersonnel.role == 'Responsable general'}">
-                        <!-- Liste des centres -->
-                        <h4>Liste des Centres</h4>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Localité</th>
-                                    <th>Heures d'ouverture</th>
-                                    <th>Adresse</th>
-                                    <th>Code Postal</th>
-                                    <th>Statut</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                 <c:forEach var="centre" items="${centres.listCentre}">
-                              
-                                    <tr>
-                                        <td>${centre.nomCentre}</td>
-                                      
-                                        <td>${centre.adresse}</td>
-                                        <td>${centre.codePostal}</td>
-                                    
-                                        <td>
-                                            <button class="btn btn-primary">Ajouter Effectif</button>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-                            </tbody>
-                        </table>
 
-                        <!-- Recherche de Centre -->
-                        <h4>Recherche de Centre</h4>
-                        <form action="rechercheCentre" method="get">
-                            <div class="form-group">
-                                <label for="codePostal">Code Postal:</label>
-                                <input type="text" class="form-control" id="codePostal" name="codePostal">
-                            </div>
-                            <button type="submit" class="btn btn-primary">Rechercher</button>
-                        </form>
-
-                        <!-- Statistiques des Centres -->
-                        <h4>Statistiques des Centres</h4>
-                        <!-- Ici, insérez la logique pour afficher les statistiques des centres -->
-                    </c:when>
-                    <c:when test="${membrePersonnel.role == 'Responsable de centre'}">
-                        <!-- Affichage des membres du personnel -->
-                        <h4>Membres du Personnel</h4>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Nom</th>
-                                    <th>Rôle</th>
-                                    <th>Heures de Travail</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <c:forEach var="membre" items="${membres}">
-                                    <tr>
-                                        <td>${membre.nom}</td>
-                                        <td>${membre.role}</td>
-                                        <td>
-                                            <!-- Ici, insérez un système pour sélectionner les heures de travail -->
-                                        </td>
-                                        <td>
-                                            <button class="btn btn-primary">Sélectionner</button>
-                                            <button class="btn btn-secondary">Annuler</button>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-                            </tbody>
-                        </table>
-
-                        <!-- Validation des sélections -->
-                        <button class="btn btn-success">Valider les Sélections</button>
-                    </c:when>
-                </c:choose>
-            </div>
+                <div class="d-flex justify-content-end align-items-center mb-3">
+                    <form action="logout" method="post" > <button class="btn btn-custom-delete" type="submit">Déconnexion <i class="fa-solid fa-arrow-right-from-bracket"></i> </button></form>
+                </div>
+                <h3 class="text-center mt-5">Bienvenue <b>${membrePersonnel.prenom}</b> dans le tableau de bord du responsable!</h3>
 
 
+                <!-- TODO FIX THIS -->
+                <div class="search-section">
+                    <div class="search-box">
+                        <input type="text" id="searchByPostCode" placeholder="Rechercher par code postal" class="search-input">
+                        <i class="fa fa-search search-icon"></i> 
+                    </div>
+                </div>
 
+                <h4>Liste des Centres</h4>
+                 <form action="statistique" method="post">
+                <table id="tableauPatient" class="table table-hover table-striped table-bordered mt-4">
+                    <thead class="custom-header">
+                        <tr>
+                            <th>Localité</th>
+                            <th>Adresse</th>
+                            <th>Code Postal</th>
+                            <th>Jours</th>
+                            <th>Horaires</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach var="centre" items="${centres.listCentre}">
+                            <tr>
+                                <td>${centre.nomCentre}</td>
+                                <td>${centre.adresse}</td>
+                                <td>${centre.codePostal}</td>
+                                <<td>${centre.jourSemaineOuverture}</td>
+                                <td>de ${centre.heureOuverture} à ${centre.heureFermeture}</td>
+                                <td>
+                                    <button class="btn btn-primary">Voir les stats</button>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+            </div>     
+                </form>
 
 
             <%@ include file="footer.jsp" %>

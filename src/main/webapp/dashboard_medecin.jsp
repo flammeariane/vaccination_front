@@ -10,77 +10,11 @@
 
         <%@ include file="/WEB-INF/bootstrap.jsp" %>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/button-styles.css">
-           <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/table-styles.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/table-styles.css">
 
         <title>dashboard Medecin</title>
         <%@ include file="header.jsp" %>
-        <style>
-            .control-buttons {
-                display: flex;
-                gap: 10px;
-            }
-            .comment-section {
-                margin-top: 15px;
-            }
-
-            .search-section {
-                background-color: #f2f2f2; /* Couleur de fond */
-                padding: 20px; /* Espacement intérieur */
-                margin-top: 20px; /* Espacement extérieur en haut */
-                border-radius: 10px; /* Coins arrondis */
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-            .search-box {
-                position: relative;
-                width: 100%;
-                max-width: 500px; /* Largeur maximale du champ de recherche */
-            }
-            .search-input {
-                width: 100%;
-                padding: 10px 20px;
-                padding-right: 40px; /* Espace pour l'icône de recherche */
-                font-size: 16px; /* Taille de la police */
-                border: 1px solid #ccc;
-                border-radius: 20px; /* Coins arrondis */
-                box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Ombre légère */
-            }
-            .search-icon {
-                position: absolute;
-                right: 10px;
-                top: 50%;
-                transform: translateY(-50%);
-                color: #777;
-            }
-
-            .custom-header {
-                background-color: #6c757d; /* Bootstrap gris foncé, mais plus clair que le noir */
-                color: #ffffff; /* Texte blanc pour contraste */
-            }
-
-            .table th, .table td {
-                max-width: 150px; /* Limite la largeur maximale de toutes les cellules */
-                overflow: hidden; /* Empêche le débordement du contenu */
-                text-overflow: ellipsis; /* Ajoute des points de suspension si le texte déborde */
-                white-space: nowrap; /* Empêche le texte de passer à la ligne automatiquement */
-            }
-
-            .table th {
-                word-break: break-all; /* Permet de casser les mots trop longs pour éviter le débordement */
-            }
-
-            .btn-group {
-                width: 100%; /* Permet aux boutons de remplir l'espace horizontal disponible */
-            }
-            .btn-group .btn {
-                width: 50%; /* Chaque bouton remplit la moitié de l'espace de la btn-group */
-            }
-            .btn-custom, .btn-custom-discard {
-                white-space: normal; /* Permet au texte du bouton de passer à la ligne */
-                word-break: break-word; /* Casse les mots si nécessaire pour éviter le débordement */
-            }
-        </style>
+     
     </head>
 
 
@@ -124,7 +58,8 @@
 
                             <td>
                                 <!-- Lien pour ouvrir la modal des commentaires -->
-                                <a href="#" data-toggle="modal" data-target="#commentModal${patient.numeroNational}">voir les commentaires</a>
+                                <a href="#" onclick="ouvrirModalIncident('${patient.numeroNational}')">voir les commentaires</a>
+
                                 <div id="commentSection${patient.numeroNational}" class="collapse comment-section">
                                     <ul>
                                         <li>Commentaire 1 pour ${patient.prenom}</li>
@@ -189,12 +124,11 @@
             <%@ include file="footer.jsp" %>
             <!-- Inclure les scripts nécessaires -->
             <!-- jQuery, Popper.js, et Bootstrap JS -->
-            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-            <script src="${pageContext.request.contextPath}/static/js/search.js"></script>
-
-
+            <script src="${pageContext.request.contextPath}/static/js/searchByNumeroNational.js"></script>
 
             <script>
                                         function cancelAction(numeroNational) {
@@ -202,6 +136,26 @@
                                             console.log("Annulation pour le patient avec le numéro national: " + numeroNational);
                                             // Vous pouvez ajouter ici une redirection ou une autre logique selon le besoin
                                         }
+
+
+                                        function ouvrirModalIncident(numeroNational) {
+                                            $.ajax({
+                                                url: 'incidentServlet',
+                                                type: 'GET',
+                                                data: {numeroNational: numeroNational},
+                                                dataType: 'json', // S'assurer que la réponse est attendue au format JSON
+                                                success: function (response) {
+                                                    var commentaires = response.listIncident; // Assurez-vous que cela correspond à la structure de votre JSON
+                                                    var contenuModal = '';
+                                                    for (var i = 0; i < commentaires.length; i++) {
+                                                        contenuModal += '<li>' + commentaires[i].remarques + '</li>';
+                                                    }
+                                                    $('#commentModal' + numeroNational + ' .modal-body').html('<ul>' + contenuModal + '</ul>');
+                                                    $('#commentModal' + numeroNational).modal('show');
+                                                }
+                                            });
+                                        }
+
             </script>
 
 

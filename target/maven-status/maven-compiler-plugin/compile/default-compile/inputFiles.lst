@@ -10,6 +10,7 @@ C:\Users\flamm\Documents\NetBeansProjects\front\src\main\java\controller\patient
 C:\Users\flamm\Documents\NetBeansProjects\front\src\main\java\facade\impl\RendezVousFacadeImpl.java
 C:\Users\flamm\Documents\NetBeansProjects\front\src\main\java\bean\IncidentBeanOut.java
 C:\Users\flamm\Documents\NetBeansProjects\front\src\main\java\facade\impl\UserOperationsFacadeImpl.java
+C:\Users\flamm\Documents\NetBeansProjects\front\src\main\java\controller\responsables\statistiqueServlet.java
 C:\Users\flamm\Documents\NetBeansProjects\front\src\main\java\facade\UserOperationsFacade.java
 C:\Users\flamm\Documents\NetBeansProjects\front\src\main\java\bean\ListDateDispoBean.java
 C:\Users\flamm\Documents\NetBeansProjects\front\src\main\java\facade\ResponsableUserFacade.java
@@ -25,7 +26,9 @@ C:\Users\flamm\Documents\NetBeansProjects\front\src\main\java\controller\medical
 C:\Users\flamm\Documents\NetBeansProjects\front\src\main\java\controller\patient\PriseRdvResume.java
 C:\Users\flamm\Documents\NetBeansProjects\front\src\main\java\modele\MembrePersonnel.java
 C:\Users\flamm\Documents\NetBeansProjects\front\src\main\java\bean\ListCentreBean.java
+C:\Users\flamm\Documents\NetBeansProjects\front\src\main\java\bean\StatCentreBeanIn.java
 C:\Users\flamm\Documents\NetBeansProjects\front\src\main\java\controller\login\LogoutServlet.java
+C:\Users\flamm\Documents\NetBeansProjects\front\src\main\java\controller\medicalStaff\IncidentServlet.java
 C:\Users\flamm\Documents\NetBeansProjects\front\src\main\java\CloseableHttpClient.java
 C:\Users\flamm\Documents\NetBeansProjects\front\src\main\java\bean\CentreInfoBeanOut.java
 C:\Users\flamm\Documents\NetBeansProjects\front\src\main\java\bean\ConfirmPresencePatientBean.java
@@ -46,6 +49,7 @@ C:\Users\flamm\Documents\NetBeansProjects\front\src\main\java\modele\CentreInfo.
 C:\Users\flamm\Documents\NetBeansProjects\front\src\main\java\bean\saveRendezVousBeanOut.java
 C:\Users\flamm\Documents\NetBeansProjects\front\src\main\java\bean\PatientListJourBean.java
 C:\Users\flamm\Documents\NetBeansProjects\front\src\main\java\bean\VaccinationHistoryBean.java
+C:\Users\flamm\Documents\NetBeansProjects\front\src\main\java\bean\StatCentreBeanOut.java
 C:\Users\flamm\Documents\NetBeansProjects\front\src\main\java\controller\patient\PriseRdvChoixCentreServlet.java
 C:\Users\flamm\Documents\NetBeansProjects\front\src\main\java\controller\login\LoginPatientServlet.java
 C:\Users\flamm\Documents\NetBeansProjects\front\src\main\java\controller\patient\PriseRdvChoixDateSecond.java

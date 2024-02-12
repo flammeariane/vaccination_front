@@ -99,11 +99,11 @@ public class MedicalUserFacadeImpl implements MedicalUserFacade {
     }
 
 
-    public PatientListJourBean GetListCommentaire(Map<String, Object> requestData) throws IOException {
+    public PatientListJourBean incidentSurvenuListPatient(Map<String, Object> requestData) throws IOException {
 
         String requestBody = objectMapper.writeValueAsString(requestData);
 
-        HttpPost postRequest = new HttpPost("http://localhost:8080/http://localhost:8080/CentreVaccinationFrontEnd/incidenSurvenuSelectPatient");
+        HttpPost postRequest = new HttpPost("http://localhost:8080/CentreVaccinationFrontEnd/incidentSurvenuListPatient");
         postRequest.setEntity(new StringEntity(requestBody, "UTF-8"));
         postRequest.setHeader("Content-Type", "application/json");
 
@@ -118,7 +118,20 @@ public class MedicalUserFacadeImpl implements MedicalUserFacade {
     }
 
     @Override
-    public PatientListJourBean incidentSurvenuListPatient(Map<String, Object> requestData) throws IOException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public IncidentBeanIn incidentSurvenuSelectPatient(Map<String, Object> requestData) throws IOException {
+         String requestBody = objectMapper.writeValueAsString(requestData);
+
+        HttpPost postRequest = new HttpPost("http://localhost:8080/http://localhost:8080/CentreVaccinationFrontEnd/incidenSurvenuSelectPatient");
+        postRequest.setEntity(new StringEntity(requestBody, "UTF-8"));
+        postRequest.setHeader("Content-Type", "application/json");
+
+        try (CloseableHttpResponse httpResponse = HttpClientSingleton.getInstance().execute(postRequest)) {
+            if (httpResponse.getStatusLine().getStatusCode() == 200) {
+
+                String responseBody = EntityUtils.toString(httpResponse.getEntity(), "UTF-8");
+                return objectMapper.readValue(responseBody, IncidentBeanIn.class);
+            }
+        }
+        return null;
     }
 }
