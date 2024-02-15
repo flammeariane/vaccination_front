@@ -6,9 +6,9 @@ import bean.ListDateDispoBean;
 import bean.SaveRendezVousSecondBeanIn;
 import bean.VaccinInfoBean;
 import bean.VaccinationHistoryBean;
-import bean.saveRendezVousBeanIn;
-import bean.saveRendezVousBeanOut;
-import bean.saveRendezVousSecondBeanOut;
+import bean.SaveRendezVousBeanIn;
+import bean.SaveRendezVousBeanOut;
+import bean.SaveRendezVousSecondBeanOut;
 import java.io.IOException;
 import java.util.Map;
 import modele.Patient;
@@ -23,10 +23,10 @@ public interface RendezVousFacade {
 
     VaccinInfoBean getVaccineList(Patient patient) throws IOException;
 
-    SaveRendezVousSecondBeanIn saveRendezVousSecond(saveRendezVousSecondBeanOut rendezVousSecondBeanOut) throws IOException;
+    SaveRendezVousSecondBeanIn saveRendezVousSecond(SaveRendezVousSecondBeanOut rendezVousSecondBeanOut) throws IOException;
 
-    ListDateDispoBean getAgendaSecondRendezVous(saveRendezVousBeanOut rendezVousBeanOut) throws IOException;
+    ListDateDispoBean getAgendaSecondRendezVous(SaveRendezVousBeanOut rendezVousBeanOut) throws IOException;
 
-    saveRendezVousBeanIn saveRendezVous(saveRendezVousBeanOut rendezVousBeanOut) throws IOException;
+    SaveRendezVousBeanIn saveRendezVous(SaveRendezVousBeanOut rendezVousBeanOut) throws IOException;
 
 }

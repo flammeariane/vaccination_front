@@ -1,4 +1,4 @@
-<%@page import="bean.saveRendezVousBeanIn"%>
+<%@page import="bean.SaveRendezVousBeanIn"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page isELIgnored="false" %>
@@ -30,7 +30,7 @@
                     </div>
                     <div class="card-body">
 
-                        <h5 class="text-center mb-4"> <i class="fas fa-check-circle" style="color: green;"></i> Vos rendez-vous sont bien confirmé !  </h5>     
+                        <h5 class="text-center mb-4"> <i class="fas fa-check-circle" style="color: green;"></i> Vos rendez-vous sont bien confirmï¿½ !  </h5>     
 
 
                         <c:if test="${not empty rendezVousResumeSecond.listRecapInfoRendezVous}">
@@ -39,7 +39,7 @@
                                 <p>Date du rendez-vous: <strong>${rendezVous.dateRdv}</strong></p>
                                 <p>Vaccin: <strong>${rendezVous.nomVaccin}</strong></p>
                                 <p>Centre de vaccination: <strong>${rendezVous.nomCentre}</strong></p>
-                                <p>Numéro de dose: <strong>${rendezVous.numeroDose}</strong></p>
+                                <p>Numï¿½ro de dose: <strong>${rendezVous.numeroDose}</strong></p>
                                 <p>Confirmation par email: <strong>${rendezVous.confrmationParEmail ? 'Oui' : 'Non'}</strong></p>
                                 <p>Email de confirmation: <strong>${rendezVous.emailConfirmation}</strong></p>
                             </c:forEach>
@@ -52,7 +52,7 @@
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" id="recevoirEmail" name="recevoirEmail" value="oui" onclick="toggleEmailInput()">
                                         <label class="form-check-label" for="recevoirEmail">
-                                            Je souhaite recevoir un résumé de mes rendez-vous par email
+                                            Je souhaite recevoir un rï¿½sumï¿½ de mes rendez-vous par email
                                         </label>
                                     </div>
                                 </div>
