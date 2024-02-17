@@ -3,7 +3,7 @@ package controller.patient;
 
 
 import bean.SaveRendezVousSecondBeanIn;
-import bean.saveRendezVousSecondBeanOut;
+import bean.SaveRendezVousSecondBeanOut;
 import facade.impl.RendezVousFacadeImpl;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -22,7 +22,7 @@ public class PriseRdvResumeSecond extends HttpServlet {
          Patient patient = (Patient) session.getAttribute("patient");
          
   
-        saveRendezVousSecondBeanOut rendezVousSecondBeanOut = new saveRendezVousSecondBeanOut();
+        SaveRendezVousSecondBeanOut rendezVousSecondBeanOut = new SaveRendezVousSecondBeanOut();
 
 
         rendezVousSecondBeanOut.setNomCentre((String) session.getAttribute("selectedCentreNom"));

@@ -16,9 +16,15 @@ public class ApiUrls {
 
 
    
-    // ResponsableServlet
+    // Responsable general
     public static final String STAT_AFFICHER_CENTRE = BASE_URL + "/consulterStatistiqueAfficherCentre";
     public static final String STAT_CENTRE = BASE_URL + "/consulterStatistiqueChoisirCentre";
+
+    // Responsable de centre
+    public static final String LIST_MEMBERS = BASE_URL + "/gererPlanningListMembre";
+    public static final String AFFICHER_AGENDA = BASE_URL + "/gererPlanningAfficherAgenda";
+    public static final String CONFIRM_PLANNING = BASE_URL + "/gererPlanningConfirmInsert";
+
 
     // MedicalPersonnelServlet
     public static final String VALIDER_PRESENCE_LIST_PATIENT = BASE_URL + "/validerPresencePatientListe";

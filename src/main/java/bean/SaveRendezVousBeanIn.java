@@ -1,6 +1,6 @@
 package bean;
 
-public class saveRendezVousBeanIn {
+public class SaveRendezVousBeanIn {
 
     private String nom;
     private String prenom;

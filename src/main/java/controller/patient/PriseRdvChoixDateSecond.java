@@ -1,7 +1,7 @@
 package controller.patient;
 
 import bean.ListDateDispoBean;
-import bean.saveRendezVousBeanOut;
+import bean.SaveRendezVousBeanOut;
 import facade.impl.RendezVousFacadeImpl;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -22,7 +22,7 @@ public class PriseRdvChoixDateSecond extends HttpServlet {
      protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         Patient patient = (Patient) session.getAttribute("patient");
-        saveRendezVousBeanOut rendezVousBeanOut = new saveRendezVousBeanOut();
+        SaveRendezVousBeanOut rendezVousBeanOut = new SaveRendezVousBeanOut();
 
         String dateFromSession = (String) session.getAttribute("selectedDateAgenda");
         // Utilisez le format correct pour la date récupérée de la session

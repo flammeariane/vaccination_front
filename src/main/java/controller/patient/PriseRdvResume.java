@@ -1,7 +1,7 @@
 package controller.patient;
 
-import bean.saveRendezVousBeanIn;
-import bean.saveRendezVousBeanOut;
+import bean.SaveRendezVousBeanIn;
+import bean.SaveRendezVousBeanOut;
 import facade.impl.RendezVousFacadeImpl;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -18,7 +18,7 @@ public class PriseRdvResume extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         Patient patient = (Patient) session.getAttribute("patient");
-        saveRendezVousBeanOut rendezVousBeanOut = new saveRendezVousBeanOut();
+        SaveRendezVousBeanOut rendezVousBeanOut = new SaveRendezVousBeanOut();
 
         // rendezVousBeanOut.setNomCentre(session.getAttribute(string));
         rendezVousBeanOut.setNomCentre((String) session.getAttribute("selectedCentreNom"));
@@ -31,7 +31,7 @@ public class PriseRdvResume extends HttpServlet {
         rendezVousBeanOut.setNomFamille(patient.getNomFamille());
         rendezVousBeanOut.setPrenom(patient.getNomFamille());
 
-        saveRendezVousBeanIn rendezVousResume = rendezVousFacade.saveRendezVous(rendezVousBeanOut);
+        SaveRendezVousBeanIn rendezVousResume = rendezVousFacade.saveRendezVous(rendezVousBeanOut);
         session.setAttribute("rendezVousResume", rendezVousResume);
 
         request.getRequestDispatcher("resume.jsp").forward(request, response);

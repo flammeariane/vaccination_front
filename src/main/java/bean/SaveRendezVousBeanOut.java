@@ -1,6 +1,6 @@
 package bean;
 
-public class saveRendezVousBeanOut {
+public class SaveRendezVousBeanOut {
 
     private String nomCentre;
     private String nomVaccin;
