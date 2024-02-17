@@ -14,7 +14,7 @@
 
         <title>dashboard Medecin</title>
         <%@ include file="header.jsp" %>
-     
+
     </head>
 
 
@@ -60,12 +60,6 @@
                                 <!-- Lien pour ouvrir la modal des commentaires -->
                                 <a href="#" onclick="ouvrirModalIncident('${patient.numeroNational}')">voir les commentaires</a>
 
-                                <div id="commentSection${patient.numeroNational}" class="collapse comment-section">
-                                    <ul>
-                                        <li>Commentaire 1 pour ${patient.prenom}</li>
-                                        <li>Commentaire 2 pour ${patient.prenom}</li>
-                                    </ul>
-                                </div>
                             </td>
 
                             <td>
@@ -131,35 +125,55 @@
             <script src="${pageContext.request.contextPath}/static/js/searchByNumeroNational.js"></script>
 
             <script>
-                                        function cancelAction(numeroNational) {
-                                            // Logique pour gérer l'annulation
-                                            console.log("Annulation pour le patient avec le numéro national: " + numeroNational);
-                                            // Vous pouvez ajouter ici une redirection ou une autre logique selon le besoin
-                                        }
-
-
                                         function ouvrirModalIncident(numeroNational) {
-                                            $.ajax({
-                                                url: 'incidentServlet',
-                                                type: 'GET',
-                                                data: {numeroNational: numeroNational},
-                                                dataType: 'json', // S'assurer que la réponse est attendue au format JSON
-                                                success: function (response) {
-                                                    var commentaires = response.listIncident; // Assurez-vous que cela correspond à la structure de votre JSON
-                                                    var contenuModal = '';
-                                                    for (var i = 0; i < commentaires.length; i++) {
-                                                        contenuModal += '<li>' + commentaires[i].remarques + '</li>';
-                                                    }
-                                                    $('#commentModal' + numeroNational + ' .modal-body').html('<ul>' + contenuModal + '</ul>');
-                                                    $('#commentModal' + numeroNational).modal('show');
-                                                }
-                                            });
-                                        }
+    $.ajax({
+        url: 'http://localhost:8080/CentreVaccinationFrontEnd/incidenSurvenuSelectPatient',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            numeroNational: numeroNational,
+            adresseMail: "medecin@gmail.com",
+            password: "81dc9bdb52d04dc20036dbd8313ed055",
+            role: "Medecin"
+        }),
+        dataType: 'json',
+        success: function (response) {
+            var contenuModal = '';
+            if (response && response.listIncident) {
+                var commentaires = response.listIncident;
+                for (var i = 0; i < commentaires.length; i++) {
+                    contenuModal += '<li>' + 
+                        'Date Naissance: ' + new Date(commentaires[i].dateNaissance).toLocaleDateString() + '<br>' +
+                        'Numéro National: ' + commentaires[i].numeroNational + '<br>' +
+                        'Nom Vaccin: ' + commentaires[i].nomVaccin + '<br>' +
+                        'Remarques: ' + commentaires[i].remarques + '<br>' +
+                        'Date Rdv: ' + new Date(commentaires[i].dateRdv).toLocaleString() + '<br>' +
+                        'Numéro Dose: ' + commentaires[i].numeroDose + '<br>' +
+                        'Code Postal: ' + commentaires[i].codePostal + '<br>' +
+                        'Adresse: ' + commentaires[i].adresse + ', ' + commentaires[i].numeroAdresse + '<br>' +
+                        'Email: ' + commentaires[i].email + '<br>' +
+                        'Nom Famille: ' + commentaires[i].nomFamille + '<br>' +
+                        'Ville: ' + commentaires[i].ville + '<br>' +
+                        'Prénom: ' + commentaires[i].prenom + 
+                        '</li><hr>'; // Ajout d'une ligne horizontale pour séparer les incidents
+                }
+            } else {
+                contenuModal = "<li>Aucun incident trouvé ou réponse mal formée</li>";
+            }
+
+            // Mettre à jour le contenu de la modal et l'afficher
+            $('#commentModal' + numeroNational + ' .modal-body').html('<ul>' + contenuModal + '</ul>');
+            $('#commentModal' + numeroNational).modal('show');
+        },
+        error: function (xhr, status, error) {
+            console.error("Erreur lors de la récupération des incidents: ", status, error);
+        }
+    });
+}
+
+
 
             </script>
-
-
-
     </body>
 </html>
 
