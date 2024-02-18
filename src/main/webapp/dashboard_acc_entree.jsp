@@ -1,20 +1,12 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html>
     <head>
-
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-        <%@ include file="/WEB-INF/bootstrap.jsp" %>
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/button-styles.css">
-           <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/table-styles.css">
-
         <title>dashboard acceuillant</title>
+        <%@ include file="common-includes.jsp" %>
         <%@ include file="header.jsp" %>
-          </head>
+    </head>
 
 
     <body>
@@ -75,24 +67,18 @@
                         </tr>
                     </c:forEach>
                 </tbody>
-
             </table>
-            
-                       <c:if test="${empty patientList.listPatient}">
-    <div class="alert alert-warning" role="alert" style="margin-top: 20px; color: orange;">
-        Il n'y a plus de présence patient à valider à la date du jour.
-    </div>
-</c:if>
 
-
+            <c:if test="${empty patientList.listPatient}">
+                <div class="alert alert-warning" role="alert" style="margin-top: 20px; color: orange;">
+                    Il n'y a plus de présence patient à valider à la date du jour.
+                </div>
+            </c:if>
 
             <%@ include file="footer.jsp" %>
-            <!-- Inclure les scripts nécessaires -->
-            <!-- jQuery, Popper.js, et Bootstrap JS -->
-            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-             <script src="${pageContext.request.contextPath}/static/js/searchByNumeroNational.js"></script>
+  
+
+            <script src="${pageContext.request.contextPath}/static/js/searchByNumeroNational.js"></script>
 
             <script>
                                             function submitForm(isConfirmed, numeroNational) {

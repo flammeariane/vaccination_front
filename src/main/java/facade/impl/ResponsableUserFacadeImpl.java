@@ -63,7 +63,7 @@ public class ResponsableUserFacadeImpl implements ResponsableUserFacade {
     }
 
     public StatCentreBeanIn getStatCentre(StatCentreBeanIn centreRequest) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 
     public ListMembreBean getListMembre(MembrePersonnel membrePersonnel) throws IOException {

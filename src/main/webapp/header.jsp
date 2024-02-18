@@ -31,8 +31,6 @@
 
         <div id="header">
             <h1>Réseau des Centres de Vaccination National</h1>
-          
-
         </div>
 
     </body>

@@ -1,6 +1,6 @@
 .btn-custom {
     background-color: #74c6a0;
-    color: white; 
+    color: white;
 }
 
 .btn-custom:hover {
@@ -14,24 +14,30 @@
 }
 
 .btn-custom-back {
-    color: #f59261; 
-    border: 1px solid #f59261; 
-    background-color: transparent; 
+    color: #f59261;
+    border: 1px solid #f59261;
+    background-color: transparent;
 }
 
 .btn-custom-back:hover {
-    color: white; 
-    background-color: #f59261; 
+    color: white;
+    background-color: #f59261;
 }
 
 .btn-custom-discard {
-   color: white; 
-   background-color: #f59261; 
+    color: white;
+    background-color: #f59261;
 }
 
 .btn-custom-discard:hover {
-    color: #f59261; 
-    border: 1px solid #f59261; 
-    background-color: transparent; 
+    color: #f59261;
+    border: 1px solid #f59261;
+    background-color: transparent;
 }
+
+
+button:disabled {
+    cursor: not-allowed;
+}
+
 

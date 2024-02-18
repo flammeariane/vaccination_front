@@ -2,9 +2,6 @@ package controller.responsables;
 
 import bean.ListCentreBean;
 import bean.ListMembreBean;
-import bean.StatCentreBeanIn;
-import bean.StatCentreBeanOut;
-import facade.impl.RendezVousFacadeImpl;
 import facade.impl.ResponsableUserFacadeImpl;
 
 import java.io.IOException;

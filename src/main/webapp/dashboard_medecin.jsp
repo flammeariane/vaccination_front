@@ -1,26 +1,16 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html>
     <head>
 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-        <%@ include file="/WEB-INF/bootstrap.jsp" %>
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/button-styles.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/table-styles.css">
-
+        <%@ include file="common-includes.jsp" %>
         <title>dashboard Medecin</title>
         <%@ include file="header.jsp" %>
-
     </head>
-
 
     <body>
         <div class="container mt-4">
-
             <div class="d-flex justify-content-end align-items-center mb-3">
                 <form action="logout" method="post" > <button class="btn btn-custom-delete" type="submit">Déconnexion <i class="fa-solid fa-arrow-right-from-bracket"></i> </button></form>
             </div>
@@ -55,29 +45,20 @@
                             <td>${patient.nomFamille}</td>
                             <td>${patient.numeroNational}</td>
                             <td><fmt:formatDate value="${patient.dateNaissance}" pattern="dd-MM-yyyy" /></td>
-
                             <td>
                                 <!-- Lien pour ouvrir la modal des commentaires -->
                                 <a href="#" onclick="ouvrirModalIncident('${patient.numeroNational}')">voir les commentaires</a>
-
                             </td>
-
-                            <td>
-                                <!-- Champ numeroLot éditable sans bouton de validation supplémentaire -->
+                            <td>                          
                                 <input type="text" name="commentaire" value="" class="form-control"  />
                             </td>
                             <td>
                                 <form action="confirmVaccinationPatientServlet" method="post">
                                     <input type="hidden" name="numeroNational" value="${patient.numeroNational}" />
                                     <input type="hidden" name="numeroLot" id="hiddenNumeroLot${patient.numeroNational}" />
-                                    <input type="hidden" name="commentaire" class="form-control" />
-
-                                    <!-- Les boutons pour confirmer ou refuser la présence -->
-
-
+                                    <input type="hidden" name="commentaire" class="form-control" />                        
                                     <button type="submit" class="btn btn-custom"> <i class="fas fa-check"></i></button>
                                     <button type="button" class="btn btn-custom-discard" onclick="cancelAction('${patient.numeroNational}')"> <i class="fas fa-times"></i></button>
-
                                 </form>
                             </td>
                         </tr>
@@ -92,14 +73,10 @@
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <div class="modal-body">
-                                    <ul>
-                                        <li>Commentaire 1 pour ${patient.prenom}</li>
-                                        <li>Commentaire 2 pour ${patient.prenom}</li>
-                                    </ul>
+                                <div class="modal-body">    
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                    <button type="button" class="btn btn-custom-discard" data-dismiss="modal">Fermer</button>
                                 </div>
                             </div>
                         </div>
@@ -114,66 +91,12 @@
                 </div>
             </c:if>
 
-
             <%@ include file="footer.jsp" %>
-            <!-- Inclure les scripts nécessaires -->
-            <!-- jQuery, Popper.js, et Bootstrap JS -->
-            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
             <script src="${pageContext.request.contextPath}/static/js/searchByNumeroNational.js"></script>
-
-            <script>
-                                        function ouvrirModalIncident(numeroNational) {
-    $.ajax({
-        url: 'http://localhost:8080/CentreVaccinationFrontEnd/incidenSurvenuSelectPatient',
-        type: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify({
-            numeroNational: numeroNational,
-            adresseMail: "medecin@gmail.com",
-            password: "81dc9bdb52d04dc20036dbd8313ed055",
-            role: "Medecin"
-        }),
-        dataType: 'json',
-        success: function (response) {
-            var contenuModal = '';
-            if (response && response.listIncident) {
-                var commentaires = response.listIncident;
-                for (var i = 0; i < commentaires.length; i++) {
-                    contenuModal += '<li>' + 
-                        'Date Naissance: ' + new Date(commentaires[i].dateNaissance).toLocaleDateString() + '<br>' +
-                        'Numéro National: ' + commentaires[i].numeroNational + '<br>' +
-                        'Nom Vaccin: ' + commentaires[i].nomVaccin + '<br>' +
-                        'Remarques: ' + commentaires[i].remarques + '<br>' +
-                        'Date Rdv: ' + new Date(commentaires[i].dateRdv).toLocaleString() + '<br>' +
-                        'Numéro Dose: ' + commentaires[i].numeroDose + '<br>' +
-                        'Code Postal: ' + commentaires[i].codePostal + '<br>' +
-                        'Adresse: ' + commentaires[i].adresse + ', ' + commentaires[i].numeroAdresse + '<br>' +
-                        'Email: ' + commentaires[i].email + '<br>' +
-                        'Nom Famille: ' + commentaires[i].nomFamille + '<br>' +
-                        'Ville: ' + commentaires[i].ville + '<br>' +
-                        'Prénom: ' + commentaires[i].prenom + 
-                        '</li><hr>'; // Ajout d'une ligne horizontale pour séparer les incidents
-                }
-            } else {
-                contenuModal = "<li>Aucun incident trouvé ou réponse mal formée</li>";
-            }
-
-            // Mettre à jour le contenu de la modal et l'afficher
-            $('#commentModal' + numeroNational + ' .modal-body').html('<ul>' + contenuModal + '</ul>');
-            $('#commentModal' + numeroNational).modal('show');
-        },
-        error: function (xhr, status, error) {
-            console.error("Erreur lors de la récupération des incidents: ", status, error);
-        }
-    });
-}
+            <script type="module" src="${pageContext.request.contextPath}/static/js/dashboard_medecin.js"></script>
 
 
-
-            </script>
     </body>
 </html>
 
