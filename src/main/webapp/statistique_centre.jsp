@@ -1,3 +1,8 @@
+<%@page import="bean.StatCentreBeanIn.TxPresAbsePersonnelJour"%>
+<%@page import="java.util.List"%>
+<%@page import="bean.StatCentreBeanIn.NbrPatientVaccineJour"%>
+<%@page import="bean.StatCentreBeanIn"%>
+<%@page import="com.fasterxml.jackson.databind.ObjectMapper"%>
 
 <!DOCTYPE html>
 <html>
@@ -6,51 +11,89 @@
         <title>Tableau de Bord du Responsable</title>
         <%@ include file="header.jsp" %>
         <%@ include file="common-includes.jsp" %>
-
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     </head>
     <body>
         <div class="container mt-4">
-
             <div class="d-flex justify-content-end align-items-center mb-3">
-                <form action="logout" method="post" > <button class="btn btn-custom-delete" type="submit">Déconnexion <i class="fa-solid fa-arrow-right-from-bracket"></i> </button></form>
+                <form action="logout" method="post">
+                    <button class="btn btn-custom-delete" type="submit">Déconnexion <i class="fa-solid fa-arrow-right-from-bracket"></i></button>
+                </form>
             </div>
-            <h3 class="text-center mt-5">Bienvenue <b>${membrePersonnel.prenom}</b> dans le tableau de bord du responsable!</h3>
+            <h3 class="text-center mt-5">Statistique pour le centre : <b>NOM DU CENTRE</b> </h3>
 
-            <!-- TODO FIX THIS -->
-            <div class="search-section">
-                <div class="search-box">
-                    <input type="text" id="searchByNumeroNational" placeholder="Rechercher par code postal" class="search-input">
-                    <i class="fa fa-search search-icon"></i> <!-- Assurez-vous d'inclure FontAwesome pour l'icône -->
-                </div>
+            <div>
+                <canvas id="personnelPresenceAbsenceChart"></canvas>
             </div>
 
-            <h4>Liste des Centres</h4>
-            <table id="tableauPatient" class="table table-hover table-striped table-bordered mt-4">
-                <thead class="custom-header">
-                    <tr>
-                        <th>Localité</th>
-                        <th>Adresse</th>
-                        <th>Code Postal</th>
-                        <th>Jours</th>
-                        <th>Horaires</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach var="centre" items="${centres.listCentre}">
-                        <tr>
-                            <td>${centre.nomCentre}</td>
-                            <td>${centre.adresse}</td>
-                            <td>${centre.codePostal}</td>
-                            <<td>${centre.jourSemaineOuverture}</td>
-                            <td>  de ${centre.heureOuverture} à ${centre.heureFermeture}</td>
-                            <td>
-                                <button class="btn btn-primary">Voir les stats</button>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
+            <div>
+                <canvas id="personnelPresenceAbsenceMonthChart"></canvas>
+            </div>
+
+            <div>
+                <canvas id="tauxRemplissageJourChart"></canvas>
+            </div>
+            
+            <div>
+    <canvas id="txPresAbsePatienJourChart"></canvas>
+</div>
 
         </div>
+
+        <%
+            ObjectMapper objectMapper = new ObjectMapper();
+            StatCentreBeanIn statistiquesData = (StatCentreBeanIn) request.getAttribute("statistiquesData");
+
+            String dataJson = "{}"; // Initialisez avec une valeur par défaut pour éviter les null
+            try {
+                dataJson = objectMapper.writeValueAsString(statistiquesData.getTxPresAbsePersonnelJour());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        %>
+
+        <%
+            String dataJsonPersonnelJour = "{}";
+            String dataJsonPersonnelMois = "{}";
+            try {
+                dataJsonPersonnelJour = objectMapper.writeValueAsString(statistiquesData.getTxPresAbsePersonnelJour());
+                dataJsonPersonnelMois = objectMapper.writeValueAsString(statistiquesData.getTxPresAbsePersonnelMois());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        %>
+
+        <%
+            String dataJsonTauxRemplissageJour = "{}";
+            try {
+               
+                dataJsonTauxRemplissageJour = objectMapper.writeValueAsString(statistiquesData.getTauxremplissageJour());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        %>
+
+        <%
+            String dataJsonTxPresAbsePatienJour = "{}";
+            try {
+                dataJsonTxPresAbsePatienJour = objectMapper.writeValueAsString(statistiquesData.getTxPresAbsePatienJour());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        %>
+
+
+
+        <script>
+            var chartData = JSON.parse('<%= dataJson%>');
+            var chartDataPersonnelJour = JSON.parse('<%= dataJsonPersonnelJour%>');
+            var chartDataPersonnelMois = JSON.parse('<%= dataJsonPersonnelMois%>');
+            var chartDataTauxRemplissageJour = JSON.parse('<%= dataJsonTauxRemplissageJour%>');
+            var chartDataTxPresAbsePatienJour = JSON.parse('<%= dataJsonTxPresAbsePatienJour%>');
+
+        </script>
+
+        <script src="${pageContext.request.contextPath}/static/js/chart-data.js"></script>
+
     </body>
 </html>

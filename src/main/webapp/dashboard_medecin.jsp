@@ -95,8 +95,6 @@
 
             <script src="${pageContext.request.contextPath}/static/js/searchByNumeroNational.js"></script>
             <script type="module" src="${pageContext.request.contextPath}/static/js/dashboard_medecin.js"></script>
-
-
     </body>
 </html>
 
