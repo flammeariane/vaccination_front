@@ -1,6 +1,7 @@
 package controller.patient;
 
 import bean.CentreInfoBean;
+import facade.RendezVousFacade;
 import facade.impl.RendezVousFacadeImpl;
 import java.io.IOException;
 import java.util.HashMap;
@@ -16,7 +17,7 @@ import modele.Patient;
 
 public class PriseRdvChoixCentreServlet extends HttpServlet {
     
-     private RendezVousFacadeImpl rendezVousFacade = new RendezVousFacadeImpl();
+     private RendezVousFacade rendezVousFacade = RendezVousFacadeImpl.INSTANCE;
     
     
 protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

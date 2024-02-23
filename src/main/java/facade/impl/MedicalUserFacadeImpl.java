@@ -16,6 +16,11 @@ public class MedicalUserFacadeImpl implements MedicalUserFacade {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
+    public static MedicalUserFacade INSTANCE = new MedicalUserFacadeImpl();
+
+    private MedicalUserFacadeImpl() {
+    }
+
     public PatientListJourBean validerPresencePatientListe(Map<String, Object> requestData) throws IOException {
 
         String requestBody = objectMapper.writeValueAsString(requestData);

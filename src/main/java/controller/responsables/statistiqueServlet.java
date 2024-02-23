@@ -2,7 +2,8 @@ package controller.responsables;
 
 import bean.StatCentreBeanIn;
 import bean.StatCentreBeanOut;
-import facade.impl.ResponsableUserFacadeImpl;
+import facade.MembrePersonnelFacade;
+import facade.impl.MembrePersonnelFacadeImpl;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,7 +14,7 @@ import modele.MembrePersonnel;
 
 public class statistiqueServlet extends HttpServlet {
 
-    private ResponsableUserFacadeImpl responsableUserFacade = new ResponsableUserFacadeImpl();
+    private MembrePersonnelFacade MembrePersonnelFacade =  MembrePersonnelFacadeImpl.INSTANCE;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -25,7 +26,7 @@ public class statistiqueServlet extends HttpServlet {
         centreRequest.setNomCentre("Family Care");
         centreRequest.setRole("Responsable general");
 
-        StatCentreBeanIn stats = responsableUserFacade.getStatCentre(centreRequest);
+        StatCentreBeanIn stats = MembrePersonnelFacade.getStatCentre(centreRequest);
         request.setAttribute("stats", stats);
 
         request.getRequestDispatcher("statistique_centre.jsp").forward(request, response);

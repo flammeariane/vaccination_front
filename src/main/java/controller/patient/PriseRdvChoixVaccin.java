@@ -3,6 +3,7 @@ package controller.patient;
 import bean.VaccinInfoBean;
 import bean.CentreInfoBeanOut;
 
+import facade.RendezVousFacade;
 import facade.impl.RendezVousFacadeImpl;
 import java.io.IOException;
 
@@ -14,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import modele.Patient;
 
 public class PriseRdvChoixVaccin extends HttpServlet {
-     private RendezVousFacadeImpl rendezVousFacade = new RendezVousFacadeImpl();
+     private RendezVousFacade rendezVousFacade = RendezVousFacadeImpl.INSTANCE;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();

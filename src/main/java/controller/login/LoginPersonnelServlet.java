@@ -16,7 +16,7 @@ public class LoginPersonnelServlet extends HttpServlet {
         String adresseMail = request.getParameter("adresseMail");
         String password = request.getParameter("password");
 
-        UserOperationsFacade personnelFacade = new UserOperationsFacadeImpl();
+        UserOperationsFacade personnelFacade = UserOperationsFacadeImpl.INSTANCE;
         MembrePersonnel membrePersonnel = personnelFacade.loginPersonnel(adresseMail, password);
 
         if (membrePersonnel != null) {
