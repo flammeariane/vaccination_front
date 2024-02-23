@@ -41,9 +41,9 @@ public class PriseRdvChoixDateSecond extends HttpServlet {
         rendezVousBeanOut.setNomFamille(patient.getNomFamille());
         rendezVousBeanOut.setPrenom(patient.getPrenom()); 
 
-        ListDateDispoBean secondRendezVous = rendezVousFacade.getAgendaSecondRendezVous(rendezVousBeanOut);
-        request.setAttribute("secondRendezVous", secondRendezVous);
-        request.getRequestDispatcher("/WEB-INF/choix_date_second.jsp").forward(request, response);
+//        ListDateDispoBean secondRendezVous = rendezVousFacade.getAgendaSecondRendezVous(rendezVousBeanOut);
+//        request.setAttribute("secondRendezVous", secondRendezVous);
+//        request.getRequestDispatcher("/WEB-INF/choix_date_second.jsp").forward(request, response);
     }
 
 }

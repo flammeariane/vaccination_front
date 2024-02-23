@@ -5,15 +5,15 @@ import java.util.List;
 public class SaveRendezVousSecondBeanIn {
 
     private List<ListRecapInfoRendezVous> listRecapInfoRendezVous;
-private String nom;
-  private String prenom;
-        private String numeroNational;
-        private String dateRdv;
-        private String nomVaccin;
-        private String nomCentre;
-        private String numeroDose;
-        private String confrmationParEmail;
-        private String emailConfirmation;
+    private String nom;
+    private String prenom;
+    private String numeroNational;
+    private String dateRdv;
+    private String nomVaccin;
+    private String nomCentre;
+    private String numeroDose;
+    private String confrmationParEmail;
+    private String emailConfirmation;
 
     public String getPrenom() {
         return prenom;

@@ -25,7 +25,7 @@ public interface RendezVousFacade {
 
     SaveRendezVousSecondBeanIn saveRendezVousSecond(SaveRendezVousSecondBeanOut rendezVousSecondBeanOut) throws IOException;
 
-    ListDateDispoBean getAgendaSecondRendezVous(SaveRendezVousBeanOut rendezVousBeanOut) throws IOException;
+    ListDateDispoBean saveRdvAndGetAgendaSecondRendezVous(SaveRendezVousBeanOut rendezVousBeanOut) throws IOException;
 
     SaveRendezVousBeanIn saveRendezVous(SaveRendezVousBeanOut rendezVousBeanOut) throws IOException;
 
