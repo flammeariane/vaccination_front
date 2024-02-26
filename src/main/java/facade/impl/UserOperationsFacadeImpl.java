@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+
 import modele.MembrePersonnel;
 import modele.Patient;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -22,6 +23,11 @@ import utils.HttpClientSingleton;
 public class UserOperationsFacadeImpl implements UserOperationsFacade {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
+
+    public static UserOperationsFacade INSTANCE = new UserOperationsFacadeImpl();
+
+    private UserOperationsFacadeImpl() {
+    }
 
     @Override
     public void logoutUser(HttpSession session, HttpServletResponse response) throws IOException {
@@ -79,10 +85,10 @@ public class UserOperationsFacadeImpl implements UserOperationsFacade {
         return null;
     }
 
- 
-  @Override
-public void redirectPersonnelBasedOnRole(MembrePersonnel membrePersonnel, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-     // Redirection basée sur le rôle
+
+    @Override
+    public void redirectPersonnelBasedOnRole(MembrePersonnel membrePersonnel, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        // Redirection basée sur le rôle
         switch (membrePersonnel.getRole()) {
             case "Accueillant en entree":
                 request.getRequestDispatcher("accEntreServlet").forward(request, response);

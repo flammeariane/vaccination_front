@@ -142,3 +142,4 @@ const txPresAbsePatienJourChart = new Chart(ctxTxPresAbsePatienJour, {
 });
 
 
+S

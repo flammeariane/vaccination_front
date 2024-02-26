@@ -20,7 +20,7 @@ public class LoginPatientServlet extends HttpServlet {
         String numeroNational = request.getParameter("numeroNational");
         String codeSecret = request.getParameter("codeSecret");
 
-       UserOperationsFacade patientFacade = new UserOperationsFacadeImpl();
+       UserOperationsFacade patientFacade = UserOperationsFacadeImpl.INSTANCE;
         Patient patient = patientFacade.loginPatient(numeroNational, codeSecret);
 
         if (patient != null) {

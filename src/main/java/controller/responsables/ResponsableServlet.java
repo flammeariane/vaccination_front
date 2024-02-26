@@ -2,7 +2,8 @@ package controller.responsables;
 
 import bean.ListCentreBean;
 import bean.ListMembreBean;
-import facade.impl.ResponsableUserFacadeImpl;
+import facade.MembrePersonnelFacade;
+import facade.impl.MembrePersonnelFacadeImpl;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -19,7 +20,7 @@ import static utils.Roles.RESPONSABLE_GENERAL;
 
 public class ResponsableServlet extends HttpServlet {
 
-    private ResponsableUserFacadeImpl responsableUserFacade = new ResponsableUserFacadeImpl();
+    private MembrePersonnelFacade MembrePersonnelFacade = MembrePersonnelFacadeImpl.INSTANCE;
 
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -29,11 +30,11 @@ public class ResponsableServlet extends HttpServlet {
         if (membrePersonnel != null) {
             String currentRole = membrePersonnel.getRole();
             if (RESPONSABLE_GENERAL.equals(currentRole)) {
-                ListCentreBean centres = responsableUserFacade.getListCentre(membrePersonnel);
+                ListCentreBean centres = MembrePersonnelFacade.getListCentre(membrePersonnel);
                 request.setAttribute("centres", centres);
                 request.getRequestDispatcher("dashboard_responsable_general.jsp").forward(request, response);
             } else if (RESPONSABLE_CENTRE.equals(currentRole)) {
-                ListMembreBean listMembreBean = responsableUserFacade.getListMembre(membrePersonnel);
+                ListMembreBean listMembreBean = MembrePersonnelFacade.getListMembre(membrePersonnel);
                 request.setAttribute("members", listMembreBean);
                 request.getRequestDispatcher("dashboard_responsable_centre.jsp").forward(request, response);
             }

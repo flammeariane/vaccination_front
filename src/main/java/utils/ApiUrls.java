@@ -24,6 +24,7 @@ public class ApiUrls {
     public static final String LIST_MEMBERS = BASE_URL + "/gererPlanningListMembre";
     public static final String AFFICHER_AGENDA = BASE_URL + "/gererPlanningAfficherAgenda";
     public static final String CONFIRM_PLANNING = BASE_URL + "/gererPlanningConfirmInsert";
+    public static final String CONSULTER_SON_HORAIRE = BASE_URL + "/gererPlanningConsulterSonHoraire";
 
 
     // MedicalPersonnelServlet

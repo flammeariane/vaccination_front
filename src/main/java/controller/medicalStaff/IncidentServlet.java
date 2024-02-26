@@ -3,6 +3,7 @@ package controller.medicalStaff;
 import bean.IncidentBeanIn;
 import bean.PatientListJourBean;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import facade.MedicalUserFacade;
 import facade.impl.MedicalUserFacadeImpl;
 import java.io.IOException;
 import java.util.HashMap;
@@ -17,7 +18,7 @@ import modele.MembrePersonnel;
 
 public class IncidentServlet extends HttpServlet {
 
-    private MedicalUserFacadeImpl medicalUserFacade = new MedicalUserFacadeImpl();
+    private MedicalUserFacade medicalUserFacade = MedicalUserFacadeImpl.INSTANCE;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();

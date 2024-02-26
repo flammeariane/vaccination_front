@@ -1,6 +1,7 @@
 package controller.medicalStaff;
 
 import bean.PatientListJourBean;
+import facade.MedicalUserFacade;
 import facade.impl.MedicalUserFacadeImpl;
 import java.io.IOException;
 import java.util.HashMap;
@@ -14,7 +15,7 @@ import modele.MembrePersonnel;
 
 public class MedecinServlet extends HttpServlet {
 
-    private MedicalUserFacadeImpl medicalUserFacade = new MedicalUserFacadeImpl();
+    private MedicalUserFacade medicalUserFacade = MedicalUserFacadeImpl.INSTANCE;
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

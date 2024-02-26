@@ -1,6 +1,7 @@
 package controller.patient;
 
 import bean.VaccinationHistoryBean;
+import facade.RendezVousFacade;
 import modele.Patient;
 import facade.impl.RendezVousFacadeImpl;
 
@@ -10,7 +11,7 @@ import java.io.IOException;
 
 public class PatientServlet extends HttpServlet {
     
-    private RendezVousFacadeImpl rendezVousFacade = new RendezVousFacadeImpl();
+    private RendezVousFacade rendezVousFacade = RendezVousFacadeImpl.INSTANCE;
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

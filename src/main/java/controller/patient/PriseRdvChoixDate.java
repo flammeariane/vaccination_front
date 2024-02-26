@@ -2,6 +2,7 @@ package controller.patient;
 
 import bean.CentreInfoBeanOut;
 import bean.ListDateDispoBean;
+import facade.RendezVousFacade;
 import facade.impl.RendezVousFacadeImpl;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -11,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class PriseRdvChoixDate extends HttpServlet {
-     private RendezVousFacadeImpl rendezVousFacade = new RendezVousFacadeImpl();
+     private RendezVousFacade rendezVousFacade = RendezVousFacadeImpl.INSTANCE;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();

@@ -19,6 +19,11 @@ public class RendezVousFacadeImpl implements RendezVousFacade {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
+    public static RendezVousFacade INSTANCE = new RendezVousFacadeImpl();
+
+    private RendezVousFacadeImpl() {
+    }
+
     @Override
     public VaccinationHistoryBean getVaccinationHistory(String numeroNational) throws IOException {
         // Création d'une Map pour encapsuler le numeroNational
