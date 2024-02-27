@@ -25,12 +25,12 @@ public class PatientServlet extends HttpServlet {
             VaccinationHistoryBean v = rendezVousFacade.getVaccinationHistory(numeroNational);
             session.setAttribute("history", v);
 
-            request.getRequestDispatcher("dashboard_patient.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/dashboard_patient.jsp").forward(request, response);
 
         } else {
             // Rediriger vers la page de connexion si aucun patient n'est en session
             request.setAttribute("errorMessage", "Informations de login incorrectes ou problème de connexion");
-            request.getRequestDispatcher("login-patient.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/login-patient.jsp").forward(request, response);
         }
 
     }

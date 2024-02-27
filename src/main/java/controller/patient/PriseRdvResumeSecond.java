@@ -40,7 +40,7 @@ public class PriseRdvResumeSecond extends HttpServlet {
         SaveRendezVousSecondBeanIn rendezVousResumeSecond = rendezVousFacade.saveRendezVousSecond(rendezVousSecondBeanOut);
         request.setAttribute("rendezVousResumeSecond", rendezVousResumeSecond);
 
-        request.getRequestDispatcher("resume_second.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/resume_second.jsp").forward(request, response);
 
     }
      

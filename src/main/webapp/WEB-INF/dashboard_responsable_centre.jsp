@@ -5,10 +5,10 @@
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
             <title>Tableau de Bord du Responsable de centre</title>
            
-            <%@ include file="common-includes.jsp" %>
+            <%@ include file="/WEB-INF/common-includes.jsp" %>
         </head>
         <body>
-             <%@ include file="header.jsp" %>
+             <%@ include file="/WEB-INF/header.jsp" %>
             <div class="container mt-4">
                 <div class="d-flex justify-content-end align-items-center mb-3">
                     <form action="logout" method="post" > <button class="btn btn-custom-delete" type="submit">Déconnexion <i class="fa-solid fa-arrow-right-from-bracket"></i> </button></form>
@@ -99,7 +99,7 @@
             </div>
         </div>
 
-        <%@ include file="footer.jsp" %>
+        <%@ include file="/WEB-INF/footer.jsp" %>
 
         <script src="${pageContext.request.contextPath}/static/js/dashboard_responsable_centre.js"></script>
      

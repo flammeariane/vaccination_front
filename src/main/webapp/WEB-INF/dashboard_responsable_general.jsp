@@ -5,11 +5,11 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Tableau de Bord du Responsable</title>
 
-        <%@ include file="common-includes.jsp" %>
+        <%@ include file="/WEB-INF/common-includes.jsp" %>
 
     </head>
     <body>
-        <%@ include file="header.jsp" %>
+        <%@ include file="/WEB-INF/header.jsp" %>
         <div class="container mt-4">
 
             <div class="d-flex justify-content-end align-items-center mb-3">
@@ -58,7 +58,7 @@
                 </table>
         </div>     
     </form>
-    <%@ include file="footer.jsp" %>
+    <%@ include file="/WEB-INF/footer.jsp" %>
 
 </body>
 </html>

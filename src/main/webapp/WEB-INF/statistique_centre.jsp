@@ -9,8 +9,8 @@
     
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Tableau de Bord du Responsable</title>
-        <%@ include file="header.jsp" %>
-        <%@ include file="common-includes.jsp" %>
+        <%@ include file="/WEB-INF/header.jsp" %>
+        <%@ include file="/WEB-INF/common-includes.jsp" %>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <body>

@@ -33,12 +33,12 @@ public class MedecinServlet extends HttpServlet {
             PatientListJourBean patientList = medicalUserFacade.incidentSurvenuListPatient(requestData);
             request.setAttribute("patientList", patientList);
 
-            request.getRequestDispatcher("dashboard_medecin.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/dashboard_medecin.jsp").forward(request, response);
 
         } else {
        
             request.setAttribute("errorMessage", "Problème de connexion ou de récupération des données");
-            request.getRequestDispatcher("login_personnel_medical.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/login_personnel_medical.jsp").forward(request, response);
         }
     }
 

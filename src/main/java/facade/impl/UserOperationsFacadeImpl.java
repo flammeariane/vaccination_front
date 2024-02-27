@@ -66,25 +66,30 @@ public class UserOperationsFacadeImpl implements UserOperationsFacade {
                 break;
             default:
                 // Gérer les cas où le rôle n'est pas reconnu
-                response.sendRedirect("login-pro.jsp");
+                request.getRequestDispatcher("/WEB-INF/login-pro.jsp").forward(request, response);
+               
                 break;
         }
     }
 
-    @Override
-    public void logoutUser(HttpSession session, HttpServletResponse response) throws IOException {
+
+    public void logoutUser(HttpServletRequest request ,HttpSession session, HttpServletResponse response) throws IOException {
         if (session != null) {
             String userType = (String) session.getAttribute("userType");
             session.invalidate();
 
             if ("patient".equals(userType)) {
-                response.sendRedirect("login-patient.jsp");
+               request.getRequestDispatcher("/WEB-INF/login-patient.jsp");
             } else {
-                response.sendRedirect("login-pro.jsp");
+                request.getRequestDispatcher("/WEB-INF/login-pro.jsp");
             }
         } else {
-            response.sendRedirect("index.jsp");
+            request.getRequestDispatcher("/WEB-INF/index.jsp");
         }
     }
+
+
+
+  
 
 }

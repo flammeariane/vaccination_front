@@ -10,7 +10,7 @@ import modele.Patient;
 
 public interface UserOperationsFacade {
 
-    void logoutUser(HttpSession session, HttpServletResponse response) throws IOException;
+    void logoutUser(HttpServletRequest request,HttpSession session, HttpServletResponse response) throws IOException;
 
     Patient loginPatient(String numeroNational, String codeSecret) throws IOException;
 

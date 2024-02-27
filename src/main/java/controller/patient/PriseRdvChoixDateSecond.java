@@ -43,7 +43,7 @@ public class PriseRdvChoixDateSecond extends HttpServlet {
 
         ListDateDispoBean secondRendezVous = rendezVousFacade.getAgendaSecondRendezVous(rendezVousBeanOut);
         request.setAttribute("secondRendezVous", secondRendezVous);
-        request.getRequestDispatcher("choix_date_second.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/choix_date_second.jsp").forward(request, response);
     }
 
 }

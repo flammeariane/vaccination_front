@@ -1,8 +1,6 @@
 
 package controller.login;
 
-import facade.UserOperationsFacade;
-import facade.impl.UserOperationsFacadeImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,8 +14,24 @@ public class LogoutServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        // Récupération de la session sans en créer une nouvelle
         HttpSession session = request.getSession(false);
-        UserOperationsFacade userFacade = UserOperationsFacadeImpl.INSTANCE;
-        userFacade.logoutUser(session, response);
+
+        if (session != null) {
+            String userType = (String) session.getAttribute("userType");
+            // Invalidation de la session pour déconnecter l'utilisateur
+            session.invalidate();
+
+            if ("patient".equals(userType)) {
+                // Redirection vers la page de login des patients
+                request.getRequestDispatcher("/WEB-INF/login-patient.jsp").forward(request, response);
+            } else {
+                // Redirection vers la page de login des professionnels
+                request.getRequestDispatcher("/WEB-INF/login-pro.jsp").forward(request, response);
+            }
+        } else {
+            // Redirection vers la page d'accueil si aucune session n'existe
+            response.sendRedirect("index.jsp");
+        }
     }
 }

@@ -18,6 +18,15 @@
         <servlet-name>LoginPatientServlet</servlet-name>
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>ShowLoginPatientServlet</servlet-name>
+        <servlet-class>controller.login.ShowLoginPatientServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ShowLoginPatientServlet</servlet-name>
+        <url-pattern>/showLoginPatient</url-pattern>
+    </servlet-mapping>
     <!-- Configuration pour LoginMembrePersonnelServlet -->
     <servlet>
         <servlet-name>LoginPersonnelServlet</servlet-name>
@@ -27,6 +36,19 @@
         <servlet-name>LoginPersonnelServlet</servlet-name>
         <url-pattern>/login-pro</url-pattern>
     </servlet-mapping>
+    
+    
+    <servlet>
+        <servlet-name>ShowLoginProServlet</servlet-name>
+        <servlet-class>controller.login.ShowLoginProServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ShowLoginProServlet</servlet-name>
+        <url-pattern>/showLoginPro</url-pattern>
+    </servlet-mapping>
+    
+    
+    
     <!-- Configuration pour LogoutServlet -->
     <servlet>
         <servlet-name>LogoutServlet</servlet-name>

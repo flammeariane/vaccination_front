@@ -30,16 +30,16 @@ public class ResponsableServlet extends HttpServlet {
             if (RESPONSABLE_GENERAL.equals(currentRole)) {
                 ListCentreBean centres = MembrePersonnelFacade.getListCentre(membrePersonnel);
                 request.setAttribute("centres", centres);
-                request.getRequestDispatcher("dashboard_responsable_general.jsp").forward(request, response);
+                request.getRequestDispatcher("/WEB-INF/dashboard_responsable_general.jsp").forward(request, response);
             } else if (RESPONSABLE_CENTRE.equals(currentRole)) {
                 ListMembreBean listMembreBean = MembrePersonnelFacade.getListMembre(membrePersonnel);
                 request.setAttribute("members", listMembreBean);
-                request.getRequestDispatcher("dashboard_responsable_centre.jsp").forward(request, response);
+                request.getRequestDispatcher("/WEB-INF/dashboard_responsable_centre.jsp").forward(request, response);
             }
         } else {
             // Gestion de l'erreur
             request.setAttribute("errorMessage", "Problème de connexion ou de récupération des données");
-            request.getRequestDispatcher("login_personnel_medical.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/login_personnel_medical.jsp").forward(request, response);
         }
     }
 }

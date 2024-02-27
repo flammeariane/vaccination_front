@@ -4,9 +4,9 @@
     <head>
 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <%@ include file="common-includes.jsp" %>
+        <%@ include file="/WEB-INF/common-includes.jsp" %>
         <title>dashboard Medecin</title>
-        <%@ include file="header.jsp" %>
+        <%@ include file="/WEB-INF/header.jsp" %>
     </head>
 
     <body>
@@ -91,7 +91,7 @@
                 </div>
             </c:if>
 
-            <%@ include file="footer.jsp" %>
+            <%@ include file="/WEB-INF/footer.jsp" %>
 
             <script src="${pageContext.request.contextPath}/static/js/searchByNumeroNational.js"></script>
             <script type="module" src="${pageContext.request.contextPath}/static/js/dashboard_medecin.js"></script>

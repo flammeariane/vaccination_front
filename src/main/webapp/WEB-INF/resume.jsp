@@ -4,11 +4,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Espace Patient</title>
-     <%@ include file="common-includes.jsp" %>
+     <%@ include file="/WEB-INF/common-includes.jsp" %>
     </head>
     <body>
 
-        <%@ include file="header.jsp" %>
+        <%@ include file="/WEB-INF/header.jsp" %>
 
         <div class="row justify-content-center">
             <div class="col-md-8 mt-5">

@@ -28,7 +28,7 @@ public class LoginPatientServlet extends HttpServlet {
             request.getRequestDispatcher("patientServlet").forward(request, response);
         } else {
             request.setAttribute("errorMessage", "Informations de login incorrectes ou problème de connexion");
-            request.getRequestDispatcher("login-patient.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/login-patient.jsp").forward(request, response);
         }
     }
 

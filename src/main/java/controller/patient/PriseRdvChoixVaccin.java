@@ -47,12 +47,12 @@ public class PriseRdvChoixVaccin extends HttpServlet {
             VaccinInfoBean vaccins = rendezVousFacade.getVaccineList(patient);
             request.setAttribute("vaccins", vaccins);
 
-            request.getRequestDispatcher("choix_vaccin.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/choix_vaccin.jsp").forward(request, response);
 
         } else {
             // Rediriger vers la page de connexion si aucun patient n'est en session
             request.setAttribute("errorMessage", "Informations de login incorrectes ou problème de connexion");
-            request.getRequestDispatcher("login-patient.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/login-patient.jsp").forward(request, response);
 
         }
     }

@@ -6,7 +6,7 @@
         <title>Espace Patient</title>
         <%@ include file="/WEB-INF/bootstrap.jsp" %>
 
-        <%@ include file="common-includes.jsp" %>
+        <%@ include file="/WEB-INF/common-includes.jsp" %>
 
         <style>
 
@@ -30,7 +30,7 @@
     </style>
 </head>
 <body>
-    <%@ include file="header.jsp" %>
+    <%@ include file="/WEB-INF/header.jsp" %>
     <div class="container">
         <div class="row mb-5 mt-3">
             <div class="col-6">

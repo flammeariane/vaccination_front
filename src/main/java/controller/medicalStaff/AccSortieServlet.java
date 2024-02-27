@@ -36,11 +36,11 @@ public class AccSortieServlet extends HttpServlet {
             PatientListJourBean patientList = medicalUserFacade.validerVaccinationPatientListe(requestData);
             request.setAttribute("patientList", patientList);
 
-            request.getRequestDispatcher("dashboard_acc_sortie.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/dashboard_acc_sortie.jsp").forward(request, response);
             
         } else {
             request.setAttribute("errorMessage", "Problème de connexion ou de récupération des données");
-            request.getRequestDispatcher("login_personnel_medical.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/login_personnel_medical.jsp").forward(request, response);
         }
     }
 

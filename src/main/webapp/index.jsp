@@ -50,12 +50,12 @@
                             <!-- Alignement horizontal des boutons -->
                             <div class="d-flex justify-content-between">
                                 <!-- Bouton pour la page de login des patients -->
-                                <form action="login-patient.jsp" class="me-2">
+                               <form action="showLoginPatient" method="post" class="me-2">
                                     <input type="submit" value="Login Patient" class="btn btn-primary btn-lg" />
                                 </form>
 
                                 <!-- Bouton pour la page de login des professionnels -->
-                                <form action="login-pro.jsp">
+                                  <form action="showLoginPro" method="post">
                                     <input type="submit" value="Login Professionnel" class="btn btn-secondary btn-lg" />
                                 </form>
                             </div>

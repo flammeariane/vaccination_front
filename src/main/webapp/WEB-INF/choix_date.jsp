@@ -4,8 +4,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Espace Patient</title>
-        <%@ include file="common-includes.jsp" %>
-
+        <%@ include file="/WEB-INF/bootstrap.jsp" %>
+        <%@ include file="/WEB-INF/common-includes.jsp" %>
         <style>
             .card-header {
                 background-color: #007bff;
@@ -21,7 +21,7 @@
     </head>
     <body>
 
-        <%@ include file="header.jsp" %>
+        <%@ include file="/WEB-INF/header.jsp" %>
         <div class="container">        
             <div class="row mb-5">
                 <div class="col-6">
@@ -38,17 +38,16 @@
                     </form>
                 </div>
             </div>
-            <h1>veuillez choisir la date de votre second rendez vous  </h1>
+            <h1>veuillez choisir la date de vaccination  </h1>
 
             <%
                 // Récupérer le nom du centre sélectionné de la session
                 String selectedCentre = (String) session.getAttribute("selectedCentreNom");
             %>
 
-
-            <form action="resumeSecond" method="post">
+            <form action="dispatch" method="post">
                 <div class="row">
-                    <c:forEach var="date" items="${secondRendezVous.listInfoAgenda}">
+                    <c:forEach var="date" items="${listInfoAgenda.listInfoAgenda}" varStatus="loop">
                         <c:if test="${date.nbrPlaceRestante > 0}">
 
                             <div class="col-md-4 mb-4">
@@ -72,6 +71,7 @@
                             <p class="text-center">Il n'y a plus de rendez-vous disponible pour ce centre. Veuillez choisir un autre centre.</p>
                         </div>
                     </c:if> 
+
                 </div>
             </form>
     </body>

@@ -29,7 +29,7 @@ public class statistiqueServlet extends HttpServlet {
         StatCentreBeanIn statistiquesData = MembrePersonnelFacade.getStatCentre(centreRequest);
         request.setAttribute("statistiquesData", statistiquesData);
 
-        request.getRequestDispatcher("statistique_centre.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/statistique_centre.jsp").forward(request, response);
 
     }
 }

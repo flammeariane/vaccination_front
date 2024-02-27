@@ -39,12 +39,12 @@ public class PriseRdvChoixDate extends HttpServlet {
             ListDateDispoBean listInfoAgenda = rendezVousFacade.getDateByCenter(centreOut);
             request.setAttribute("listInfoAgenda", listInfoAgenda);
 
-            request.getRequestDispatcher("choix_date.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/choix_date.jsp").forward(request, response);
 
         } else {
             // Rediriger vers la page de connexion si aucun patient n'est en session
             request.setAttribute("errorMessage", "Informations de login incorrectes ou problème de connexion");
-            request.getRequestDispatcher("login-patient.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/login-patient.jsp").forward(request, response);
 
         }
     }

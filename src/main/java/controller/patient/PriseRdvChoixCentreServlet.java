@@ -33,12 +33,12 @@ public class PriseRdvChoixCentreServlet extends HttpServlet {
             CentreInfoBean centres = rendezVousFacade.getCentresNear(requestData);
             request.setAttribute("centres", centres);
 
-            request.getRequestDispatcher("choix_centre.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/choix_centre.jsp").forward(request, response);
 
         } else {
             // Rediriger vers la page de connexion si aucun patient n'est en session
             request.setAttribute("errorMessage", "Informations de login incorrectes ou problème de connexion");
-            request.getRequestDispatcher("login-patient.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/login-patient.jsp").forward(request, response);
         }
     }
 

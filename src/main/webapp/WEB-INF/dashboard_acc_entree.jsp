@@ -4,8 +4,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>dashboard acceuillant</title>
-        <%@ include file="common-includes.jsp" %>
-        <%@ include file="header.jsp" %>
+        <%@ include file="/WEB-INF/common-includes.jsp" %>
+        <%@ include file="/WEB-INF/header.jsp" %>
     </head>
 
 
@@ -75,8 +75,8 @@
                 </div>
             </c:if>
 
-            <%@ include file="footer.jsp" %>
-  
+            <%@ include file="/WEB-INF/footer.jsp" %>
+
 
             <script src="${pageContext.request.contextPath}/static/js/searchByNumeroNational.js"></script>
 

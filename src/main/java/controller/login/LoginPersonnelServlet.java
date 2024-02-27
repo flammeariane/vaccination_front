@@ -27,7 +27,8 @@ public class LoginPersonnelServlet extends HttpServlet {
             personnelFacade.redirectPersonnelBasedOnRole(membrePersonnel, request, response);
         } else {
             request.setAttribute("errorMessage", "Identifiants incorrects ou membre du personnel non trouvé");
-            request.getRequestDispatcher("login-pro.jsp").forward(request, response);
+           
+            request.getRequestDispatcher("/WEB-INF/login-pro.jsp").forward(request, response);
         }
     }
    
