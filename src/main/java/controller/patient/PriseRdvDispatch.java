@@ -25,11 +25,11 @@ public class PriseRdvDispatch extends HttpServlet {
         if (nbrDosesTotal == 1) {
             // Rediriger vers le servlet de résumé
             request.getRequestDispatcher("/resume").forward(request, response);
-            // response.sendRedirect(request.getContextPath() + "/resume");
+         
         } else if (nbrDosesTotal == 2) {
             // Rediriger vers le servlet de choix de la seconde date
             request.getRequestDispatcher("/choixDatesecond").forward(request, response);
-            //response.sendRedirect(request.getContextPath() + "/choixdateSecond");
+           
         }
         }
     }
