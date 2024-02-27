@@ -29,7 +29,6 @@ public class AccEntreeServlet extends HttpServlet {
         if (membrePersonnel != null) {
             Map<String, Object> requestData = new HashMap<>();
          
-
             requestData.put("role", membrePersonnel.getRole());
             requestData.put("adresseMail", membrePersonnel.getAdresseMail());
             requestData.put("password",  membrePersonnel.getPassword());
@@ -40,7 +39,6 @@ public class AccEntreeServlet extends HttpServlet {
             request.getRequestDispatcher("dashboard_acc_entree.jsp").forward(request, response);
             
         } else {
-            // Gestion de l'erreur
             request.setAttribute("errorMessage", "Problème de connexion ou de récupération des données");
             request.getRequestDispatcher("login_personnel_medical.jsp").forward(request, response);
         }

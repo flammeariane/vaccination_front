@@ -17,11 +17,9 @@ import modele.MembrePersonnel;
 import static utils.Roles.RESPONSABLE_CENTRE;
 import static utils.Roles.RESPONSABLE_GENERAL;
 
-
 public class ResponsableServlet extends HttpServlet {
 
     private MembrePersonnelFacade MembrePersonnelFacade = MembrePersonnelFacadeImpl.INSTANCE;
-
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
@@ -46,15 +44,6 @@ public class ResponsableServlet extends HttpServlet {
     }
 }
 // USECASE 5: Déterminer les pools de professionnels par centre => responbale general
-// TODO Fahdi getListCentres
-// TODO Fahdi getListMenbrePersonnel
-// TODO Fahdi SavePoolPersonnelcentre
-
 // Use case 6 : Gérer le planning des pools de professionnels =>responsable de centre
-// TODO Fahdi getPoolBycenter
-// TODO Fahdi getHoraire
-// TODO Fahdi Save horaire for center
-   
-  
 
 

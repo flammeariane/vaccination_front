@@ -5,8 +5,6 @@
             30
         </session-timeout>
     </session-config>
-         
-                            
     <!-- Page d'accueil par défaut -->
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
@@ -47,9 +45,6 @@
         <servlet-name>PatientServlet</servlet-name>
         <url-pattern>/patientServlet</url-pattern>
     </servlet-mapping>
-    
-    
-    
     <!-- Configuration pour le dashboard medecin -->
     <servlet>
         <servlet-name>MedicalPersonnelServlet</servlet-name>
@@ -59,8 +54,7 @@
         <servlet-name>MedicalPersonnelServlet</servlet-name>
         <url-pattern>/medicalPersonnelServlet</url-pattern>
     </servlet-mapping>
-    
-     <servlet>
+    <servlet>
         <servlet-name>IncidentServlet</servlet-name>
         <servlet-class>controller.medicalStaff.IncidentServlet</servlet-class>
     </servlet>
@@ -68,14 +62,6 @@
         <servlet-name>IncidentServlet</servlet-name>
         <url-pattern>/incidentServlet</url-pattern>
     </servlet-mapping>
-    
-    
-    
-    
-    
-    
-    
-    
     <!-- Configuration pour le dashboard responsable de centre -->
     <servlet>
         <servlet-name>statistiqueServlet</servlet-name>
@@ -85,8 +71,7 @@
         <servlet-name>statistiqueServlet</servlet-name>
         <url-pattern>/statistique</url-pattern>
     </servlet-mapping>
-    
-       <servlet>
+    <servlet>
         <servlet-name>ResponsableServlet</servlet-name>
         <servlet-class>controller.responsables.ResponsableServlet</servlet-class>
     </servlet>
@@ -94,8 +79,6 @@
         <servlet-name>ResponsableServlet</servlet-name>
         <url-pattern>/responsableServlet</url-pattern>
     </servlet-mapping>
-    
-    
     <!-- Servlet pour la prise de rendez depuis le dashboard patient  -->
     <servlet>
         <servlet-name>PriseRdvChoixCentreServlet</servlet-name>
@@ -171,14 +154,6 @@
         <url-pattern>/accSortieServlet</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>InfirmierServlet</servlet-name>
-        <servlet-class>controller.medicalStaff.InfirmierServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>InfirmierServlet</servlet-name>
-        <url-pattern>/infirmierServlet</url-pattern>
-    </servlet-mapping>
-    <servlet>
         <servlet-name>MedecinServlet</servlet-name>
         <servlet-class>controller.medicalStaff.MedecinServlet</servlet-class>
     </servlet>
@@ -194,9 +169,7 @@
         <servlet-name>ConfirmPresencePatientServlet</servlet-name>
         <url-pattern>/confirmPresencePatientServlet</url-pattern>
     </servlet-mapping>
-    
-    
-      <servlet>
+    <servlet>
         <servlet-name>ConfirmVaccinationPatientServlet</servlet-name>
         <servlet-class>controller.medicalStaff.ConfirmVaccinationPatientServlet</servlet-class>
     </servlet>
@@ -205,6 +178,3 @@
         <url-pattern>/confirmVaccinationPatientServlet</url-pattern>
     </servlet-mapping>
 </web-app>
-
-
-

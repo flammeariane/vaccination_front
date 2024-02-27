@@ -21,14 +21,10 @@ public class statistiqueServlet extends HttpServlet {
         HttpSession session = request.getSession();
         MembrePersonnel membrePersonnel = (MembrePersonnel) session.getAttribute("membrePersonnel");
 
-        //String nomCentre = request.getParameter("nomCentre");
-        //int codePostal = Integer.parseInt(request.getParameter("codePostal"));
-        //String role = request.getParameter("role");
-
         StatCentreBeanOut centreRequest = new StatCentreBeanOut();
         centreRequest.setCodePostal(1000);
-        centreRequest.setNomCentre("Family Care");
-        centreRequest.setRole("Responsable general");
+        centreRequest.setNomCentre(request.getParameter("nomCentre"));
+        centreRequest.setRole(request.getParameter("role"));
 
         StatCentreBeanIn statistiquesData = MembrePersonnelFacade.getStatCentre(centreRequest);
         request.setAttribute("statistiquesData", statistiquesData);
@@ -39,5 +35,4 @@ public class statistiqueServlet extends HttpServlet {
 }
 
 // Use case n°7 : Consulter les statistiques par centre => responsable general
-//  getListCentres
-    // Le système affiche, pour le centre un graphique avec le taux d absence et presence
+

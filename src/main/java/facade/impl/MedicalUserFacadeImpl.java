@@ -69,8 +69,7 @@ public class MedicalUserFacadeImpl implements MedicalUserFacade {
         try (CloseableHttpResponse httpResponse = httpClient.execute(postRequest)) {
             // Vérifiez le code de statut de la réponse
             if (httpResponse.getStatusLine().getStatusCode() == 200) {
-                // Si vous avez besoin de traiter la réponse, faites-le ici
-                // Comme vous avez mentionné, aucun mappage de réponse n'est nécessaire
+             
             } else {
                 // Gérer les cas d'erreur, par exemple, en loggant ou en affichant un message d'erreur
             }
@@ -92,8 +91,7 @@ public class MedicalUserFacadeImpl implements MedicalUserFacade {
         try (CloseableHttpResponse httpResponse = httpClient.execute(postRequest)) {
             // Vérifiez le code de statut de la réponse
             if (httpResponse.getStatusLine().getStatusCode() == 200) {
-                // Si vous avez besoin de traiter la réponse, faites-le ici
-                // Comme vous avez mentionné, aucun mappage de réponse n'est nécessaire
+                
             } else {
                 // Gérer les cas d'erreur, par exemple, en loggant ou en affichant un message d'erreur
             }

@@ -1,10 +1,11 @@
 
-<!DOCTYPE html>
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Espace Patient</title>
         <%@ include file="common-includes.jsp" %>
+
         <%@ page import="utils.DateUtils" %>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -106,7 +107,7 @@
                 </div>
             </div>
         </div>
-    </div>
+   
     <%@ include file="footer.jsp" %>
 
      <script src="${pageContext.request.contextPath}/static/js/dashboard_patient.js"></script>

@@ -11,7 +11,7 @@ public class CentreInfo {
     private String heureFermeture;
     private String heureOuverture;
 
- // Constructeur par défaut
+
     public CentreInfo() {
     }
 

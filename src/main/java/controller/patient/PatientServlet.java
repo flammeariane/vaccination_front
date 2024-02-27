@@ -10,7 +10,7 @@ import javax.servlet.http.*;
 import java.io.IOException;
 
 public class PatientServlet extends HttpServlet {
-    
+
     private RendezVousFacade rendezVousFacade = RendezVousFacadeImpl.INSTANCE;
 
     @Override
@@ -18,9 +18,7 @@ public class PatientServlet extends HttpServlet {
         HttpSession session = request.getSession();
         Patient patient = (Patient) session.getAttribute("patient");
 
-// Informations nécessaires pour l'appel API
         if (patient != null) {
-
             // Utilisez l'objet patient pour récupérer les informations nécessaires
             String numeroNational = patient.getNumeroNational();
 

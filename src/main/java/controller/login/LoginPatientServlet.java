@@ -3,8 +3,6 @@ package controller.login;
 import facade.UserOperationsFacade;
 import facade.impl.UserOperationsFacadeImpl;
 import modele.Patient;
-
-
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

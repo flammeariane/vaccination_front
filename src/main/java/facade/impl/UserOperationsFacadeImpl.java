@@ -23,26 +23,9 @@ import utils.HttpClientSingleton;
 public class UserOperationsFacadeImpl implements UserOperationsFacade {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
-
     public static UserOperationsFacade INSTANCE = new UserOperationsFacadeImpl();
 
     private UserOperationsFacadeImpl() {
-    }
-
-    @Override
-    public void logoutUser(HttpSession session, HttpServletResponse response) throws IOException {
-        if (session != null) {
-            String userType = (String) session.getAttribute("userType");
-            session.invalidate();
-
-            if ("patient".equals(userType)) {
-                response.sendRedirect("login-patient.jsp");
-            } else {
-                response.sendRedirect("login-pro.jsp");
-            }
-        } else {
-            response.sendRedirect("index.jsp");
-        }
     }
 
     public Patient loginPatient(String numeroNational, String codeSecret) throws IOException {
@@ -110,6 +93,22 @@ public class UserOperationsFacadeImpl implements UserOperationsFacade {
                 // Gérer les cas où le rôle n'est pas reconnu
                 response.sendRedirect("login-pro.jsp");
                 break;
+        }
+    }
+    
+       @Override
+    public void logoutUser(HttpSession session, HttpServletResponse response) throws IOException {
+        if (session != null) {
+            String userType = (String) session.getAttribute("userType");
+            session.invalidate();
+
+            if ("patient".equals(userType)) {
+                response.sendRedirect("login-patient.jsp");
+            } else {
+                response.sendRedirect("login-pro.jsp");
+            }
+        } else {
+            response.sendRedirect("index.jsp");
         }
     }
 }

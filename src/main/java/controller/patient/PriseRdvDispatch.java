@@ -16,16 +16,11 @@ public class PriseRdvDispatch extends HttpServlet {
 
        String selectedDateIndex = request.getParameter("selectedDate");
     
-         
-       // String selectedIndex = request.getParameter("selectedDate");
-        //  int selectedDateIndex = Integer.parseInt(selectedDateIndexStr);
-            
-
+    
         if (selectedDateIndex != null) {
           int index = Integer.parseInt(selectedDateIndex);
           session.setAttribute("selectedDateAgenda", request.getParameter("selectedDateAgenda_" + index));
         
-
 
         if (nbrDosesTotal == 1) {
             // Rediriger vers le servlet de résumé

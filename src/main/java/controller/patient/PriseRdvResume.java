@@ -21,7 +21,7 @@ public class PriseRdvResume extends HttpServlet {
         Patient patient = (Patient) session.getAttribute("patient");
         SaveRendezVousBeanOut rendezVousBeanOut = new SaveRendezVousBeanOut();
 
-        // rendezVousBeanOut.setNomCentre(session.getAttribute(string));
+ 
         rendezVousBeanOut.setNomCentre((String) session.getAttribute("selectedCentreNom"));
         rendezVousBeanOut.setNomVaccin((String) session.getAttribute("selectedVaccinNom"));
         rendezVousBeanOut.setDateRdv((String) session.getAttribute("selectedDateAgenda"));

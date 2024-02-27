@@ -17,8 +17,7 @@ $(document).ready(function () {
         checkDatePickers();
     });
 
-    // Appel initial au cas où les valeurs sont pré-remplies (utile si vous avez une logique de pré-remplissage)
-    checkDatePickers();
+     checkDatePickers();
 
     $('#datetimepicker1').datetimepicker({
         format: 'YYYY-MM-DD HH:mm',
@@ -44,7 +43,7 @@ $(document).ready(function () {
                 }],
             roleCentre: "Responsable de centre",
             listMembrePersonnelResp: [{
-                    // Remplacer ces valeurs par les entrées de formulaire réelles si nécessaire
+                   
                     nomFamille: "Romain",
                     prenom: "Alexandre",
                     role: "Responsable de centre",
@@ -74,14 +73,14 @@ $(document).ready(function () {
                     });
                 });
 
-                // Mettre à jour le conteneur de réponse avec le style désiré et l'afficher
+                // Mettre à jour le conteneur 
                 $("#responseContainer").html(message).show();
 
-                // Fermer le modal si nécessaire
+            
                 $("#horaireModal").modal('hide');
             },
             error: function (xhr, status, error) {
-                // Gérer les erreurs ici
+             
                 console.error("Erreur lors de l'envoi: ", error);
             }
         });

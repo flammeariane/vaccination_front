@@ -41,7 +41,7 @@ public class PriseRdvChoixVaccin extends HttpServlet {
             centreOut.setCodePostal(request.getParameter("selectedCentreCodePostal_" + index));
             centreOut.setNumero(request.getParameter("selectedCentreNumero_" + index));
 
-            // Stockez l'objet centreOut dans la session
+         
             session.setAttribute("selectedCentreOut", centreOut);
 
             VaccinInfoBean vaccins = rendezVousFacade.getVaccineList(patient);

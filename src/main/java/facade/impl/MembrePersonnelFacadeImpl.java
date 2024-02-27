@@ -9,20 +9,12 @@ import bean.ListMembreSonHoraireBeanIn;
 import bean.PlanningBeanOut;
 import bean.StatCentreBeanIn;
 import bean.StatCentreBeanOut;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import facade.MembrePersonnelFacade;
-
 import java.io.IOException;
-
 import modele.MembrePersonnel;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.util.EntityUtils;
 import utils.ApiUrls;
 import utils.HttpClient;
-import utils.HttpClientSingleton;
 
 public class MembrePersonnelFacadeImpl implements MembrePersonnelFacade {
 

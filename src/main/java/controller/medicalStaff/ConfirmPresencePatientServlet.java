@@ -38,8 +38,7 @@ public class ConfirmPresencePatientServlet extends HttpServlet {
 
                        
         } else {
-            // Gérer le cas où les données nécessaires ne sont pas disponibles
-            response.sendRedirect("login.jsp"); // Redirection vers la page de connexion ou une autre page appropriée
+            response.sendRedirect("login.jsp"); 
         }
     }
     

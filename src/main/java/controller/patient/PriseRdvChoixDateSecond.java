@@ -5,7 +5,6 @@ import bean.SaveRendezVousBeanOut;
 import facade.RendezVousFacade;
 import facade.impl.RendezVousFacadeImpl;
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
@@ -40,7 +39,7 @@ public class PriseRdvChoixDateSecond extends HttpServlet {
         rendezVousBeanOut.setStatutConfirmer("oui");
         rendezVousBeanOut.setNumeroNational(patient.getNumeroNational());
         rendezVousBeanOut.setNomFamille(patient.getNomFamille());
-        rendezVousBeanOut.setPrenom(patient.getPrenom()); // Correction pour utiliser getPrenom au lieu de getNomFamille pour le prénom
+        rendezVousBeanOut.setPrenom(patient.getPrenom()); 
 
         ListDateDispoBean secondRendezVous = rendezVousFacade.getAgendaSecondRendezVous(rendezVousBeanOut);
         request.setAttribute("secondRendezVous", secondRendezVous);

@@ -6,13 +6,13 @@
 
 <!DOCTYPE html>
 <html>
-    <head>
+    
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Tableau de Bord du Responsable</title>
         <%@ include file="header.jsp" %>
         <%@ include file="common-includes.jsp" %>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    </head>
+    
     <body>
         <div class="container mt-4">
             <div class="d-flex justify-content-end align-items-center mb-3">
@@ -44,7 +44,7 @@
             ObjectMapper objectMapper = new ObjectMapper();
             StatCentreBeanIn statistiquesData = (StatCentreBeanIn) request.getAttribute("statistiquesData");
 
-            String dataJson = "{}"; // Initialisez avec une valeur par défaut pour éviter les null
+            String dataJson = "{}"; /* la valeur par défaut permet d éviter les null*/
             try {
                 dataJson = objectMapper.writeValueAsString(statistiquesData.getTxPresAbsePersonnelJour());
             } catch (Exception e) {

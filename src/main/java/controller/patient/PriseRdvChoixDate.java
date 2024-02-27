@@ -14,12 +14,12 @@ import javax.servlet.http.HttpSession;
 public class PriseRdvChoixDate extends HttpServlet {
      private RendezVousFacade rendezVousFacade = RendezVousFacadeImpl.INSTANCE;
 
+     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
 
         // Récupérez l'objet centreOut de la session
         CentreInfoBeanOut centreOut = (CentreInfoBeanOut) request.getSession().getAttribute("selectedCentreOut");
-
 
         // Récupérer l'index du centre sélectionné depuis la requête
         String selectedVaccinIndex = request.getParameter("selectedVaccin");
