@@ -13,12 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import modele.MembrePersonnel;
 import modele.Patient;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.util.EntityUtils;
 import utils.ApiUrls;
-import utils.HttpClientSingleton;
+import utils.HttpClient;
 
 public class UserOperationsFacadeImpl implements UserOperationsFacade {
 
@@ -28,46 +24,25 @@ public class UserOperationsFacadeImpl implements UserOperationsFacade {
     private UserOperationsFacadeImpl() {
     }
 
+    @Override
     public Patient loginPatient(String numeroNational, String codeSecret) throws IOException {
         Map<String, String> loginData = new HashMap<>();
         loginData.put("numeroNational", numeroNational);
         loginData.put("codeSecret", codeSecret);
 
-        String requestBody = objectMapper.writeValueAsString(loginData);
-
-        HttpPost postRequest = new HttpPost(ApiUrls.LOGIN_PATIENT);
-        postRequest.setEntity(new StringEntity(requestBody, "UTF-8"));
-        postRequest.setHeader("Content-Type", "application/json");
-
-        try (CloseableHttpResponse httpResponse = HttpClientSingleton.getInstance().execute(postRequest)) {
-            if (httpResponse.getStatusLine().getStatusCode() == 200) {
-                String responseBody = EntityUtils.toString(httpResponse.getEntity(), "UTF-8");
-                return objectMapper.readValue(responseBody, Patient.class);
-            }
-        }
-        return null;
+        return HttpClient.post(loginData, ApiUrls.LOGIN_PATIENT, Patient.class);
     }
 
+    @Override
     public MembrePersonnel loginPersonnel(String adresseMail, String password) throws IOException {
         Map<String, String> loginData = new HashMap<>();
         loginData.put("adresseMail", adresseMail);
         loginData.put("password", password);
 
-        String requestBody = objectMapper.writeValueAsString(loginData);
-
-        HttpPost postRequest = new HttpPost(ApiUrls.LOGIN_PERSONNEL);
-        postRequest.setEntity(new StringEntity(requestBody, "UTF-8"));
-        postRequest.setHeader("Content-Type", "application/json");
-
-        try (CloseableHttpResponse httpResponse = HttpClientSingleton.getInstance().execute(postRequest)) {
-            if (httpResponse.getStatusLine().getStatusCode() == 200) {
-                String responseBody = EntityUtils.toString(httpResponse.getEntity(), "UTF-8");
-                return objectMapper.readValue(responseBody, MembrePersonnel.class);
-            }
-        }
-        return null;
+        return HttpClient.post(loginData, ApiUrls.LOGIN_PERSONNEL, MembrePersonnel.class);
     }
 
+  
 
     @Override
     public void redirectPersonnelBasedOnRole(MembrePersonnel membrePersonnel, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -95,8 +70,8 @@ public class UserOperationsFacadeImpl implements UserOperationsFacade {
                 break;
         }
     }
-    
-       @Override
+
+    @Override
     public void logoutUser(HttpSession session, HttpServletResponse response) throws IOException {
         if (session != null) {
             String userType = (String) session.getAttribute("userType");
@@ -111,4 +86,5 @@ public class UserOperationsFacadeImpl implements UserOperationsFacade {
             response.sendRedirect("index.jsp");
         }
     }
+
 }

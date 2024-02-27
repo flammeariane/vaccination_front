@@ -9,7 +9,6 @@ import bean.ListMembreSonHoraireBeanIn;
 import bean.PlanningBeanOut;
 import bean.StatCentreBeanIn;
 import bean.StatCentreBeanOut;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import facade.MembrePersonnelFacade;
 import java.io.IOException;
 import modele.MembrePersonnel;
@@ -21,7 +20,6 @@ public class MembrePersonnelFacadeImpl implements MembrePersonnelFacade {
     private MembrePersonnelFacadeImpl() {
     }
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
 
     public static MembrePersonnelFacade INSTANCE = new MembrePersonnelFacadeImpl();
 
