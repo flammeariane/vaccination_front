@@ -5,7 +5,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Espace Patient</title>
-      <%@ include file="/WEB-INF/common-includes.jsp" %>
+        <%@ include file="/WEB-INF/common-includes.jsp" %>
     </head>
     <body>
 
@@ -21,17 +21,30 @@
 
                         <h5 class="text-center mb-4"> <i class="fas fa-check-circle" style="color: green;"></i> Vos rendez-vous sont bien confirmé !  </h5>     
 
+                        <p>1ER</p>
+
+                        <!-- Récupérer la variable depuis la session HTTP -->
+                        <% SaveRendezVousBeanIn rendezVousResume = (SaveRendezVousBeanIn) session.getAttribute("rendezVousResume");%>
+
+                        <!-- Afficher la valeur de dateRdv -->
+                        <p>Valeur de la variable de session : <%= rendezVousResume.getDateRdv()%></p>
+
+
+
+
+                        <p>SEECOND</p>
 
                         <c:if test="${not empty rendezVousResumeSecond.listRecapInfoRendezVous}">
-                          
+
                             <c:forEach var="rendezVous" items="${rendezVousResumeSecond.listRecapInfoRendezVous}">
                                 <p>Date du rendez-vous: <strong>${rendezVous.dateRdv}</strong></p>
                                 <p>Vaccin: <strong>${rendezVous.nomVaccin}</strong></p>
                                 <p>Centre de vaccination: <strong>${rendezVous.nomCentre}</strong></p>
-                                <p>Numï¿½ro de dose: <strong>${rendezVous.numeroDose}</strong></p>
+                                <p>Numéro de dose: <strong>${rendezVous.numeroDose}</strong></p>
                                 <p>Confirmation par email: <strong>${rendezVous.confrmationParEmail ? 'Oui' : 'Non'}</strong></p>
                                 <p>Email de confirmation: <strong>${rendezVous.emailConfirmation}</strong></p>
                             </c:forEach>
+
                         </c:if>
 
                         <div class="row mt-3 ml-1">

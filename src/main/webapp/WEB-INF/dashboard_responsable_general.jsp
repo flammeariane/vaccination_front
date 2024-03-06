@@ -56,8 +56,9 @@
                     </c:forEach>
                     </tbody>
                 </table>
+                    </form>
+
         </div>     
-    </form>
     <%@ include file="/WEB-INF/footer.jsp" %>
 
 </body>

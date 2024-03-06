@@ -1,6 +1,5 @@
 package facade.impl;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import facade.UserOperationsFacade;
 
 import javax.servlet.http.HttpServletResponse;
@@ -18,7 +17,6 @@ import utils.HttpClient;
 
 public class UserOperationsFacadeImpl implements UserOperationsFacade {
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
     public static UserOperationsFacade INSTANCE = new UserOperationsFacadeImpl();
 
     private UserOperationsFacadeImpl() {

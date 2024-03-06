@@ -21,6 +21,7 @@ public class PriseRdvResumeSecond extends HttpServlet {
      protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
          Patient patient = (Patient) session.getAttribute("patient");
+         session.getAttribute("rendezVousResume");
          
   
         SaveRendezVousSecondBeanOut rendezVousSecondBeanOut = new SaveRendezVousSecondBeanOut();

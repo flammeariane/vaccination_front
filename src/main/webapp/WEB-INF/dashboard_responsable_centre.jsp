@@ -52,8 +52,9 @@
                             </c:forEach>
                         </tbody>
                     </table>
+                      </form>
             </div>     
-        </form>
+      
 
 
 
