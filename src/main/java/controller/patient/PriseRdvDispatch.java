@@ -26,7 +26,7 @@ public class PriseRdvDispatch extends HttpServlet {
         String selectedVaccinNbrDoseTotal = (String) session.getAttribute("selectedVaccinNbrDoseTotal");
         int nbrDosesTotal = Integer.parseInt(selectedVaccinNbrDoseTotal);
 
-        String selectedDateIndex = request.getParameter("selectedDate");
+        String selectedDate = request.getParameter("selectedDate");
 
         rendezVousBeanOut.setNomCentre((String) session.getAttribute("selectedCentreNom"));
         rendezVousBeanOut.setNomVaccin((String) session.getAttribute("selectedVaccinNom"));
@@ -37,29 +37,17 @@ public class PriseRdvDispatch extends HttpServlet {
         rendezVousBeanOut.setNumeroNational(patient.getNumeroNational());
         rendezVousBeanOut.setNomFamille(patient.getNomFamille());
         rendezVousBeanOut.setPrenom(patient.getNomFamille());
-
-  
-
-        if (selectedDateIndex != null) {
-            // Construisez la clé pour récupérer la date sélectionnée à partir de la session
-            String dateKey = "selectedDateAgenda_" + selectedDateIndex;
-            String dateFromSession = (String) session.getAttribute(dateKey);
-
-            if (dateFromSession != null) {
-                DateTimeFormatter formatterInput = DateTimeFormatter.ofPattern("EEE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
-                ZonedDateTime dateTime = ZonedDateTime.parse(dateFromSession, formatterInput);
-                String formattedDate = dateTime.toLocalDateTime().toString(); // Convertit en format ISO_LOCAL_DATE_TIME
-                rendezVousBeanOut.setDateRdv(formattedDate);
-
-                // Le reste de votre logique...
-            } else {
-                // Gérez le cas où la date sélectionnée n'est pas trouvée ou est null
-            }
-        }
+        
+        DateTimeFormatter formatterInput = DateTimeFormatter.ofPattern("EEE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
+        ZonedDateTime dateTime = ZonedDateTime.parse(selectedDate, formatterInput);
+        String formattedDate = dateTime.toLocalDateTime().toString(); // Convertit en format ISO_LOCAL_DATE_TIME
+        rendezVousBeanOut.setDateRdv(formattedDate);
 
         // Enregistrer les informations de rendez-vous
         SaveRendezVousBeanIn rendezVousResume = rendezVousFacade.saveRendezVous(rendezVousBeanOut);
         session.setAttribute("rendezVousResume", rendezVousResume);
+
+       
 
         // Rediriger vers le servlet approprié en fonction du nombre de doses total
         if (nbrDosesTotal == 1) {
@@ -67,6 +55,7 @@ public class PriseRdvDispatch extends HttpServlet {
             request.getRequestDispatcher("/WEB-INF/resume.jsp").forward(request, response);
         } else if (nbrDosesTotal == 2) {
             // Rediriger vers le servlet de choix de la seconde date
+            request.setAttribute("firstRdvDate", formattedDate);
             request.getRequestDispatcher("/choixDatesecond").forward(request, response);
         }
     }

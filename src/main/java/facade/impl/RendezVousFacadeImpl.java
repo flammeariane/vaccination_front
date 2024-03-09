@@ -44,7 +44,7 @@ public class RendezVousFacadeImpl implements RendezVousFacade {
 
     @Override
     public ListDateDispoBean getAgendaSecondRendezVous(SaveRendezVousBeanOut rendezVousBeanOut) throws IOException {
-        return HttpClient.post(rendezVousBeanOut, ApiUrls.RDV_SAVE, ListDateDispoBean.class);
+        return HttpClient.post(rendezVousBeanOut, ApiUrls.RDV_AFFICHAGE_AGENDA_2, ListDateDispoBean.class);
 
     }
 

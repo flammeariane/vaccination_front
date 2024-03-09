@@ -45,21 +45,24 @@
                 String selectedCentre = (String) session.getAttribute("selectedCentreNom");
             %>
 
-            <form action="dispatch" method="post">
+         
                 <div class="row">
                     <c:forEach var="date" items="${listInfoAgenda.listInfoAgenda}" varStatus="loop">
                         <c:if test="${date.nbrPlaceRestante > 0}">
 
                             <div class="col-md-4 mb-4">
                                 <div class="card">
+                                 
                                     <div class="card-header text-info">Centre de Vaccination: <%= selectedCentre%></div>
                                     <div class="card-body">
-                                        <input type="hidden" name="selectedDateAgenda_${loop.index}" value="${date.dateAgenda}">
+                                           <form action="dispatch" method="post">
+                                               <input type="hidden" name="selectedDate" value="${date.dateAgenda}">
                                         <p> <fmt:formatDate value="${date.dateAgenda}" pattern="EEEE d MMMM yyyy HH:mm" /></p>
                                         <p>nombre de place  :   ${date.nbrMaxPlace}</p>   
-                                        <button class="btn btn-custom mt-2" type="submit" name="selectedDate" value="${loop.index}">
+                                        <button class="btn btn-custom mt-2" type="submit"  >
                                             Choisir cette date
                                         </button>
+                                                </form>
                                     </div>
                                 </div>
                             </div>
@@ -73,6 +76,6 @@
                     </c:if> 
 
                 </div>
-            </form>
+        
     </body>
 </html>
