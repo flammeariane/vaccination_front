@@ -71,6 +71,11 @@ public class UserOperationsFacadeImpl implements UserOperationsFacade {
     }
 
 
+    @Override
+    public ListDateDispoBean saveRdvAndGetAgendaSecondRendezVous(SaveRendezVousBeanOut rendezVousBeanOut) throws IOException {
+        return HttpClient.post(rendezVousBeanOut, ApiUrls.RDV_SAVE, ListDateDispoBean.class);
+
+
     public void logoutUser(HttpServletRequest request ,HttpSession session, HttpServletResponse response) throws IOException {
         if (session != null) {
             String userType = (String) session.getAttribute("userType");
