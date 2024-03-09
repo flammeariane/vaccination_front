@@ -1,5 +1,6 @@
 package controller.patient;
 
+import bean.ListDateDispoBean;
 import bean.SaveRendezVousBeanIn;
 import bean.SaveRendezVousBeanOut;
 import facade.RendezVousFacade;
@@ -26,8 +27,6 @@ public class PriseRdvDispatch extends HttpServlet {
         String selectedVaccinNbrDoseTotal = (String) session.getAttribute("selectedVaccinNbrDoseTotal");
         int nbrDosesTotal = Integer.parseInt(selectedVaccinNbrDoseTotal);
 
-        String selectedDate = request.getParameter("selectedDate");
-
         rendezVousBeanOut.setNomCentre((String) session.getAttribute("selectedCentreNom"));
         rendezVousBeanOut.setNomVaccin((String) session.getAttribute("selectedVaccinNom"));
 
@@ -37,26 +36,28 @@ public class PriseRdvDispatch extends HttpServlet {
         rendezVousBeanOut.setNumeroNational(patient.getNumeroNational());
         rendezVousBeanOut.setNomFamille(patient.getNomFamille());
         rendezVousBeanOut.setPrenom(patient.getNomFamille());
-        
+
+        String selectedDate = request.getParameter("selectedDate");
+
         DateTimeFormatter formatterInput = DateTimeFormatter.ofPattern("EEE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
         ZonedDateTime dateTime = ZonedDateTime.parse(selectedDate, formatterInput);
         String formattedDate = dateTime.toLocalDateTime().toString(); // Convertit en format ISO_LOCAL_DATE_TIME
+
         rendezVousBeanOut.setDateRdv(formattedDate);
-
-        // Enregistrer les informations de rendez-vous
-        SaveRendezVousBeanIn rendezVousResume = rendezVousFacade.saveRendezVous(rendezVousBeanOut);
-        session.setAttribute("rendezVousResume", rendezVousResume);
-
-       
 
         // Rediriger vers le servlet approprié en fonction du nombre de doses total
         if (nbrDosesTotal == 1) {
+            // Enregistrer les informations de rendez-vous
+            SaveRendezVousBeanIn rendezVousResume = rendezVousFacade.saveRendezVous(rendezVousBeanOut);
+            session.setAttribute("rendezVousResume", rendezVousResume);
             // Rediriger vers le servlet de résumé
             request.getRequestDispatcher("/WEB-INF/resume.jsp").forward(request, response);
         } else if (nbrDosesTotal == 2) {
+            ListDateDispoBean listDateDispoBean = rendezVousFacade.saveRdvAndGetAgendaSecondRendezVous(rendezVousBeanOut);
+            session.setAttribute("firstRdv" , rendezVousBeanOut);
+            request.setAttribute("secondRendezVous", listDateDispoBean);
             // Rediriger vers le servlet de choix de la seconde date
-            request.setAttribute("firstRdvDate", formattedDate);
-            request.getRequestDispatcher("/choixDatesecond").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/choix_date_second.jsp").forward(request, response);
         }
     }
 }

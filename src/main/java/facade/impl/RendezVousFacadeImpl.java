@@ -1,57 +1,93 @@
 package facade.impl;
 
-import facade.RendezVousFacade;
-import bean.*;
+import facade.UserOperationsFacade;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+
+import modele.MembrePersonnel;
 import modele.Patient;
 import utils.ApiUrls;
 import utils.HttpClient;
 
-public class RendezVousFacadeImpl implements RendezVousFacade {
+public class UserOperationsFacadeImpl implements UserOperationsFacade {
 
+    public static UserOperationsFacade INSTANCE = new UserOperationsFacadeImpl();
 
-    public static RendezVousFacade INSTANCE = new RendezVousFacadeImpl();
-
-    private RendezVousFacadeImpl() {
+    private UserOperationsFacadeImpl() {
     }
 
     @Override
-    public VaccinationHistoryBean getVaccinationHistory(String numeroNational) throws IOException {
-        Map<String, String> payload = new HashMap<>();
-        payload.put("numeroNational", numeroNational);
-        return HttpClient.post(payload, ApiUrls.RDV_CONSULTATION, VaccinationHistoryBean.class);
+    public Patient loginPatient(String numeroNational, String codeSecret) throws IOException {
+        Map<String, String> loginData = new HashMap<>();
+        loginData.put("numeroNational", numeroNational);
+        loginData.put("codeSecret", codeSecret);
+
+        return HttpClient.post(loginData, ApiUrls.LOGIN_PATIENT, Patient.class);
     }
 
     @Override
-    public CentreInfoBean getCentresNear(Map<String, Object> requestData) throws IOException {
-        return HttpClient.post(requestData, ApiUrls.RDV_INFO, CentreInfoBean.class);
+    public MembrePersonnel loginPersonnel(String adresseMail, String password) throws IOException {
+        Map<String, String> loginData = new HashMap<>();
+        loginData.put("adresseMail", adresseMail);
+        loginData.put("password", password);
+
+        return HttpClient.post(loginData, ApiUrls.LOGIN_PERSONNEL, MembrePersonnel.class);
     }
 
-    public ListDateDispoBean getDateByCenter(CentreInfoBeanOut centreOut) throws IOException {
-        return HttpClient.post(centreOut, ApiUrls.RDV_AFFICHAGE_AGENDA, ListDateDispoBean.class);
-    }
-
-    public VaccinInfoBean getVaccineList(Patient patient) throws IOException {
-        return HttpClient.post(patient, ApiUrls.RDV_LISTE_VACCIN, VaccinInfoBean.class);
-    }
-
-    public SaveRendezVousSecondBeanIn saveRendezVousSecond(SaveRendezVousSecondBeanOut rendezVousSecondBeanOut) throws IOException {
-        return HttpClient.post(rendezVousSecondBeanOut, ApiUrls.RDV_SAVE_SECOND, SaveRendezVousSecondBeanIn.class);
-    }
+  
 
     @Override
-    public ListDateDispoBean getAgendaSecondRendezVous(SaveRendezVousBeanOut rendezVousBeanOut) throws IOException {
-        return HttpClient.post(rendezVousBeanOut, ApiUrls.RDV_AFFICHAGE_AGENDA_2, ListDateDispoBean.class);
-
+    public void redirectPersonnelBasedOnRole(MembrePersonnel membrePersonnel, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        // Redirection basée sur le rôle
+        switch (membrePersonnel.getRole()) {
+            case "Accueillant en entree":
+                request.getRequestDispatcher("accEntreServlet").forward(request, response);
+                break;
+            case "Accueillant de sortie":
+                request.getRequestDispatcher("accSortieServlet").forward(request, response);
+                break;
+            case "Infirmier":
+                request.getRequestDispatcher("infirmierServlet").forward(request, response);
+                break;
+            case "Medecin":
+                request.getRequestDispatcher("medecinServlet").forward(request, response);
+                break;
+            case "Responsable de centre":
+            case "Responsable general":
+                request.getRequestDispatcher("responsableServlet").forward(request, response);
+                break;
+            default:
+                // Gérer les cas où le rôle n'est pas reconnu
+                request.getRequestDispatcher("/WEB-INF/login-pro.jsp").forward(request, response);
+               
+                break;
+        }
     }
 
-    @Override
-    public SaveRendezVousBeanIn saveRendezVous(SaveRendezVousBeanOut rendezVousBeanOut) throws IOException {
-        return HttpClient.post(rendezVousBeanOut, ApiUrls.RDV_SAVE, SaveRendezVousBeanIn.class);
 
+    public void logoutUser(HttpServletRequest request ,HttpSession session, HttpServletResponse response) throws IOException {
+        if (session != null) {
+            String userType = (String) session.getAttribute("userType");
+            session.invalidate();
+
+            if ("patient".equals(userType)) {
+               request.getRequestDispatcher("/WEB-INF/login-patient.jsp");
+            } else {
+                request.getRequestDispatcher("/WEB-INF/login-pro.jsp");
+            }
+        } else {
+            request.getRequestDispatcher("/WEB-INF/index.jsp");
+        }
     }
+
+
+
+  
 
 }
