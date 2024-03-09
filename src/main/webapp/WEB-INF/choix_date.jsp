@@ -41,7 +41,7 @@
             <h1>veuillez choisir la date de vaccination  </h1>
 
             <%
-                // R�cup�rer le nom du centre s�lectionn� de la session
+
                 String selectedCentre = (String) session.getAttribute("selectedCentreNom");
             %>
 

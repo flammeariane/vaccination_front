@@ -24,14 +24,9 @@ public class PriseRdvChoixDateSecond extends HttpServlet {
         Patient patient = (Patient) session.getAttribute("patient");
         SaveRendezVousBeanOut rendezVousBeanOut = new SaveRendezVousBeanOut();
 
-        String dateFromSession = (String) session.getAttribute("selectedDateAgenda");
-        // Utilisez le format correct pour la date récupérée de la session
-        DateTimeFormatter formatterInput = DateTimeFormatter.ofPattern("EEE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
-        // Pas besoin de formatterOutput si on convertit directement au format ISO_LOCAL_DATE_TIME
-        ZonedDateTime dateTime = ZonedDateTime.parse(dateFromSession, formatterInput);
-        String formattedDate = dateTime.toLocalDateTime().toString(); // Convertit en format ISO_LOCAL_DATE_TIME
-        rendezVousBeanOut.setDateRdv(formattedDate);
-        
+        String firstRdvDate = (String) request.getAttribute("firstRdvdate");
+    
+        rendezVousBeanOut.setDateRdv(firstRdvDate);        
         rendezVousBeanOut.setNomCentre((String) session.getAttribute("selectedCentreNom"));
         rendezVousBeanOut.setNomVaccin((String) session.getAttribute("selectedVaccinNom"));
         rendezVousBeanOut.setConfirmParEmail("1");
